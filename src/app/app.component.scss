@@ -10,65 +10,65 @@
   background-position: center;
   color: var(--white-color);
   
-  .container {
-    max-width: 1180px;
-    margin: 0 auto;
-  }
-
   .d-flex {
     @include mix.flex(column, center, wrap);
     row-gap: 520px;
   }
   
-  .header__top {
+  &__container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  
+  &__top {
     @include mix.flex(space-between, center, nowrap);
     height: 4.5rem;
     padding-top: 16px;
     margin: 0 auto;
     
-    .header__nav {
-      width: 831px;
-      height: 44px;
-      @include mix.flex(space-between, center, nowrap);
-      column-gap: 24px;
+    .name-company {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 6.5px;
+    }
+    
+    .link, .btn-consultation {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .btn-consultation {
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      padding: 12px 24px;
+      border-radius: 4px;
+      margin-left: 49px;
+      color: var(--white-color);
+      background-color: var(--green-color);
     }
   }
-}
 
-.company-name {
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 6.5px;
-}
-
-.link, .btn-consultation {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.btn-consultation {
-  font-family: inherit;
-  border: none;
-  cursor: pointer;
-  padding: 12px 24px;
-  border-radius: 4px;
-  margin-left: 49px;
-  color: var(--white-color);
-  background-color: var(--green-color);
-}
-
-.header__bottom {
-  max-width: 1180px;
-  margin: 0 auto;
+  &__nav {
+    width: 831px;
+    height: 44px;
+    @include mix.flex(space-between, center, nowrap);
+    column-gap: 24px;
+  }
   
-  .header__title {
+  &__bottom {
+    max-width: 1180px;
+    margin: 0 auto;    
+  }
+
+  &__title {
     font-family: "NEXT ART";
     text-transform: uppercase;
     font-size: 50px;
     font-weight: 700;
     margin-bottom: 41px;
   }
-
+  
   .bottom-container {
     @include mix.flex(space-between, center, nowrap);
     column-gap: 24px;
@@ -101,12 +101,13 @@
     line-height: 50px;
     text-align: center;
     cursor: pointer;
-  }
-  
-  .find-program__btn {
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--green-color);
+    
+    &__btn {
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--green-color);
+    }
   }
   
   .location-for-tour__item,
