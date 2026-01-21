@@ -11,7 +11,7 @@
   color: var(--white-color);
   
   .d-flex {
-    @include mix.flex(column, center, wrap);
+    @include mix.flex(start, center, wrap);
     row-gap: 520px;
   }
   
@@ -86,7 +86,7 @@
     margin-bottom: 35px;
   }
 
-  .location-for-tour__img, .date-of-hike__item, .participants__img {
+  .location-for-tour__item, .date-of-hike__item, .participants__item {
     cursor: pointer;
   }
 
