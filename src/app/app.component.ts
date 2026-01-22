@@ -33,11 +33,8 @@ export class AppComponent {
 
   // №04 Сохранять количество заходов на страницу
   saveNumberVisits(): void {
-    const key: string = "userVisit";
-    const storedCount: string | null = localStorage.getItem(key);
-    let count: number = storedCount ? parseInt(storedCount) : 0;
-    
-    count++;
-    localStorage.setItem(key, JSON.stringify(count));
+    const visitsRaw: number = Number(localStorage.getItem("userVisit"));  
+    const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
+    localStorage.setItem("userVisit", ""+visits);
   }
 }
