@@ -4,11 +4,11 @@
   min-width: 1920px;
   min-height: 985px;
   font-family: "Nunito Sans";
-  background-image: url("/images/background-rumtibet.jpg");
+  background-image: url("/images/bg-rumtibet.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: var(--white-color);
+  color: var(--primary-color);
   
   .d-flex {
     @include mix.flex(start, center, wrap);
@@ -26,7 +26,7 @@
     padding-top: 16px;
     margin: 0 auto;
     
-    .name-company {
+    .company-name {
       text-transform: uppercase;
       font-weight: 700;
       letter-spacing: 6.5px;
@@ -44,8 +44,8 @@
       padding: 12px 24px;
       border-radius: 4px;
       margin-left: 49px;
-      color: var(--white-color);
-      background-color: var(--green-color);
+      color: var(--primary-color);
+      background-color: var(--additional-color);
     }
   }
 
@@ -97,7 +97,7 @@
 
   .find-program {
     max-width: 213px;
-    background-color: #FDFDFD;
+    background-color: var(--primary-color);
     line-height: 50px;
     text-align: center;
     cursor: pointer;
@@ -106,7 +106,7 @@
       font-family: inherit;
       font-weight: 700;
       font-size: 16px;
-      color: var(--green-color);
+      color: var(--additional-color);
     }
   }
   
@@ -115,7 +115,7 @@
   .participants__item {
     @include mix.flex(space-between, center, nowrap);
     padding: 14px 16px;
-    border: 1px solid #FDFDFD;
+    border: 1px solid var(--primary-color);
     border-radius: 10px;
   }
 }

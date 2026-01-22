@@ -1,5 +1,4 @@
 // №05 Задачи с Generic
-
 const rareStones: string[] = [
   "Шунгит",
   "Лимонит",
@@ -17,40 +16,29 @@ const oldСoins: string[] = [
 ];
 
 class Collection<T> {
-  element: T[] = [];
+  elements: T[] = [];
   
   constructor(element: T[]) {
-    this.element = element;
+    this.elements = element;
   }
 
-  getAllelement(): T[] {
-    return this.element;
+  getAllElements(): T[] {
+    return this.elements;
   }
 
-  getSpecificItem(): T {
-    return this.element[1];
+  getSpecificItem(index: number): T {
+    return this.elements[index];
   }
 
-  getСlearedСollection(): T[] {
-    return this.element = [];
+  clearedСollection(): void {
+    this.elements = [];
   }
 
-  getDeleteSpecificItem(): T[] {
-    return this.element.slice(0, 4);
+  deleteSpecificItem(): void {
+    this.elements.slice(0, 3);
   }
 
-  getReplaceSpecificElement(item: T): T[] {
-    return this.element.splice(0, 4, item);
+  replaceSpecificElements(index: number, elem: T): void {
+    this.elements[index] = elem;
   }
 }
-
-const collectionStones: Collection<string> = new Collection(rareStones);
-const collectionСoins: Collection<string> = new Collection(oldСoins);
-
-console.log(collectionStones.getAllelement());
-console.log(collectionStones.getDeleteSpecificItem());
-console.log(collectionStones.getSpecificItem());
-
-console.log(collectionСoins.getReplaceSpecificElement("Драхма"));
-console.log(collectionСoins.getDeleteSpecificItem());
-console.log(collectionСoins.getСlearedСollection());
