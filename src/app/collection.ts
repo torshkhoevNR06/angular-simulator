@@ -1,4 +1,3 @@
-// №05 Задачи с Generic
 const rareStones: string[] = [
   "Шунгит",
   "Лимонит",
@@ -16,8 +15,8 @@ const oldСoins: string[] = [
 ];
 
 class Collection<T> {
+
   elements: T[] = [];
-  
   constructor(element: T[]) {
     this.elements = element;
   }
@@ -26,7 +25,7 @@ class Collection<T> {
     return this.elements;
   }
 
-  getSpecificItem(index: number): T {
+  getItem(index: number): T {
     return this.elements[index];
   }
 
@@ -34,11 +33,12 @@ class Collection<T> {
     this.elements = [];
   }
 
-  deleteSpecificItem(): void {
-    this.elements.slice(0, 3);
+  deleteItem(index: number): void {
+    this.elements.slice(0, index);
   }
 
-  replaceSpecificElements(index: number, elem: T): void {
+  replaceElements(index: number, elem: T): void {
     this.elements[index] = elem;
   }
+
 }

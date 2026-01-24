@@ -13,28 +13,26 @@ import './collection';
 export class AppComponent {
 
   companyName: string = 'Румтибет';
-  constructor () {
+  constructor() {
     this.saveLastSeenTime();
-    this.saveNumberVisits();
+    this.saveСountVisits();
     this.getColor(Color.RED);
   }
 
-  // №02 Вернуть boolean в зависимости от условия с основным цветом
   getColor(color: Color): boolean {
-  const primaryColors: Color[] = [Color.RED, Color.BLUE, Color.GREEN];
-  return primaryColors.includes(color);
-}
+    const primaryColors: Color[] = [Color.RED, Color.BLUE, Color.GREEN];
+    return primaryColors.includes(color);
+  }
 
-  // №03 Сохранять дату последнего захода на страницу
   saveLastSeenTime(): void {
     const date: string = new Date().toString();
     localStorage.setItem("userDate", JSON.stringify(date));
   }
 
-  // №04 Сохранять количество заходов на страницу
-  saveNumberVisits(): void {
-    const visitsRaw: number = Number(localStorage.getItem("userVisit"));  
+  saveСountVisits(): void {
+    const visitsRaw: number = Number(localStorage.getItem("user-visit"));
     const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
-    localStorage.setItem("userVisit", ""+visits);
+    localStorage.setItem("user-visit", JSON.stringify(visits));
   }
+
 }
