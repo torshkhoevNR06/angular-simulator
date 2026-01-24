@@ -33,8 +33,8 @@ class Collection<T> {
     this.elements = [];
   }
 
-  deleteItem(index: number): void {
-    this.elements.slice(0, index);
+  deleteItem(indexToRemove: number): void {
+    this.elements = this.elements.filter((_: T, index: number) => index !== indexToRemove);
   }
 
   replaceElements(index: number, elem: T): void {
