@@ -17,27 +17,28 @@ const oldСoins: string[] = [
 class Collection<T> {
 
   elements: T[] = [];
-  constructor(element: T[]) {
-    this.elements = element;
+
+  constructor(elements: T[]) {
+    this.elements = elements;
   }
 
   getAllElements(): T[] {
     return this.elements;
   }
 
-  getItem(index: number): T {
+  getElements(index: number): T {
     return this.elements[index];
   }
 
-  clearedСollection(): void {
+  сollectionСleared(): void {
     this.elements = [];
   }
 
-  deleteItem(indexToRemove: number): void {
+  deleteElement(indexToRemove: number): void {
     this.elements = this.elements.filter((_: T, index: number) => index !== indexToRemove);
   }
 
-  replaceElements(index: number, elem: T): void {
+  replaceElement(index: number, elem: T): void {
     this.elements[index] = elem;
   }
 

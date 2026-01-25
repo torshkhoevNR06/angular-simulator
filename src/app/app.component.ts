@@ -13,8 +13,9 @@ import './collection';
 export class AppComponent {
 
   companyName: string = 'Румтибет';
+  
   constructor() {
-    this.saveLastSeenTime();
+    this.saveLastVisit();
     this.saveСountVisits();
     this.getColor(Color.RED);
   }
@@ -24,15 +25,15 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
 
-  saveLastSeenTime(): void {
+  saveLastVisit(): void {
     const date: string = new Date().toString();
     localStorage.setItem("userDate", JSON.stringify(date));
   }
 
   saveСountVisits(): void {
-    const visitsRaw: number = Number(localStorage.getItem("user-visit"));
-    const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
-    localStorage.setItem("user-visit", JSON.stringify(visits));
+    const key: number = Number(localStorage.getItem("user-visit"));
+    const userVisits: number = isNaN(key) ? 1 : key + 1;
+    localStorage.setItem("user-visit", JSON.stringify(userVisits));
   }
 
 }
