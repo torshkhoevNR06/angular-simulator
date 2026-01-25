@@ -30,7 +30,7 @@ class Collection<T> {
     return this.elements[index];
   }
 
-  сollectionСleared(): void {
+  clearСollection(): void {
     this.elements = [];
   }
 

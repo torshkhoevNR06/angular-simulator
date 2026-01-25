@@ -16,7 +16,7 @@ export class AppComponent {
   
   constructor() {
     this.saveLastVisit();
-    this.saveСountVisits();
+    this.saveVisitsСount();
     this.getColor(Color.RED);
   }
 
@@ -30,10 +30,10 @@ export class AppComponent {
     localStorage.setItem("userDate", JSON.stringify(date));
   }
 
-  saveСountVisits(): void {
-    const key: number = Number(localStorage.getItem("user-visit"));
-    const userVisits: number = isNaN(key) ? 1 : key + 1;
-    localStorage.setItem("user-visit", JSON.stringify(userVisits));
+  saveVisitsСount(): void {
+    const visitsRaw: number = Number(localStorage.getItem("user-visit"));
+    const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
+    localStorage.setItem("user-visit", JSON.stringify(visits));
   }
 
 }
