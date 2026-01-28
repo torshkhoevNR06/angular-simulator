@@ -1,0 +1,127 @@
+@use '../assets/mixins' as mix;
+
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.header {
+  min-width: 1920px;
+  min-height: 985px;
+  font-family: "Nunito Sans";
+  background-image: url("/images/bg-rumtibet.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: var(--primary-color);
+  
+  .d-flex {
+    @include mix.flex(start, center, wrap);
+    row-gap: 520px;
+  }
+  
+  &__container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  
+  &__top {
+    @include mix.flex(space-between, center, nowrap);
+    height: 4.5rem;
+    padding-top: 16px;
+    margin: 0 auto;
+    
+    .company-name {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 7px;
+    }
+    
+    .link, .btn-consultation {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .btn-consultation {
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      padding: 12px 24px;
+      border-radius: 4px;
+      margin-left: 42px;
+      color: var(--primary-color);
+      background-color: var(--additional-color);
+    }
+  }
+
+  &__nav {
+    width: 831px;
+    height: 44px;
+    @include mix.flex(space-between, center, nowrap);
+    column-gap: 24px;
+  }
+  
+  &__bottom {
+    max-width: 1180px;
+    margin: 0 auto;    
+  }
+
+  &__title {
+    font-family: "NEXT ART";
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 41px;
+  }
+  
+  .bottom-container {
+    @include mix.flex(space-between, center, nowrap);
+    column-gap: 24px;
+    height: 161px;
+    padding: 0 42px;
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    background-color: #FFFFFF33;
+  }
+
+  .location-for-tour, .date-of-hike, .participants, .find-program {
+    width: 270px;
+    height: 52px;
+    border-radius: 4px;
+    margin-bottom: 35px;
+  }
+
+  .location-for-tour__item, .date-of-hike__item, .participants__item {
+    cursor: pointer;
+  }
+
+  .location-for-tour__desc, .date-of-hike__desc, .participants__desc {
+    display: block;
+    padding-top: 8px;
+  }
+
+  .find-program {
+    max-width: 213px;
+    background-color: var(--primary-color);
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    
+    &__btn {
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--additional-color);
+    }
+  }
+  
+  .location-for-tour__item,
+  .date-of-hike__item,
+  .participants__item {
+    @include mix.flex(space-between, center, nowrap);
+    padding: 14px 16px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+  }
+}
