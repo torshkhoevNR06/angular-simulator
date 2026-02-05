@@ -1,7 +1,6 @@
 interface IAdvantage {
-  id: number,
-  iconName: string,
-  iconDescription: string,
-  title: string,
+  id: number;
+  iconName: string;
+  title: string;
   description: string
 }

@@ -32,26 +32,6 @@
   box-sizing: border-box;
 }
 
-.btn {
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 16px;
-  border-radius: 4px;
-  background-color: var(--additional-color);
-  color: var(--primary-color);
-}
-
-.entry {
-  font-size: 24px;
-  font-weight: 400;
-  color: var(--gold-color);
-}
-
-.title {
-  font-size: 32px;
-  font-weight: 800;
-}
-
 .header {
   min-width: 1920px;
   min-height: 985px;
@@ -64,6 +44,7 @@
   
   .d-flex {
     @include mix.flex(start, center, wrap);
+    
     row-gap: 520px;
   }
   
@@ -74,6 +55,7 @@
   
   &__top {
     @include mix.flex(space-between, center, nowrap);
+    
     position: relative;
     max-width: 1180px;
     height: 4.5rem;
@@ -103,6 +85,7 @@
 
   &__nav {
     @include mix.flex(space-between, center, nowrap);
+    
     width: 831px;
     height: 44px;
     column-gap: 24px;
@@ -110,6 +93,7 @@
 
   &__clicker, &__timer {
     @include mix.flex(space-between, center, nowrap);
+    
     width: 270px;
     position: absolute;
     bottom: -65px;
@@ -118,6 +102,7 @@
 
   &__timer {
     @include mix.flex(space-between, center, nowrap);
+    
     width: 375px;
   }
 
@@ -127,6 +112,7 @@
 
   .clicker-container {
     @include mix.flex(space-between, center, nowrap);
+    
     column-gap: 15.75px;
       
     .btn-minus {
@@ -145,7 +131,7 @@
   }
   
   .btn-show-clicker {
-    padding: 12px 11.50px;
+    padding: 12px 11px;
   }
 
   .btn-show-date {
@@ -156,20 +142,21 @@
     max-width: 1180px;
     margin: 0 auto;
 
-    .list-of-locations, .number-of-participants {
+    .list-locations, .number-participants {
       width: 240px;
       font-family: inherit;
       font-size: inherit;
       outline: none;
+      opacity: 0;
     }
 
-    .date-of-hike__icon {
+    .date-hike__icon {
       position: absolute;
       top: 32%;
       right: 6.5%;
     }
     
-    .date-of-hike__data {
+    .date-hike__data {
       opacity: 0;
       width: 19px;
     }
@@ -185,6 +172,7 @@
   
   .bottom-container {
     @include mix.flex(space-between, center, nowrap);
+    
     column-gap: 24px;
     height: 171px;
     padding: 0 42px;
@@ -193,17 +181,18 @@
     background-color: #FFFFFF33;
   }
 
-  .location-for-tour, .date-of-hike, .participants, .find-program {
+  .location-tour, .date-hike, .participants, .find-program {
     width: 270px;
     height: 52px;
     border-radius: 4px;
     margin-bottom: 35px;
   }
 
-  .location-for-tour__container, 
-  .date-of-hike__container, 
+  .location-tour__container, 
+  .date-hike__container, 
   .participants__container {
     @include mix.flex(space-between, center, nowrap);
+    
     position: relative;
     padding: 14px 16px;
     height: 52px;
@@ -212,9 +201,21 @@
     cursor: pointer;
   }
 
-  .location-for-tour__desc, .date-of-hike__desc, .participants__desc {
+  .location-tour__desc, .date-hike__desc, .participants__desc {
     display: block;
     padding-top: 8px;
+  }
+
+  .location-tour__before-choice, .participants__before-choice {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+  }
+
+  .caret-down-icon {
+    position: absolute;
+    top: 23px;
+    right: 19px;
   }
 
   .find-program {
@@ -244,6 +245,7 @@
 
 .header__live-input {
   @include mix.flex(start, center, nowrap);
+  
   gap: 50px;
   position: relative;
   width: 470px;
@@ -274,6 +276,7 @@
   
   .container {
     @include mix.flex(space-between, center, nowrap);
+    
     max-width: 1180px;
     margin: 0 auto;
     column-gap: 90px;
@@ -282,6 +285,7 @@
 
 .our-approach {
   @include mix.flex(space-between, center, nowrap);
+  
   position: relative;
   min-height: 526px;
   margin-bottom: 100px;
@@ -331,9 +335,9 @@
 }
 
 .our-offer {
+  @include mix.flex(space-between, start, nowrap);
+
   background-color: var(--light-gray-color);
-  display: flex;
-  justify-content: space-between;
   padding: 80px 0 100px 0;
 }
 
@@ -377,6 +381,7 @@
 
 .our-offer__item {
   @include mix.flex(start, center, nowrap);
+  
   margin: 40px 0 40px 0;
 }
 
@@ -402,6 +407,7 @@
 
 .our-offer__images {
   @include mix.flex(start, start, wrap);
+  
   max-width: 510px;
   max-height: 510px;
   gap: 10px 10px;

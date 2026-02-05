@@ -13,13 +13,13 @@ import './collection';
 export class AppComponent {
 
   companyName: string = 'Румтибет';
-  selectedLocation: string = 'Локация для тура';
-  selectedDate: string = 'дд.мм.гггг';
-  selectedParticipants: string = 'Участники';
+  selectedLocation: string = '';
+  selectedDate: string = '';
+  selectedParticipants: string = '';
   selectedInput!: string;
-  dateITime!: string;
+  dateTime!: string;
   counter: number = 0;
-  isTask: boolean = true;
+  currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
   
   locations: ILocation[] = [
@@ -27,6 +27,7 @@ export class AppComponent {
     { id: 2, name: 'Новосибирск' },
     { id: 3, name: 'Коста-Рика' }
   ];
+
   participants: IParticipant[] = [
     { id: 1, name: "Александр" },
     { id: 2, name: "Мария" },
@@ -39,25 +40,23 @@ export class AppComponent {
     { id: 9, name: "Андрей" },
     { id: 10, name: "Наталья" }
   ];
+
   cards: IAdvantage[] = [
     {
       id: 1,
       iconName: "tourists-icon",
-      iconDescription: "иконка туристы",
       title: "Опытный гид",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     },
     {
       id: 2,
       iconName: "security-icon",
-      iconDescription: "иконка синий щит",
       title: "Безопасный поход",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     },
     {
       id: 3,
-      iconName: "label-icon",
-      iconDescription: "иконка золотая бирка",
+      iconName: "price-tag-icon",
       title: "Лояльные цены",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     }
@@ -74,7 +73,7 @@ export class AppComponent {
     }
 
     setInterval(() => {
-      this.dateITime = new Date().toLocaleString();
+      this.dateTime = new Date().toLocaleString();
     }, 1000)
 
     setTimeout(() => {
@@ -99,28 +98,21 @@ export class AppComponent {
   }
 
   isValidInput(): boolean {
-    if (this.selectedLocation !== 'Локация для тура'
-      && this.selectedDate !== ''
-      && this.selectedDate !== 'дд.мм.гггг'
-      && this.selectedParticipants !== 'Участники') {
-        return true;
-    } else {
-      return false;
-    }
+    return this.selectedLocation !== '' && this.selectedDate !== '' && this.selectedParticipants !== '';
   }
 
-  increment(): void {
+  incrementCounter(): void {
     this.counter++;
     localStorage.setItem('counter', JSON.stringify(this.counter));
   }
 
-  decrement(): void {
+  decrementCounter(): void {
     this.counter--;
     localStorage.setItem('counter', JSON.stringify(this.counter));
   }
 
-  switchingTask(): void {
-    this.isTask = !this.isTask;
+  setCurrentTask(task: 'counter' | 'dateTime'): void {
+    this.currentTask = task;
   }
 
 }

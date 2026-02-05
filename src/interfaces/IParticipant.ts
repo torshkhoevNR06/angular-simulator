@@ -1,4 +1,4 @@
 interface IParticipant {
-  id: number,
+  id: number;
   name: string
 }

@@ -15,30 +15,30 @@
           <span class="company-name">{{ companyName }}</span>
         </div>
         <nav class="header__nav">
-          <a href="#" class="link" id="link-1">Главная</a>
-          <a href="#" class="link" id="link-2">Про гида</a>
-          <a href="#" class="link" id="link-3">Программа тура</a>
-          <a href="#" class="link" id="link-4">Стоимость</a>
-          <a href="#" class="link" id="link-5">Блог</a>
-          <a href="#" class="link" id="link-6">Контакты</a>
+          <a href="#" class="link" id="main">Главная</a>
+          <a href="#" class="link" id="pro-guide">Про гида</a>
+          <a href="#" class="link" id="tour-program">Программа тура</a>
+          <a href="#" class="link" id="price">Стоимость</a>
+          <a href="#" class="link" id="blog">Блог</a>
+          <a href="#" class="link" id="contacts">Контакты</a>
         </nav>
         <div class="header__btn">
           <button class="btn btn-consultation" id="btn-consultation">Консультация</button>
         </div>
 
-        @if (isTask) {
+        @if (currentTask === 'counter') {
           <div class="header__timer">
-            <span class="timer">{{ dateITime }}</span>
-            <button class="btn btn-show-clicker" (click)="switchingTask()">Показать кликер</button>
+            <span class="timer">{{ dateTime }}</span>
+            <button class="btn btn-show-clicker" (click)="setCurrentTask('dateTime')">Показать кликер</button>
           </div>
         } @else {
           <div class="header__clicker">
             <div class="clicker-container">
-              <button class="btn-plus" (click)="increment()">+</button>
+              <button class="btn-plus" (click)="incrementCounter()">+</button>
               <span class="current-account">{{ counter }}</span>
-              <button class="btn-minus" (click)="decrement()" [disabled]="counter <= 0">-</button>
+              <button class="btn-minus" (click)="decrementCounter()" [disabled]="counter <= 0">-</button>
             </div>
-            <button class="btn btn-show-date" (click)="switchingTask()">Показать дату</button>
+            <button class="btn btn-show-date" (click)="setCurrentTask('counter')">Показать дату</button>
           </div>
         }
       </div>
@@ -48,31 +48,49 @@
           <h1>Насладись прогулкой в горах с&nbsp;командой единомышленников</h1>
         </div>
         <div class="bottom-container">
-          <div class="location-for-tour">
-            <div class="location-for-tour__container">
-              <select class="list-of-locations" [(ngModel)]="selectedLocation">
-                <option selected hidden>{{ selectedLocation }}</option>
-                @for (locationName of locations; track locationName.id) {
-                  <option [value]="locationName.name">{{ locationName.name }}</option>
+          <div class="location-tour">
+            <div class="location-tour__container">
+              @if (!selectedLocation) {
+                <span class="location-tour__before-choice">Локация для тура</span>
+              } @else {
+                <span class="location-tour__before-choice">{{ selectedLocation }}</span>
+              }
+              <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+              <select class="list-locations" [(ngModel)]="selectedLocation">
+                @if (!selectedLocation) {
+                } @else {
+                  <option selected disabled hidden>{{ selectedLocation }}</option>
+                }
+                @for (location of locations; track location.id) {
+                  <option [value]="location.name">{{ location.name }}</option>
                 } @empty {
                   <span>Не удалось отобразить список локаций!</span>
                 }
               </select>
             </div>
-            <span class="location-for-tour__desc">выберите из списка</span>
+            <span class="location-tour__desc">выберите из списка</span>
           </div>
-          <div class="date-of-hike">
-            <div class="date-of-hike__container">
-              <span>{{ selectedDate }}</span>
-              <img class="date-of-hike__icon" src="/images/calendar-icon.svg" alt="иконка календарь">
-              <input class="date-of-hike__data" id="date-of-hike__data" type="date" [(ngModel)]="selectedDate">
+          <div class="date-hike">
+            <div class="date-hike__container">
+              @if (!selectedDate) {
+                <span>дд.мм.гггг</span>
+              } @else {
+                <span>{{ selectedDate }}</span>
+              }
+              <img class="date-hike__icon" src="/images/calendar-icon.svg" alt="иконка календарь">
+              <input class="date-hike__data" id="date-hike__data" type="date" [(ngModel)]="selectedDate">
             </div>
-            <span class="date-of-hike__desc">укажите диапазон</span>
+            <span class="date-hike__desc">укажите диапазон</span>
           </div>
           <div class="participants">
             <div class="participants__container">
-              <select class="number-of-participants" [(ngModel)]="selectedParticipants">
-                <option selected hidden>{{ selectedParticipants }}</option>
+              @if (!selectedParticipants) {
+                <span class="participants__before-choice">Участники</span>
+              } @else {
+                <span class="participants__before-choice">{{ selectedParticipants }}</span>
+              }
+              <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+              <select class="number-participants" [(ngModel)]="selectedParticipants">
                 @for (participant of participants; track participant.id) {
                   <option [value]="participant.name">{{ participant.name }}</option>
                 } @empty {
@@ -82,15 +100,14 @@
             </div>
             <span class="participants__desc">Выберите из списка</span>
           </div>
-          @if (!isValidInput()) {
-            <div class="find-program find-program__disabled">
-              <button class="btn find-program__btn find-program__disabled-btn" id="find-program__btn" disabled>Найти программу</button>
+            <div class="find-program"[class.find-program__disabled]="!isValidInput()">
+              <button class="btn find-program__btn"
+                [class.find-program__disabled-btn]="!isValidInput()"
+                id="find-program__btn"
+                [disabled]="!isValidInput()"
+              >
+              Найти программу</button>
           </div>
-          } @else {
-            <div class="find-program">
-              <button class="btn find-program__btn" id="find-program__btn">Найти программу</button>
-          </div>
-          }
         </div>
 
         <div class="header__live-input">
@@ -117,7 +134,7 @@
             <img class="img-play-btn" src="/images/play-button.svg" alt="кнопка плеер">
           </a>
         </div>
-        </div>
+      </div>
         <div class="our-approach__content">
           <span class="entry our-approach__entry">о нашем походе</span>
           <h2 class="title our-approach__title">Исследуйте все горные массивы мира вместе с нами</h2>
@@ -134,24 +151,24 @@
           <h2 class="title our-offer__title">Лучшие программы для тебя</h2>
           <p class="our-offer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
           @for (card of cards; track card.id) {
-            <div class="our-offer__item">
-                <div class="item-img"
-                  [class.expert-guide__img]="card.id === 1"
-                  [class.safe-passage__img]="card.id === 2"
-                  [class.loyal-prices__img]="card.id === 3"
-                >
-                  <img [src]="'images/' + card.iconName + '.svg'" [alt]="card.iconDescription">
-                </div>
-              <div class="item__content">
-                <h3 class="item__title">{{ card.title }}</h3>
-                <p class="item__desc">{{ card.description }}</p>
+            <div class="our-offer__item" [id]="'our-offer__item-' + card.id">
+              <div class="item-img"
+                [class.expert-guide__img]="card.id === 1"
+                [class.safe-passage__img]="card.id === 2"
+                [class.loyal-prices__img]="card.id === 3"
+              >
+                <img [src]="'images/' + card.iconName + '.svg'" [alt]="card.iconName">
               </div>
+            <div class="item__content">
+              <h3 class="item__title">{{ card.title }}</h3>
+              <p class="item__desc">{{ card.description }}</p>
             </div>
-          } @empty {
-            <p>Пусто, карточки не отобразились!</p>
-          }
-          <button class="btn our-offer__btn" id="our-offer__btn">Стоимость программ</button>
-        </div>
+          </div>
+        } @empty {
+          <p>Пусто, карточки не отобразились!</p>
+        }
+        <button class="btn our-offer__btn" id="our-offer__btn">Стоимость программ</button>
+      </div>
 
         <div class="our-offer__images">
           <img class="img-participant" src="/images/tropical-look.png" alt="картинка тропический вид" width="250px" height="250px">

@@ -1,4 +1,4 @@
 interface ILocation {
-  id: number,
+  id: number;
   name: string
 }
