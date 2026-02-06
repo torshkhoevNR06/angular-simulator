@@ -65,7 +65,7 @@ export class AppComponent {
   constructor() {
     this.saveLastVisit();
     this.saveVisitsСount();
-    this.getColor(Color.RED);
+    this.getPrimaryColor(Color.RED);
     
     const saveCounter: number = Number(localStorage.getItem('counter'));
     if (saveCounter) {
@@ -74,14 +74,14 @@ export class AppComponent {
 
     setInterval(() => {
       this.dateTime = new Date().toLocaleString();
-    }, 1000)
+    }, 1000);
 
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000)
+    }, 2000);
   }
 
-  private getColor(color: Color): boolean {
+  private getPrimaryColor(color: Color): boolean {
     const primaryColors: Color[] = [Color.RED, Color.BLUE, Color.GREEN];
     return primaryColors.includes(color);
   }
@@ -97,8 +97,8 @@ export class AppComponent {
     localStorage.setItem("user-visit", JSON.stringify(visits));
   }
 
-  isValidInput(): boolean {
-    return this.selectedLocation !== '' && this.selectedDate !== '' && this.selectedParticipants !== '';
+  isValidInput(): string {
+    return this.selectedLocation && this.selectedDate && this.selectedParticipants;
   }
 
   incrementCounter(): void {

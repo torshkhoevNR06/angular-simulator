@@ -151,7 +151,7 @@
           <h2 class="title our-offer__title">Лучшие программы для тебя</h2>
           <p class="our-offer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
           @for (card of cards; track card.id) {
-            <div class="our-offer__item" [id]="'our-offer__item-' + card.id">
+            <div class="our-offer__item" id="our-offer__item">
               <div class="item-img"
                 [class.expert-guide__img]="card.id === 1"
                 [class.safe-passage__img]="card.id === 2"
