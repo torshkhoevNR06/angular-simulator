@@ -16,7 +16,7 @@ export class AppComponent {
   selectedLocation!: boolean;
   selectedDate!: boolean;
   selectedParticipants!: boolean;
-  selectedInput!: string;
+  liveTextInput!: string;
   dateTime!: string;
   counter: number = 0;
   currentTask!: 'counter' | 'dateTime';
