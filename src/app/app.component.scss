@@ -1,9 +1,35 @@
 @use '../assets/mixins' as mix;
 
+.loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &__content {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0); }
+  }
+}
+
 .wrapper {
   min-height: 100%;
   width: 100%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .header {
@@ -18,6 +44,7 @@
   
   .d-flex {
     @include mix.flex(start, center, wrap);
+    
     row-gap: 520px;
   }
   
@@ -28,6 +55,9 @@
   
   &__top {
     @include mix.flex(space-between, center, nowrap);
+    
+    position: relative;
+    max-width: 1180px;
     height: 4.5rem;
     padding-top: 16px;
     margin: 0 auto;
@@ -45,26 +75,91 @@
 
     .btn-consultation {
       font-family: inherit;
-      border: none;
-      cursor: pointer;
       padding: 12px 24px;
       border-radius: 4px;
-      margin-left: 42px;
+      margin-left: 38px;
       color: var(--primary-color);
       background-color: var(--additional-color);
     }
   }
 
   &__nav {
+    @include mix.flex(space-between, center, nowrap);
+    
     width: 831px;
     height: 44px;
-    @include mix.flex(space-between, center, nowrap);
     column-gap: 24px;
+  }
+
+  &__clicker, &__timer {
+    @include mix.flex(space-between, center, nowrap);
+    
+    width: 270px;
+    position: absolute;
+    bottom: -65px;
+    right: 0px;
+  }
+
+  &__timer {
+    @include mix.flex(space-between, center, nowrap);
+    
+    width: 375px;
+  }
+
+   &__clicker {
+    display: flex;
+  }
+
+  .clicker-container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    column-gap: 15.75px;
+      
+    .btn-minus {
+      transform: translateY(-2px);
+    }  
+  }
+  
+  .btn-minus, 
+  .current-account, 
+  .btn-plus, 
+  .timer, 
+  .btn-show-clicker
+  .btn-show-date {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .btn-show-clicker {
+    padding: 12px 11px;
+  }
+
+  .btn-show-date {
+    padding: 12px 22px;
   }
   
   &__bottom {
     max-width: 1180px;
-    margin: 0 auto;    
+    margin: 0 auto;
+
+    .list-locations, .number-participants {
+      width: 240px;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      opacity: 0;
+    }
+
+    .date-hike__icon {
+      position: absolute;
+      top: 32%;
+      right: 6.5%;
+    }
+    
+    .date-hike__data {
+      opacity: 0;
+      width: 19px;
+    }
   }
 
   &__title {
@@ -77,51 +172,246 @@
   
   .bottom-container {
     @include mix.flex(space-between, center, nowrap);
+    
     column-gap: 24px;
-    height: 161px;
+    height: 171px;
     padding: 0 42px;
     backdrop-filter: blur(5px);
     border-radius: 10px;
     background-color: #FFFFFF33;
   }
 
-  .location-for-tour, .date-of-hike, .participants, .find-program {
+  .location-tour, .date-hike, .participants, .find-program {
     width: 270px;
     height: 52px;
     border-radius: 4px;
     margin-bottom: 35px;
   }
 
-  .location-for-tour__item, .date-of-hike__item, .participants__item {
+  .location-tour__container, 
+  .date-hike__container, 
+  .participants__container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    position: relative;
+    padding: 14px 16px;
+    height: 52px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
     cursor: pointer;
   }
 
-  .location-for-tour__desc, .date-of-hike__desc, .participants__desc {
+  .location-tour__desc, .date-hike__desc, .participants__desc {
     display: block;
     padding-top: 8px;
   }
 
+  .location-tour__before-choice, .participants__before-choice {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+  }
+
+  .caret-down-icon {
+    position: absolute;
+    top: 23px;
+    right: 19px;
+  }
+
   .find-program {
     max-width: 213px;
-    background-color: var(--primary-color);
     line-height: 50px;
     text-align: center;
     cursor: pointer;
+    background-color: var(--primary-color);
     
+    &__disabled {
+      background-color: #333;
+      transform: 1s;
+    }
+
     &__btn {
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 16px;
+      background-color: var(--primary-color);
       color: var(--additional-color);
     }
+
+    &__disabled-btn {
+      background-color: #333333;
+      color: #918d8d;
+      transform: 1s;
+    }
+  }
+}
+
+.header__live-input {
+  @include mix.flex(start, center, nowrap);
+  
+  gap: 50px;
+  position: relative;
+  width: 470px;
+  margin: 15px 0;
+}
+
+.live-input {
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: 270px;
+  padding: 14px 12px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.caret-down {
+  position: absolute;
+  top: 20px;
+  right: 215px;
+  transform: rotate(270deg);
+  cursor: pointer;
+}
+
+.main {
+  font-family: "Nunito Sans";
+  padding: 100px 0 100px 0;
+  color: var(--secondary-color);
+  
+  .container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    max-width: 1180px;
+    margin: 0 auto;
+    column-gap: 90px;
+  }
+}
+
+.our-approach {
+  @include mix.flex(space-between, center, nowrap);
+  
+  position: relative;
+  min-height: 526px;
+  margin-bottom: 100px;
+  
+  &__showreel {
+    position: relative;
+    width: 600px;
+    height: 526px;
   }
   
-  .location-for-tour__item,
-  .date-of-hike__item,
-  .participants__item {
-    @include mix.flex(space-between, center, nowrap);
-    padding: 14px 16px;
-    border: 1px solid var(--primary-color);
-    border-radius: 10px;
+  .showreel-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 350px;
+    height: 400px;
+  }
+}
+
+.img-play-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.our-approach__content {
+  max-width: 580px;
+}
+
+.our-approach__title {
+  margin: 8px 0 40px 0;
+}
+
+.our-approach__desc {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+.our-approach__btn {
+  height: 200px;
+  height: 52px;
+  padding: 16px 36px;
+}
+
+.our-offer {
+  @include mix.flex(space-between, start, nowrap);
+
+  background-color: var(--light-gray-color);
+  padding: 80px 0 100px 0;
+}
+
+.our-offer__content, .our-offer__desc {
+  max-width: 580px;
+}
+
+.our-offer__desc {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.our-offer__title {
+ margin: 8px 0 40px 0; 
+}
+
+.item-img {
+  margin-right: 16px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+.expert-guide__img:hover {
+  transition: .5s;
+  background: #e5eeeb;
+}
+
+.safe-passage__img:hover {
+  transition: .5s;
+  background: #e3e6ee;
+}
+
+.loyal-prices__img:hover {
+  transition: .5s;
+  background: #f3f1e1;
+}
+
+.our-offer__item {
+  @include mix.flex(start, center, nowrap);
+  
+  margin: 40px 0 40px 0;
+}
+
+.item__title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.item__desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.item__content {
+  width: 514px;
+}
+
+.our-offer__btn {
+  padding: 16px 36px;
+}
+
+.our-offer__images {
+  @include mix.flex(start, start, wrap);
+  
+  max-width: 510px;
+  max-height: 510px;
+  gap: 10px 10px;
+  
+  .img-participant {
+    display: block;
   }
 }

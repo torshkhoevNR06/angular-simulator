@@ -1,3 +1,11 @@
+@if (isLoading) {
+  <div class="loading">
+    <div class="loading__content">
+      <img src="/images/loading-icon.svg" alt="иконка загрузка страницы">
+    </div>
+  </div>
+}
+
 <div class="wrapper">
   <header class="header">
     <div class="header__container d-flex">
@@ -7,51 +15,168 @@
           <span class="company-name">{{ companyName }}</span>
         </div>
         <nav class="header__nav">
-          <a href="#" class="link">Главная</a>
-          <a href="#" class="link">Про гида</a>
-          <a href="#" class="link">Программа тура</a>
-          <a href="#" class="link">Стоимость</a>
-          <a href="#" class="link">Блог</a>
-          <a href="#" class="link">Контакты</a>
+          <a href="#" class="link" id="main">Главная</a>
+          <a href="#" class="link" id="pro-guide">Про гида</a>
+          <a href="#" class="link" id="tour-program">Программа тура</a>
+          <a href="#" class="link" id="price">Стоимость</a>
+          <a href="#" class="link" id="blog">Блог</a>
+          <a href="#" class="link" id="contacts">Контакты</a>
         </nav>
         <div class="header__btn">
-          <button class="btn-consultation">Консультация</button>
+          <button class="btn btn-consultation" id="btn-consultation">Консультация</button>
         </div>
+
+        @if (currentTask === 'counter') {
+          <div class="header__timer">
+            <span class="timer">{{ dateTime }}</span>
+            <button class="btn btn-show-clicker" (click)="setCurrentTask('dateTime')">Показать кликер</button>
+          </div>
+        } @else {
+          <div class="header__clicker">
+            <div class="clicker-container">
+              <button class="btn-plus" (click)="incrementCounter()">+</button>
+              <span class="current-account">{{ counter }}</span>
+              <button class="btn-minus" (click)="decrementCounter()" [disabled]="counter <= 0">-</button>
+            </div>
+            <button class="btn btn-show-date" (click)="setCurrentTask('counter')">Показать дату</button>
+          </div>
+        }
       </div>
-  
+
       <div class="header__bottom">
         <div class="header__title">
           <h1>Насладись прогулкой в горах с&nbsp;командой единомышленников</h1>
         </div>
         <div class="bottom-container">
-          <div class="location-for-tour">
-            <div class="location-for-tour__item">
-              <span>Локация для тура</span>
-              <img class="location-for-tour__img" src="/images/caret-down-icon.svg" alt="Иконка косой вниз">
+          <div class="location-tour">
+            <div class="location-tour__container">
+              @if (!selectedLocation) {
+                <span class="location-tour__before-choice">Локация для тура</span>
+              } @else {
+                <span class="location-tour__before-choice">{{ selectedLocation }}</span>
+              }
+              <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+              <select class="list-locations" [(ngModel)]="selectedLocation">
+                @if (!selectedLocation) {
+                } @else {
+                  <option selected disabled hidden>{{ selectedLocation }}</option>
+                }
+                @for (location of locations; track location.id) {
+                  <option [value]="location.name">{{ location.name }}</option>
+                } @empty {
+                  <span>Не удалось отобразить список локаций!</span>
+                }
+              </select>
             </div>
-            <span class="location-for-tour__desc">выберите из списка</span>
+            <span class="location-tour__desc">выберите из списка</span>
           </div>
-          <div class="date-of-hike">
-            <div class="date-of-hike__item">
-              <span>Дата похода</span>
-              <img class="date-of-hike__img" src="/images/calendar-icon.svg" alt="Иконка календарь">
+          <div class="date-hike">
+            <div class="date-hike__container">
+              @if (!selectedDate) {
+                <span>дд.мм.гггг</span>
+              } @else {
+                <span>{{ selectedDate }}</span>
+              }
+              <img class="date-hike__icon" src="/images/calendar-icon.svg" alt="иконка календарь">
+              <input class="date-hike__data" id="date-hike__data" type="date" [(ngModel)]="selectedDate">
             </div>
-            <span class="date-of-hike__desc">укажите диапазон</span>
+            <span class="date-hike__desc">укажите диапазон</span>
           </div>
           <div class="participants">
-            <div class="participants__item">
-              <span>Участники</span>
-              <img class="participants__img" src="/images/caret-down-icon.svg" alt="Иконка косой вниз">
+            <div class="participants__container">
+              @if (!selectedParticipants) {
+                <span class="participants__before-choice">Участники</span>
+              } @else {
+                <span class="participants__before-choice">{{ selectedParticipants }}</span>
+              }
+              <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+              <select class="number-participants" [(ngModel)]="selectedParticipants">
+                @for (participant of participants; track participant.id) {
+                  <option [value]="participant.name">{{ participant.name }}</option>
+                } @empty {
+                  <span>Не удалось отобразить список участников!</span>
+                }
+              </select>
             </div>
-            <span class="participants__desc">минимум 4 человека</span>
+            <span class="participants__desc">Выберите из списка</span>
           </div>
-          <div class="find-program">
-            <button class="find-program__btn">Найти программу</button>
+            <div class="find-program"[class.find-program__disabled]="!isFormValid()">
+              <button class="btn find-program__btn"
+                [class.find-program__disabled-btn]="!isFormValid()"
+                id="find-program__btn"
+                [disabled]="!isFormValid()"
+              >
+              Найти программу</button>
           </div>
+        </div>
+
+        <div class="header__live-input">
+          <input class="live-input" id="live-input" type="text" [(ngModel)]="liveInputValue" maxlength="15">
+          <img class="caret-down" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+          <span>{{ liveInputValue }}</span>
         </div>
       </div>
     </div>
   </header>
 
-  
+  <main class="main">
+    <section class="our-approach">
+      <div class="container">
+        <div class="our-approach__showreel">
+          <a class="img-mountain__link" id="img-mountain__link" href="#">
+            <img src="/images/mountain-peak.png" alt="картинка горный пик" width="350px" height="400px">
+          </a>
+        <div class="showreel-container">
+          <a class="alpine-meadow-house__link" id="alpine-meadow-house__link" href="#">
+            <img src="/images/alpine-meadow-house.png" alt="картинка деревянный домик на альпийском лугу" width="350px" height="400px">
+          </a>
+          <a class="img-play-link" id="img-play-link" href="#">
+            <img class="img-play-btn" src="/images/play-button.svg" alt="кнопка плеер">
+          </a>
+        </div>
+      </div>
+        <div class="our-approach__content">
+          <span class="entry our-approach__entry">о нашем походе</span>
+          <h2 class="title our-approach__title">Исследуйте все горные массивы мира вместе с нами</h2>
+          <p class="our-approach__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+          <button class="btn our-approach__btn" id="our-approach__btn">Программа тура</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="our-offer">
+      <div class="container">
+        <div class="our-offer__content">
+          <span class="entry our-offer__entry">наше предложение</span>
+          <h2 class="title our-offer__title">Лучшие программы для тебя</h2>
+          <p class="our-offer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+          @for (card of cards; track card.id) {
+            <div class="our-offer__item" id="our-offer__item">
+              <div class="item-img"
+                [class.expert-guide__img]="card.id === 1"
+                [class.safe-passage__img]="card.id === 2"
+                [class.loyal-prices__img]="card.id === 3"
+              >
+                <img [src]="'images/' + card.iconName + '.svg'" [alt]="card.iconName">
+              </div>
+            <div class="item__content">
+              <h3 class="item__title">{{ card.title }}</h3>
+              <p class="item__desc">{{ card.description }}</p>
+            </div>
+          </div>
+        } @empty {
+          <p>Пусто, карточки не отобразились!</p>
+        }
+        <button class="btn our-offer__btn" id="our-offer__btn">Стоимость программ</button>
+      </div>
+
+        <div class="our-offer__images">
+          <img class="img-participant" src="/images/tropical-look.png" alt="картинка тропический вид" width="250px" height="250px">
+          <img class="img-participant" src="/images/volcanic-crater.png" alt="картинка вулканический кратер" width="250px" height="250px">
+          <img class="img-participant" src="/images/snowy-mountains.png" alt="картинка заснеженные горы" width="250px" height="250px">
+          <img class="img-participant" src="/images/orange-mineral-river.png" alt="картинка минеральные воды" width="250px" height="250px">
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
