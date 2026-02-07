@@ -13,9 +13,9 @@ import './collection';
 export class AppComponent {
 
   companyName: string = 'Румтибет';
-  selectedLocation: string = '';
-  selectedDate: string = '';
-  selectedParticipants: string = '';
+  selectedLocation!: boolean;
+  selectedDate!: boolean;
+  selectedParticipants!: boolean;
   selectedInput!: string;
   dateTime!: string;
   counter: number = 0;
@@ -65,7 +65,7 @@ export class AppComponent {
   constructor() {
     this.saveLastVisit();
     this.saveVisitsCount();
-    this.getPrimaryColor(Color.RED);
+    this.isPrimaryColor(Color.RED);
 
     const saveCounter: number = Number(localStorage.getItem('counter'));
     if (saveCounter) {
@@ -81,7 +81,7 @@ export class AppComponent {
     }, 2000);
   }
 
-  private getPrimaryColor(color: Color): boolean {
+  private isPrimaryColor(color: Color): boolean {
     const primaryColors: Color[] = [Color.RED, Color.BLUE, Color.GREEN];
     return primaryColors.includes(color);
   }
@@ -97,7 +97,7 @@ export class AppComponent {
     localStorage.setItem("user-visit", JSON.stringify(visits));
   }
 
-  isValidInput(): string {
+  isFormValid(): boolean {
     return this.selectedLocation && this.selectedDate && this.selectedParticipants;
   }
 

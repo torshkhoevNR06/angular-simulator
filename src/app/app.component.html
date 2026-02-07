@@ -100,11 +100,11 @@
             </div>
             <span class="participants__desc">Выберите из списка</span>
           </div>
-            <div class="find-program"[class.find-program__disabled]="!isValidInput()">
+            <div class="find-program"[class.find-program__disabled]="!isFormValid()">
               <button class="btn find-program__btn"
-                [class.find-program__disabled-btn]="!isValidInput()"
+                [class.find-program__disabled-btn]="!isFormValid()"
                 id="find-program__btn"
-                [disabled]="!isValidInput()"
+                [disabled]="!isFormValid()"
               >
               Найти программу</button>
           </div>
