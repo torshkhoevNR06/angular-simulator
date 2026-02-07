@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Color } from '../enums/Color';
+import {Component} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {Color} from '../enums/Color';
 import './training';
 import './collection';
 
@@ -21,7 +21,7 @@ export class AppComponent {
   counter: number = 0;
   currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
-  
+
   locations: ILocation[] = [
     { id: 1, name: 'Исландия' },
     { id: 2, name: 'Новосибирск' },
@@ -64,9 +64,9 @@ export class AppComponent {
 
   constructor() {
     this.saveLastVisit();
-    this.saveVisitsСount();
+    this.saveVisitsCount();
     this.getPrimaryColor(Color.RED);
-    
+
     const saveCounter: number = Number(localStorage.getItem('counter'));
     if (saveCounter) {
       this.counter = saveCounter;
@@ -91,7 +91,7 @@ export class AppComponent {
     localStorage.setItem("userDate", JSON.stringify(date));
   }
 
-  private saveVisitsСount(): void {
+  private saveVisitsCount(): void {
     const visitsRaw: number = Number(localStorage.getItem("user-visit"));
     const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
     localStorage.setItem("user-visit", JSON.stringify(visits));
