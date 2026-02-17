@@ -1,5 +1,12 @@
 @use '../assets/mixins' as mix;
 
+.box-message {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  height: 400px;
+}
+
 .loading {
   position: fixed;
   left: 0;
@@ -23,6 +30,49 @@
     0% { transform: rotate(360deg); }
     100% { transform: rotate(0); }
   }
+}
+
+.box-message {
+  @include mix.flex(start, start, nowrap);
+
+  position: fixed;
+  top: 7px;
+  right: 7px;
+  row-gap: 7px;
+  flex-direction: column;
+}
+
+.message {
+  @include mix.flex(start, center, wrap);
+
+  position: relative;
+  column-gap: 15px;
+  padding: 15px;
+  width: 350px;
+  height: 70px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  background-color: #0F172A99;
+  z-index: 1;
+}
+
+.message__title, .message__desc {
+  color: var(--primary-color);
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.message__desc {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.close-button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  cursor: pointer;
 }
 
 .wrapper {
@@ -414,4 +464,199 @@
   .img-participant {
     display: block;
   }
+}
+
+.popular-destinations__container, .travel-blog__container {
+  display: block !important;
+}
+
+.popular-destinations__info, .travel-blog__info {
+  text-align: center;
+  padding: 85px 0 40px 0;
+}
+
+.popular-destinations__images {
+  @include mix.flex(center, center, nowrap);
+
+  margin-bottom: 50px;
+  gap: 20px;
+  
+  .images__item--one {
+    background-image: url("/images/mountain-lake.png");
+  }
+  
+  .images__item--two {
+    background-image: url("/images/night-mountains.png");
+  }
+  
+  .images__item--three {
+    background-image: url("/images/mountain-yoga.png");
+  }
+  
+  .images__item--one, .images__item--two, .images__item--three {
+    background-size: 100%;
+    cursor: pointer;
+  }
+}
+
+.popular-destinations__images-item {
+  position: relative;
+  width: 380px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.box-rating {
+  @include mix.flex(center, center, nowrap);
+
+  position: absolute;
+  top: 50px;
+  right: 0;
+  gap: 7px;
+  width: 65px;
+  height: 32px;
+  background-color: #FFFFFF4D;
+  cursor: pointer;
+
+  &__star, &__desc {
+    display: block;
+  }
+
+  &__desc {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--additional-color);
+  }  
+}
+
+.box-description {
+  @include mix.flex(center, center, nowrap);
+
+  position: absolute;
+  bottom: 0;
+  gap: 35px;
+  width: 380px;
+  height: 90px;
+  backdrop-filter: blur(2px);
+  background-color: #ebebeb38;
+
+  .location__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .location__desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+}
+
+.box-description__price {
+  @include mix.flex(center, center, nowrap);
+
+  background-color: #FFFFFF4D;
+  width: 86px; 
+  height: 40px;
+  border-radius: 4px;
+
+  .price-item {
+    display: block;
+    font-size: 20px;
+    font-weight: 700px;
+    color: var(--primary-color);
+  }
+}
+
+.popular-destinations__referral-rating {
+  text-align: center;  
+}
+
+.referral-rating__btn, .other-material__btn {
+  padding: 16px 36px;
+  font-weight: 600;
+}
+
+.travel-blog {
+  margin: 95px 0 85px 0;
+  background-color: var(--light-gray-color);
+}
+
+.travel-blog__article {
+  @include mix.flex(start, start, wrap);
+
+  gap: 20px;
+}
+
+.article-holder {
+  @include mix.flex(center, center, nowrap);
+  
+  column-gap: 24px;
+  width: 580px;
+  height: 320px;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 #18121E1F;
+  background-color: var(--primary-color);
+}
+
+.article-holder__content {
+  @include mix.flex(space-between, start, nowrap);
+  
+  flex-direction: column;
+  width: 294px;
+  height: 280px;
+  padding: 16px 0 16px 0;
+  
+  &-item {
+    @include mix.flex(start, start, nowrap);
+  
+    flex-direction: column;
+    row-gap: 24px;
+  }
+  
+  &-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    cursor: pointer;
+  }
+
+  &-title:hover {
+    color: var(--additional-color);
+    text-decoration: underline;
+  }
+  
+  &-desc {
+    max-height: 100px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    overflow-y: hidden;
+  }
+}
+
+.article-holder__info {
+  @include mix.flex(space-between, start, nowrap);
+
+  width: 100%;
+
+  .info-article {
+    color: var(--additional-color);
+    cursor: pointer;
+  }
+}
+
+.info-date, .info-article {
+  color: var(--gold-color);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.travel-blog__other-material {
+  @include mix.flex(center, start, nowrap);
+
+  padding: 50px 0 85px 0;
 }

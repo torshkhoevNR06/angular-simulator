@@ -1,10 +1,10 @@
-@if (isLoading) {
+<!-- @if (isLoading) {
   <div class="loading">
     <div class="loading__content">
       <img src="/images/loading-icon.svg" alt="иконка загрузка страницы">
     </div>
   </div>
-}
+} -->
 
 <div class="wrapper">
   <header class="header">
@@ -23,7 +23,12 @@
           <a href="#" class="link" id="contacts">Контакты</a>
         </nav>
         <div class="header__btn">
-          <button class="btn btn-consultation" id="btn-consultation">Консультация</button>
+          <button 
+            class="btn btn-consultation" 
+            id="btn-consultation"
+            (click)="messageService.addMessage(MessageType.SUCCESS, 'Message Content')"
+          > 
+          Консультация</button>
         </div>
 
         @if (currentTask === 'counter') {
@@ -98,13 +103,15 @@
                 }
               </select>
             </div>
-            <span class="participants__desc">Выберите из списка</span>
+            <span class="participants__desc">выберите из списка</span>
           </div>
             <div class="find-program"[class.find-program__disabled]="!isFormValid()">
-              <button class="btn find-program__btn"
+              <button 
+                class="btn find-program__btn"
                 [class.find-program__disabled-btn]="!isFormValid()"
                 id="find-program__btn"
                 [disabled]="!isFormValid()"
+                (click)="messageService.addMessage(MessageType.INFO, 'Message Content')"
               >
               Найти программу</button>
           </div>
@@ -139,7 +146,12 @@
           <span class="entry our-approach__entry">о нашем походе</span>
           <h2 class="title our-approach__title">Исследуйте все горные массивы мира вместе с нами</h2>
           <p class="our-approach__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-          <button class="btn our-approach__btn" id="our-approach__btn">Программа тура</button>
+          <button 
+            class="btn our-approach__btn" 
+            id="our-approach__btn"
+            (click)="messageService.addMessage(MessageType.WARN, 'Message Content')"
+          >
+          Программа тура</button>
         </div>
       </div>
     </section>
@@ -152,7 +164,8 @@
           <p class="our-offer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
           @for (card of cards; track card.id) {
             <div class="our-offer__item" id="our-offer__item">
-              <div class="item-img"
+              <div 
+                class="item-img"
                 [class.expert-guide__img]="card.id === 1"
                 [class.safe-passage__img]="card.id === 2"
                 [class.loyal-prices__img]="card.id === 3"
@@ -178,5 +191,107 @@
         </div>
       </div>
     </section>
+
+    <section class="popular-destinations">
+      <div class="container popular-destinations__container">
+        <div class="popular-destinations__info">
+          <span class="entry">по версии отдыхающих</span>
+          <h3 class="title">Популярные направления</h3>
+        </div>
+        <div class="popular-destinations__images" id="popular-destinations__images">
+          @for (direction of directions; track direction.id) {
+            <div 
+              class="popular-destinations__images-item"
+              [class.images__item--one]="direction.id === 1"
+              [class.images__item--two]="direction.id === 2"
+              [class.images__item--three]="direction.id === 3"
+              [id]="'popular-destinations__images-item__' + direction.id"
+            >
+            <div class="box-rating" id="box-rating">
+              <img class="box-rating__star" 
+                [id]="'box-rating__star-' + direction.id" 
+                src="/images/star-icon.svg" 
+                alt="иконка звёздочка"
+              >
+              <span class="box-rating__desc" [id]="'box-rating__desc-' + direction.id">{{ direction.rating }}</span>
+            </div>
+              <div class="box-description">
+                <div class="box-description__location">
+                  <h3 class="location__title">{{ direction.title }}</h3>
+                  <span class="location__desc">{{ direction.description }}</span>
+                </div>
+                <div class="box-description__price" [id]="'box-description__price-' + direction.id">
+                  <span class="price-item">{{ direction.price }} &dollar;</span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="popular-destinations__referral-rating">
+        <button class="btn referral-rating__btn" id="referral-rating__btn">Рейтинг направлений</button>
+      </div>
+    </section>
+
+    <section class="travel-blog">
+      <div class="container travel-blog__container">
+        <div class="travel-blog__info">
+          <span class="entry">делимся впечатлениями</span>
+          <h3 class="title">Блог о путешествиях</h3>
+        </div>
+        <div class="travel-blog__article">
+          @for (article of articles; track article.id) {
+            <div class="article-holder">
+              <div class="article-holder__image" id="article-holder__image">
+                <img [src]="'/images/' + [article.image] + '.png'" [alt]="article.image">
+              </div>
+              <div class="article-holder__content">
+                <div class="article-holder__content-item">
+                  <h3 class="article-holder__content-title" id="article-holder__content-title">{{ article.title }}</h3>
+                  <p class="article-holder__content-desc">{{ article.description }}</p>
+                </div>
+                <div class="article-holder__info">
+                  <span class="info-date">{{ article.data }}</span>
+                  <a href="#" class="info-article" id="info-article">читать статью</a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="travel-blog__other-material">
+          <button 
+            class="btn other-material__btn"
+            id="other-material__btn"
+            (click)="messageService.addMessage(MessageType.ERROR, 'Message Content')"
+          >
+          Другие материалы</button>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
+
+<div class="box-message">
+  @for (message of messageService.messages; track $index) {
+    <ng-container [ngTemplateOutlet]="messageTemplate" [ngTemplateOutletContext]="{ message: message }" />
+  }
+</div>
+
+<ng-template #messageTemplate let-message="message">
+  <div class="message">
+    <div class="message__icons">
+      <img src="/images/letter-icon.svg" alt="иконка письмо">
+      <img 
+        class="close-button"
+        id="close-button"
+        src="/images/close-button-icon.png" 
+        alt="иконка закрытие сообщений"
+        (click)="messageService.closeMessage(message)" 
+      >
+    </div>
+    <div class="message__info">
+      <h3 class="message__title">{{ message.type }}</h3>
+      <span class="message__desc">{{ message.text }}</span>
+    </div>
+  </div>
+</ng-template>

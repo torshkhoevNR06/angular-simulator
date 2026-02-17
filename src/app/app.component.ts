@@ -1,12 +1,16 @@
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {Color} from '../enums/Color';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
+import { MessageService } from '../services/message.service';
+import { localStorageService } from '../services/local-storage.service';
+import { Color } from '../enums/Color';
+import { MessageType } from '../enums/MessageType';
 import './training';
 import './collection';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -21,6 +25,9 @@ export class AppComponent {
   counter: number = 0;
   currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
+  MessageType = MessageType;
+  messageService = inject(MessageService);
+  private localStorageService = inject(localStorageService);
 
   locations: ILocation[] = [
     { id: 1, name: 'Исландия' },
@@ -62,6 +69,61 @@ export class AppComponent {
     }
   ];
 
+  directions: IDirection[] = [
+    {
+      id: 1,
+      rating: "4.9",
+      title: "Озеро возле гор",
+      description: "романтическое приключение",
+      price: 480
+    },
+    {
+      id: 2,
+      rating: "4.5",
+      title: "Ночь в горах",
+      description: "в компании друзей",
+      price: 500
+    },
+    {
+      id: 3,
+      rating: "5.0",
+      title: "Упр в горах",
+      description: "для тех, кто забоится о себе",
+      price: 230
+    }
+  ];
+
+  articles: IArticle[] = [
+    {
+      id: 1,
+      image: "manarola-sunset",
+      title: "Красивая Италия, какая она в реальности?",
+      description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.",
+      data: "01/11/2023"
+    },
+    {
+      id: 2,
+      image: "flight-dawn",
+      title: "Долой сомнения! Весь мир открыт для вас!",
+      description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...",
+      data: "12/12/2023"
+    },
+    {
+      id: 3,
+      image: "road-trip",
+      title: "Как подготовиться к путешествию в одиночку?",
+      description: "Для современного мира базовый вектор развития предполагает.",
+      data: "08/03/2024"
+    },
+    {
+      id: 4,
+      image: "taj-mahal",
+      title: "Индия ... летим?",
+      description: "Для современного мира базовый.",
+      data: "25/06/2024"
+    }
+  ]
+  
   constructor() {
     this.saveLastVisit();
     this.saveVisitsCount();
@@ -90,13 +152,13 @@ export class AppComponent {
     const date: string = new Date().toString();
     localStorage.setItem("userDate", JSON.stringify(date));
   }
-
+  
   private saveVisitsCount(): void {
     const visitsRaw: number = Number(localStorage.getItem("user-visit"));
     const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
     localStorage.setItem("user-visit", JSON.stringify(visits));
   }
-
+  
   isFormValid(): boolean {
     return this.selectedLocation && this.selectedDate && this.selectedParticipants;
   }
@@ -105,14 +167,14 @@ export class AppComponent {
     this.counter++;
     localStorage.setItem('counter', JSON.stringify(this.counter));
   }
-
+  
   decrementCounter(): void {
     this.counter--;
     localStorage.setItem('counter', JSON.stringify(this.counter));
   }
-
+  
   setCurrentTask(task: 'counter' | 'dateTime'): void {
     this.currentTask = task;
   }
-
+  
 }
