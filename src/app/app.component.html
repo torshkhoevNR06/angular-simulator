@@ -26,7 +26,7 @@
           <button 
             class="btn btn-consultation" 
             id="btn-consultation"
-            (click)="messageService.addMessage(MessageType.SUCCESS, 'Message Content')"
+            (click)="messageService.addMessage(messageType.SUCCESS, 'Message Content')"
           > 
             Консультация
           </button>
@@ -112,7 +112,7 @@
                 [class.find-program__disabled-btn]="!isFormValid()"
                 id="find-program__btn"
                 [disabled]="!isFormValid()"
-                (click)="messageService.addMessage(MessageType.INFO, 'Message Content')"
+                (click)="messageService.addMessage(messageType.INFO, 'Message Content')"
               >
                 Найти программу
               </button>
@@ -151,7 +151,7 @@
           <button 
             class="btn our-approach__btn" 
             id="our-approach__btn"
-            (click)="messageService.addMessage(MessageType.WARN, 'Message Content')"
+            (click)="messageService.addMessage(messageType.WARN, 'Message Content')"
           >
             Программа тура
           </button>
@@ -266,7 +266,7 @@
           <button 
             class="btn other-material__btn"
             id="other-material__btn"
-            (click)="messageService.addMessage(MessageType.ERROR, 'Message Content')"
+            (click)="messageService.addMessage(messageType.ERROR, 'Message Content')"
           >
             Другие материалы
           </button>

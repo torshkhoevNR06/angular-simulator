@@ -25,7 +25,7 @@ export class AppComponent {
   counter: number = 0;
   currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
-  MessageType = MessageType;
+  messageType: typeof MessageType = MessageType;
   messageService: MessageService = inject(MessageService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
