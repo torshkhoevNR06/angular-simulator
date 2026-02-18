@@ -9,17 +9,16 @@ export class MessageService {
 
   messages: IMessage[] = [];
 
-  addMessage(type: MessageType, text: string) {
+  addMessage(type: MessageType, text: string): void {
     const newMessage: IMessage = { type, text };
-    let copyMessage: IMessage[] = [...this.messages, newMessage];
-    this.messages = copyMessage;
+    this.messages = [...this.messages, newMessage];
     
     setTimeout(() => {
       this.closeMessage(newMessage);
     }, 5000);
   }
 
-  closeMessage(messageToRemove: IMessage) {
+  closeMessage(messageToRemove: IMessage): void {
     this.messages = this.messages.filter((message: IMessage) => message !== messageToRemove);
   }
   
