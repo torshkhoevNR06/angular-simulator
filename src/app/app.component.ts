@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet } from '@angular/common';
 import { MessageService } from '../services/message.service';
-import { localStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '../services/local-storage.service';
 import { Color } from '../enums/Color';
 import { MessageType } from '../enums/MessageType';
 import './training';
@@ -26,8 +26,8 @@ export class AppComponent {
   currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
   MessageType = MessageType;
-  messageService = inject(MessageService);
-  private localStorageService = inject(localStorageService);
+  messageService: MessageService = inject(MessageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   locations: ILocation[] = [
     { id: 1, name: 'Исландия' },
