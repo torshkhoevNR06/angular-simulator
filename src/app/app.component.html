@@ -214,7 +214,7 @@
               <img 
                 class="box-rating__star" 
                 [id]="'box-rating__star-' + direction.id" 
-                src="/images/star-icon.svg" 
+                src="/images/star.svg" 
                 alt="иконка звёздочка"
               >
               <span class="box-rating__desc" [id]="'box-rating__desc-' + direction.id">{{ direction.rating }}</span>
@@ -289,7 +289,7 @@
       <img 
         class="close-button"
         id="close-button"
-        src="/images/close-button-icon.png" 
+        src="/images/close-icon.svg" 
         alt="иконка закрытие сообщений"
         (click)="messageService.closeMessage(message)" 
       >
