@@ -1,10 +1,10 @@
-<!-- @if (isLoading) {
+@if (isLoading) {
   <div class="loading">
     <div class="loading__content">
       <img src="/images/loading-icon.svg" alt="иконка загрузка страницы">
     </div>
   </div>
-} -->
+}
 
 <div class="wrapper">
   <header class="header">
@@ -28,7 +28,8 @@
             id="btn-consultation"
             (click)="messageService.addMessage(MessageType.SUCCESS, 'Message Content')"
           > 
-          Консультация</button>
+            Консультация
+          </button>
         </div>
 
         @if (currentTask === 'counter') {
@@ -113,7 +114,8 @@
                 [disabled]="!isFormValid()"
                 (click)="messageService.addMessage(MessageType.INFO, 'Message Content')"
               >
-              Найти программу</button>
+                Найти программу
+              </button>
           </div>
         </div>
 
@@ -151,7 +153,8 @@
             id="our-approach__btn"
             (click)="messageService.addMessage(MessageType.WARN, 'Message Content')"
           >
-          Программа тура</button>
+            Программа тура
+          </button>
         </div>
       </div>
     </section>
@@ -265,7 +268,8 @@
             id="other-material__btn"
             (click)="messageService.addMessage(MessageType.ERROR, 'Message Content')"
           >
-          Другие материалы</button>
+            Другие материалы
+          </button>
         </div>
       </div>
     </section>
