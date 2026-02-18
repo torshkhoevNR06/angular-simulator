@@ -14,11 +14,11 @@ export class LocalStorageService {
     return keyData ? JSON.parse(keyData) : null;
   }
 
-  clear() {
+  clear(): void {
     localStorage.clear();
   }
 
-  removeItem(key: string) {
+  removeItem(key: string): void {
     localStorage.removeItem(key);
   }
 
