@@ -11,7 +11,7 @@ export class MessageService {
 
   addMessage(type: MessageType, text: string): void {
     const newMessage: IMessage = { type, text };
-    this.messages = [...this.messages, newMessage];
+    this.messages = [newMessage, ...this.messages];
     
     setTimeout(() => {
       this.closeMessage(newMessage);

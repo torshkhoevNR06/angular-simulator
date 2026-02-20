@@ -15,7 +15,9 @@ import './collection';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
+  
+  messageService: MessageService = inject(MessageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   companyName: string = 'Румтибет';
   selectedLocation!: boolean;
   selectedDate!: boolean;
@@ -26,8 +28,6 @@ export class AppComponent {
   currentTask!: 'counter' | 'dateTime';
   isLoading: boolean = true;
   messageType: typeof MessageType = MessageType;
-  messageService: MessageService = inject(MessageService);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   locations: ILocation[] = [
     { id: 1, name: 'Исландия' },
@@ -72,6 +72,7 @@ export class AppComponent {
   directions: IDirection[] = [
     {
       id: 1,
+      image: "mountain-lake",
       rating: "4.9",
       title: "Озеро возле гор",
       description: "романтическое приключение",
@@ -79,6 +80,7 @@ export class AppComponent {
     },
     {
       id: 2,
+      image: "night-mountains",
       rating: "4.5",
       title: "Ночь в горах",
       description: "в компании друзей",
@@ -86,6 +88,7 @@ export class AppComponent {
     },
     {
       id: 3,
+      image: "mountain-exercise",
       rating: "5.0",
       title: "Упр в горах",
       description: "для тех, кто забоится о себе",

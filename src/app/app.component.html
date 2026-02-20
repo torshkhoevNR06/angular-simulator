@@ -84,7 +84,7 @@
                 <span>{{ selectedDate }}</span>
               }
               <img class="date-hike__icon" src="/images/calendar-icon.svg" alt="иконка календарь">
-              <input class="date-hike__data" id="date-hike__data" type="date" [(ngModel)]="selectedDate">
+              <input class="date-hike__data" id="date-hike-data" type="date" [(ngModel)]="selectedDate">
             </div>
             <span class="date-hike__desc">укажите диапазон</span>
           </div>
@@ -110,7 +110,7 @@
               <button 
                 class="btn find-program__btn"
                 [class.find-program__disabled-btn]="!isFormValid()"
-                id="find-program__btn"
+                id="find-program-btn"
                 [disabled]="!isFormValid()"
                 (click)="messageService.addMessage(messageType.INFO, 'Message Content')"
               >
@@ -132,11 +132,11 @@
     <section class="our-approach">
       <div class="container">
         <div class="our-approach__showreel">
-          <a class="img-mountain__link" id="img-mountain__link" href="#">
+          <a class="img-mountain__link" id="img-mountain-link" href="#">
             <img src="/images/mountain-peak.png" alt="картинка горный пик" width="350px" height="400px">
           </a>
         <div class="showreel-container">
-          <a class="alpine-meadow-house__link" id="alpine-meadow-house__link" href="#">
+          <a class="alpine-meadow-house__link" id="alpine-meadow-house-link" href="#">
             <img src="/images/alpine-meadow-house.png" alt="картинка деревянный домик на альпийском лугу" width="350px" height="400px">
           </a>
           <a class="img-play-link" id="img-play-link" href="#">
@@ -150,7 +150,7 @@
           <p class="our-approach__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
           <button 
             class="btn our-approach__btn" 
-            id="our-approach__btn"
+            id="our-approach-btn"
             (click)="messageService.addMessage(messageType.WARN, 'Message Content')"
           >
             Программа тура
@@ -159,6 +159,7 @@
       </div>
     </section>
 
+    
     <section class="our-offer">
       <div class="container">
         <div class="our-offer__content">
@@ -166,12 +167,12 @@
           <h2 class="title our-offer__title">Лучшие программы для тебя</h2>
           <p class="our-offer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
           @for (card of cards; track card.id) {
-            <div class="our-offer__item" id="our-offer__item">
+            <div class="our-offer__item" id="our-offer-item">
               <div 
                 class="item-img"
-                [class.expert-guide__img]="card.id === 1"
-                [class.safe-passage__img]="card.id === 2"
-                [class.loyal-prices__img]="card.id === 3"
+                [class.expert-guide__animated-bg]="card.id === 1"
+                [class.safe-passage__animated-bg]="card.id === 2"
+                [class.loyal-prices__animated-bg]="card.id === 3"
               >
                 <img [src]="'images/' + card.iconName + '.svg'" [alt]="card.iconName">
               </div>
@@ -183,7 +184,7 @@
         } @empty {
           <p>Пусто, карточки не отобразились!</p>
         }
-        <button class="btn our-offer__btn" id="our-offer__btn">Стоимость программ</button>
+        <button class="btn our-offer__btn" id="our-offer-btn">Стоимость программ</button>
       </div>
 
         <div class="our-offer__images">
@@ -201,30 +202,25 @@
           <span class="entry">по версии отдыхающих</span>
           <h3 class="title">Популярные направления</h3>
         </div>
-        <div class="popular-destinations__images" id="popular-destinations__images">
+        <div class="popular-destinations__images" id="popular-destinations-images">
           @for (direction of directions; track direction.id) {
-            <div 
-              class="popular-destinations__images-item"
-              [class.images__item--one]="direction.id === 1"
-              [class.images__item--two]="direction.id === 2"
-              [class.images__item--three]="direction.id === 3"
-              [id]="'popular-destinations__images-item__' + direction.id"
-            >
+            <div class="popular-destinations__images-item" id="popular-destinations-images-item">
+            <img class="image-item" [src]="'images/' + direction.image + '.png'" [alt]="direction.image">
             <div class="box-rating" id="box-rating">
               <img 
-                class="box-rating__star" 
-                [id]="'box-rating__star-' + direction.id" 
+                class="box-rating__star"
+                id="box-rating-star" 
                 src="/images/star.svg" 
                 alt="иконка звёздочка"
               >
-              <span class="box-rating__desc" [id]="'box-rating__desc-' + direction.id">{{ direction.rating }}</span>
+              <span class="box-rating__desc" id="box-rating-desc">{{ direction.rating }}</span>
             </div>
               <div class="box-description">
                 <div class="box-description__location">
                   <h3 class="location__title">{{ direction.title }}</h3>
                   <span class="location__desc">{{ direction.description }}</span>
                 </div>
-                <div class="box-description__price" [id]="'box-description__price-' + direction.id">
+                <div class="box-description__price" id="box-description-price">
                   <span class="price-item">{{ direction.price }} &dollar;</span>
                 </div>
               </div>
@@ -233,7 +229,7 @@
         </div>
       </div>
       <div class="popular-destinations__referral-rating">
-        <button class="btn referral-rating__btn" id="referral-rating__btn">Рейтинг направлений</button>
+        <button class="btn referral-rating__btn" id="referral-rating-btn">Рейтинг направлений</button>
       </div>
     </section>
 
@@ -246,12 +242,12 @@
         <div class="travel-blog__article">
           @for (article of articles; track article.id) {
             <div class="article-holder">
-              <div class="article-holder__image" id="article-holder__image">
-                <img [src]="'/images/' + [article.image] + '.png'" [alt]="article.image">
+              <div class="article-holder__image" id="article-holder-image">
+                <img [src]="'/images/' + article.image + '.png'" [alt]="article.image">
               </div>
               <div class="article-holder__content">
                 <div class="article-holder__content-item">
-                  <h3 class="article-holder__content-title" id="article-holder__content-title">{{ article.title }}</h3>
+                  <h3 class="article-holder__content-title" id="article-holder-content-title">{{ article.title }}</h3>
                   <p class="article-holder__content-desc">{{ article.description }}</p>
                 </div>
                 <div class="article-holder__info">

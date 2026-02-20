@@ -411,19 +411,20 @@
   text-align: center;
   border-radius: 4px;
   padding: 7px;
+  transition: .5s;
 }
 
-.expert-guide__img:hover {
+.expert-guide__animated-bg:hover {
   transition: .5s;
   background: #e5eeeb;
 }
 
-.safe-passage__img:hover {
+.safe-passage__animated-bg:hover {
   transition: .5s;
   background: #e3e6ee;
 }
 
-.loyal-prices__img:hover {
+.loyal-prices__animated-bg:hover {
   transition: .5s;
   background: #f3f1e1;
 }
@@ -481,20 +482,7 @@
   margin-bottom: 50px;
   gap: 20px;
   
-  .images__item--one {
-    background-image: url("/images/mountain-lake.png");
-  }
-  
-  .images__item--two {
-    background-image: url("/images/night-mountains.png");
-  }
-  
-  .images__item--three {
-    background-image: url("/images/mountain-exercise.png");
-  }
-  
-  .images__item--one, .images__item--two, .images__item--three {
-    background-size: 100%;
+  .image-item {
     cursor: pointer;
   }
 }
