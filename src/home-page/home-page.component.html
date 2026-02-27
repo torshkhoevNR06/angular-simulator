@@ -1,5 +1,82 @@
 <app-message></app-message>
 <main class="main">
+  <section class="tour-program">
+    <div class="tour-program__wrapper">
+      <div class="tour-program__title">
+        <h1 class="heading">Насладись прогулкой в горах с&nbsp;командой единомышленников</h1>
+      </div>
+      <div class="bottom-container">
+        <div class="location-tour">
+          <div class="location-tour__container">
+            @if (!selectedLocation) {
+              <span class="location-tour__before-choice">Локация для тура</span>
+            } @else {
+              <span class="location-tour__before-choice">{{ selectedLocation }}</span>
+            }
+            <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+            <select class="list-locations" [(ngModel)]="selectedLocation">
+              @if (!selectedLocation) {
+              } @else {
+                <option selected disabled hidden>{{ selectedLocation }}</option>
+              }
+              @for (location of locations; track location.id) {
+                <option [value]="location.name">{{ location.name }}</option>
+              } @empty {
+                <span>Не удалось отобразить список локаций!</span>
+              }
+            </select>
+          </div>
+          <span class="location-tour__desc">выберите из списка</span>
+        </div>
+        <div class="date-hike">
+          <div class="date-hike__container">
+            @if (!selectedDate) {
+              <span>дд.мм.гггг</span>
+            } @else {
+              <span>{{ selectedDate }}</span>
+            }
+            <img class="date-hike__icon" src="/images/calendar-icon.svg" alt="иконка календарь">
+            <input class="date-hike__data" id="date-hike-data" type="date" [(ngModel)]="selectedDate">
+          </div>
+          <span class="date-hike__desc">укажите диапазон</span>
+        </div>
+        <div class="participants">
+          <div class="participants__container">
+            @if (!selectedParticipants) {
+              <span class="participants__before-choice">Участники</span>
+            } @else {
+              <span class="participants__before-choice">{{ selectedParticipants }}</span>
+            }
+            <img class="caret-down-icon" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+            <select class="number-participants" [(ngModel)]="selectedParticipants">
+              @for (participant of participants; track participant.id) {
+                <option [value]="participant.name">{{ participant.name }}</option>
+              } @empty {
+                <span>Не удалось отобразить список участников!</span>
+              }
+            </select>
+          </div>
+          <span class="participants__desc">выберите из списка</span>
+        </div>
+          <div class="find-program"[class.find-program__disabled]="!isFormValid()">
+            <button 
+              class="btn find-program__btn"
+              [class.find-program__disabled-btn]="!isFormValid()"
+              id="find-program-btn"
+              [disabled]="!isFormValid()"
+              (click)="messageService.showInfo(messageType.INFO, 'Message Content')"
+            >
+              Найти программу
+            </button>
+        </div>
+      </div>
+      <div class="header__live-input">
+        <input class="live-input" id="live-input" type="text" [(ngModel)]="liveInputValue" maxlength="15">
+        <img class="caret-down" src="/images/caret-down-icon.svg" alt="иконка косая стрелка">
+        <span>{{ liveInputValue }}</span>
+      </div>
+    </div>
+  </section>
   <section class="our-approach">
     <div class="container">
       <div class="our-approach__showreel">
@@ -155,30 +232,6 @@
       </div>
       <div class="share-impressions__pinterest">
         <button class="btn share-impressions__btn" id="share-impressions__btn">Наш pinterest</button>
-      </div>
-      <div class="share-impressions__newsletter-form">
-        <div class="newsletter-form__info">
-          <span class="entry newsletter-form__entry">актуально</span>
-          <h3 class="title newsletter-form__title">Получайте полезные рассылки о путешествиях</h3>
-        </div>
-        <div class="newsletter-form__news-subscription">
-          <span class="news-subscription__text">Введите e-mail адрес</span>
-          <div class="news-subscription__form">
-            <input class="news-subscription__email" id="news-subscription__email" type="text" placeholder="name@domain.com">
-            <button 
-                class="btn news-subscription__btn" 
-                id="news-subscription__btn"
-                (click)="messageService.showSuccess(messageType.SUCCESS, 'Message Content')"
-              >
-                Подписаться на новости
-              </button>
-          </div>
-          <div class="news-subscription__legal-disklayer">
-            <p class="legal-disklayer__text">подписываясь на новости, вы автоматически соглашаетесь с
-            <a href="#" class="legal-disklayer__link" id="legal-disklayer__link-one">условиями обработки персональных данных 
-            </a>и<a href="#" class="legal-disklayer__link-two" id="legal-disklayer__link-two">правилами рекламных рассылок</a></p>
-          </div>
-        </div>
       </div>
     </div>
   </section>

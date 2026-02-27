@@ -1,9 +1,9 @@
 @use '../assets/mixins' as mix;
 
 .footer {
+  position: relative;
   padding: 178px 0 0px 0;
   background-color: var(--additional-color);
-  color: var(--primary-color);
 
   &__container {
     @include mix.flex(space-between, start, nowrap);
@@ -118,4 +118,81 @@
     text-decoration: underline;
     color: var(--primary-color);
   }
+}
+
+.share-impressions__newsletter-form {
+  @include mix.flex(space-between, start, nowrap);
+
+  position: absolute;
+  top: -98px;
+  width: 1180px;
+  border-radius: 6px;
+  padding: 40px 100px;
+  z-index: 2;
+  box-shadow: 0 0 15px 0 #18121E1F;
+  background-color: var(--primary-color);
+}
+
+.newsletter-form__info {
+  max-width: 380px;
+
+  .newsletter-form__entry {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .newsletter-form__title {
+    font-size: 26px;
+    line-height: 120%;
+    overflow: hidden;
+  }
+}
+
+.news-subscription__form {
+  @include mix.flex(start, start, nowrap);
+
+  gap: 16px;
+  margin: 8px 0 8px 0;
+}
+
+.news-subscription__text {
+  display: block;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.news-subscription__email {
+  width: 240px;
+  height: 44px;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-weight: 300;
+  font-size: 14px;
+  background-color: var(--light-gray-color);
+  color: var(--secondary-color);
+}
+
+.news-subscription__email::placeholder {
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--secondary-color);
+}
+
+.news-subscription__btn {
+  padding: 12px 24px;
+}
+
+.legal-disklayer__text {
+  width: 536px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.legal-disklayer__link {
+  text-decoration: underline;
+  color: var(--secondary-color);
 }

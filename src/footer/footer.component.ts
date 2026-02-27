@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MessageComponent } from '../message/message.component';
+import { MessageService } from '../services/message.service';
+import { MessageType } from '../enums/MessageType';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [MessageComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+
+  messageService: MessageService = inject(MessageService);
+  messageType: typeof MessageType = MessageType;
 
   favors: IFavor[] = [
     { id: 1, favor: "Прогулки в горы летом" },

@@ -1,5 +1,30 @@
+<app-message></app-message>
 <footer class="footer">
   <div class="footer__container">
+    <div class="share-impressions__newsletter-form">
+      <div class="newsletter-form__info">
+        <span class="entry newsletter-form__entry">актуально</span>
+        <h3 class="title newsletter-form__title">Получайте полезные рассылки о путешествиях</h3>
+      </div>
+      <div class="newsletter-form__news-subscription">
+        <span class="news-subscription__text">Введите e-mail адрес</span>
+        <div class="news-subscription__form">
+          <input class="news-subscription__email" id="news-subscription__email" type="text" placeholder="name@domain.com">
+          <button 
+              class="btn news-subscription__btn" 
+              id="news-subscription__btn"
+              (click)="messageService.showSuccess(messageType.SUCCESS, 'Message Content')"
+            >
+              Подписаться на новости
+            </button>
+        </div>
+        <div class="news-subscription__legal-disklayer">
+          <p class="legal-disklayer__text">подписываясь на новости, вы автоматически соглашаетесь с
+          <a href="#" class="legal-disklayer__link" id="legal-disklayer__link-one">условиями обработки персональных данных 
+          </a>и<a href="#" class="legal-disklayer__link-two" id="legal-disklayer__link-two">правилами рекламных рассылок</a></p>
+        </div>
+      </div>
+    </div>
     <div class="footer__company">
       <h3 class="footer__heading">Компания «РумТибет»</h3>
       <p class="footer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух

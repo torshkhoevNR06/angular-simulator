@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MessageComponent } from '../message/message.component';
 import { MessageType } from '../enums/MessageType';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
-  imports: [MessageComponent],
+  imports: [MessageComponent, FormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -13,6 +14,10 @@ export class HomePageComponent {
   
   messageService: MessageService = inject(MessageService);
   messageType: typeof MessageType = MessageType;
+  liveInputValue!: string;
+  selectedLocation!: boolean;
+  selectedDate!: boolean;
+  selectedParticipants!: boolean;
   
   cards: IAdvantage[] = [
     {
@@ -91,6 +96,29 @@ export class HomePageComponent {
       description: "Для современного мира базовый.",
       data: "25/06/2024"
     }
+  ];
+
+  locations: ILocation[] = [
+    { id: 1, name: "Исландия" },
+    { id: 2, name: "Новосибирск" },
+    { id: 3, name: "Коста-Рика" }
+  ];
+
+  participants: IParticipant[] = [
+    { id: 1, name: "Александр" },
+    { id: 2, name: "Мария" },
+    { id: 3, name: "Дмитрий" },
+    { id: 4, name: "Анна" },
+    { id: 5, name: "Иван" },
+    { id: 6, name: "Екатерина" },
+    { id: 7, name: "Сергей" },
+    { id: 8, name: "Ольга" },
+    { id: 9, name: "Андрей" },
+    { id: 10, name: "Наталья" }
   ]
+
+   isFormValid(): boolean {
+    return this.selectedLocation && this.selectedDate && this.selectedParticipants;
+  }
 
 }
