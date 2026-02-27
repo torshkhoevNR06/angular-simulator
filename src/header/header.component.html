@@ -1,34 +1,36 @@
 <app-message></app-message>
 <header class="header">
-  <div class="header__container d-flex">
+  <div class="header__inner">
     <div class="header__top">
-      <div class="header__logo">
-        <img src="/images/logo-rumtibet.svg" alt="Логотип компаний Румтибет">
-        <span class="company-name">{{ companyName }}</span>
-      </div>
-      <nav class="header__nav">
-        @for (page of pages; track page.id) {
-          <a 
-            [routerLink]="page.id === 2 ? 'user-page' : ''"
-            [routerLinkActive]="'active'" 
-            [routerLinkActiveOptions]="{ exact: true }" 
-            class="link"
-            id="link"
+      <div class="header__container">
+        <div class="header__logo">
+          <img src="/images/logo-rumtibet.svg" alt="Логотип компаний Румтибет">
+          <span class="company-name">{{ companyName }}</span>
+        </div>
+        <nav class="header__nav">
+          @for (page of pages; track page.id) {
+            <a 
+              [routerLink]="page.path"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }" 
+              class="link"
+              [id]="page.id"
+            >
+              {{ page.page }}
+            </a>
+          } @empty {
+            <span>Навигация - пусто!</span>
+          }
+        </nav>
+        <div class="header__btn">
+          <button
+            class="btn btn-consultation" 
+            id="btn-consultation"
+            (click)="messageService.showSuccess(messageType.SUCCESS, 'Message Content')"
           >
-            {{ page.page }}
-          </a>
-        } @empty {
-          <span>Навигация - пусто!</span>
-        }
-      </nav>
-      <div class="header__btn">
-        <button
-          class="btn btn-consultation" 
-          id="btn-consultation"
-          (click)="messageService.showSuccess(messageType.SUCCESS, 'Message Content')"
-        >
-          Консультация
-        </button>
+            Консультация
+          </button>
+        </div>
       </div>
       @if (currentTask === 'counter') {
         <div class="header__timer">

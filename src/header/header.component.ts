@@ -25,8 +25,8 @@ export class HeaderComponent {
   selectedParticipants!: boolean;
 
   pages: IPage[] = [
-    { id: 1, page: "Главная" },
-    { id: 2, page: "Пользователи" },
+    { id: 1, page: "Главная", path: "" },
+    { id: 2, page: "Пользователи", path: "user-page" },
   ];
 
   locations: ILocation[] = [
