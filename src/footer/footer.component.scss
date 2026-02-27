@@ -1,0 +1,121 @@
+@use '../assets/mixins' as mix;
+
+.footer {
+  padding: 178px 0 0px 0;
+  background-color: var(--additional-color);
+  color: var(--primary-color);
+
+  &__container {
+    @include mix.flex(space-between, start, nowrap);
+
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  &__heading {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    color: var(--primary-color);
+  }
+
+  &__company {
+    max-width: 480px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    padding-right: 24px;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+  }
+
+  &__contacts {
+    @include mix.flex(start, center, nowrap);
+
+    gap: 24px;
+    margin-bottom: 50px;
+  }
+
+  &__contact-link {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    text-decoration: underline;
+    color: var(--primary-color);
+  }
+
+  &__socials {
+    @include mix.flex(start, center, nowrap);
+
+    gap: 16px;
+  }
+
+  &__social-link {
+    @include mix.flex(center, center, nowrap);
+
+    width: 32px;
+    height: 32px;
+  }
+
+  &__services,
+  &__important {
+    max-width: 280px;
+  }
+
+  &__list {
+    @include mix.flex(start, start, nowrap);
+
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__list-item {
+    @include mix.flex(start, flex-start, nowrap);
+
+    gap: 8px;
+  }
+
+  &__arrow {
+    transform: translateY(2px);
+  }
+
+  &__list-link {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--primary-color);
+  }
+
+  &__copyright {
+    margin-top: 78px;
+    padding: 24px 0;
+    background-color: var(--secondary-color);
+  }
+
+  &__copyright-container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  &__copyright-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: var(--primary-color);
+  }
+
+  &__copyright-link {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    text-decoration: underline;
+    color: var(--primary-color);
+  }
+}

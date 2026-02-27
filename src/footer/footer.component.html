@@ -1,0 +1,52 @@
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__company">
+      <h3 class="footer__heading">Компания «РумТибет»</h3>
+      <p class="footer__desc">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney.</p>
+      <div class="footer__contacts">
+        <a href="mailto:info@domain.com" class="footer__contact-link" id="footer__contact-link__email">info&#64;domain.com</a>
+        <a href="tel:+71234567890" class="footer__contact-link" id="footer__contact-link__number">+7 (123) 456-78-90</a>
+      </div>
+      <div class="footer__socials">
+        @for (socialNetwork of socialNetworks; track socialNetwork.id) {
+          <a href="#" class="footer__social-link" id="footer__social-link">
+            <img [src]="'/images/' + socialNetwork.image + '.svg'" [alt]="socialNetwork.image">
+          </a>
+        } @empty {
+          <span>Статьи - пусто!</span>
+        }
+      </div>
+    </div>
+    <div class="footer__services">
+      <h3 class="footer__heading">Наши услуги</h3>
+      <ul class="footer__list">
+        @for(favor of favors; track favor.id) {
+          <li class="footer__list-item">
+            <img class="footer__arrow" src="/images/caret-right-icon.svg" alt="иконка косая стрелка">
+            <a href="#" class="footer__list-link" id="footer__list-link__favor">{{ favor.favor }}</a>
+          </li>
+        } @empty {
+          <span>Услуги - пусто!</span>
+        }
+      </ul>
+    </div>
+    <div class="footer__important">
+      <h3 class="footer__heading">Важно для путешествий</h3>
+      <ul class="footer__list">
+        @for (travel of travels; track travel.id) {
+          <li class="footer__list-item">
+            <img class="footer__arrow" src="/images/caret-right-icon.svg" alt="иконка косая стрелка">
+            <a href="#" class="footer__list-link" id="footer__list-link__travel">{{ travel.article }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="footer__copyright">
+    <div class="footer__copyright-container">
+      <span class="footer__copyright-text">ИП Константинопольский К.К., 2023</span>
+      <a href="#" class="footer__copyright-link" id="footer__copyright-link">Политика обработки персональных данных</a>
+    </div>
+  </div>
+</footer>

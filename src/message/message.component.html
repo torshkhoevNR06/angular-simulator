@@ -1,0 +1,24 @@
+<div class="box-message">
+  @for (message of messageService.messages; track $index) {
+    <ng-container [ngTemplateOutlet]="messageTemplate" [ngTemplateOutletContext]="{ message: message }" />
+  }
+</div>
+
+<ng-template #messageTemplate let-message="message">
+  <div class="message">
+    <div class="message__icons">
+      <img src="/images/letter-icon.svg" alt="иконка письмо">
+      <img 
+        class="close-button"
+        id="close-button"
+        src="/images/close-icon.svg" 
+        alt="иконка закрытие сообщений"
+        (click)="messageService.closeMessage(message)" 
+      >
+    </div>
+    <div class="message__info">
+      <h3 class="message__title">{{ message.type }}</h3>
+      <span class="message__desc">{{ message.text }}</span>
+    </div>
+  </div>
+</ng-template>

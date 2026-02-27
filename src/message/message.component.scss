@@ -1,0 +1,44 @@
+@use '../assets/mixins' as mix;
+
+.box-message {
+  @include mix.flex(start, start, nowrap);
+
+  position: fixed;
+  top: 7px;
+  right: 7px;
+  flex-direction: column;
+  row-gap: 7px;
+  height: 400px;
+}
+
+.message {
+  @include mix.flex(start, center, wrap);
+
+  position: relative;
+  column-gap: 15px;
+  padding: 15px;
+  width: 350px;
+  height: 70px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  background-color: #0F172A99;
+  z-index: 1;
+
+  .message__title, .message__desc {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .message__desc {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,248 @@
+@use '../assets/mixins' as mix;
+
+.header {
+  min-width: 1920px;
+  min-height: 985px;
+  font-family: "Nunito Sans";
+  background-image: url("/images/bg-rumtibet.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: var(--primary-color);
+  
+  .d-flex {
+    @include mix.flex(start, center, wrap);
+    
+    row-gap: 520px;
+  }
+  
+  &__container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  
+  &__top {
+    @include mix.flex(space-between, center, nowrap);
+    
+    position: relative;
+    max-width: 1180px;
+    height: 4.5rem;
+    padding-top: 16px;
+    margin: 0 auto;
+    
+    .company-name {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 7px;
+    }
+    
+    .link, .btn-consultation {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .active {
+      color: var(--secondary-color);
+      font-weight: 800;
+    }
+
+    .btn-consultation {
+      font-family: inherit;
+      padding: 12px 24px;
+      border-radius: 4px;
+      margin-left: 38px;
+      color: var(--primary-color);
+      background-color: var(--additional-color);
+    }
+  }
+
+  &__nav {
+    @include mix.flex(flex-end, center, nowrap);
+    
+    width: 831px;
+    height: 44px;
+    column-gap: 24px;
+  }
+
+  &__clicker, &__timer {
+    @include mix.flex(space-between, center, nowrap);
+    
+    width: 270px;
+    position: absolute;
+    bottom: -65px;
+    right: 0px;
+  }
+
+  &__timer {
+    @include mix.flex(space-between, center, nowrap);
+    
+    width: 375px;
+  }
+
+   &__clicker {
+    display: flex;
+  }
+
+  .clicker-container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    column-gap: 15.75px;
+    
+    .btn-minus, 
+    .btn-plus {
+      font-weight: 700;
+    };
+  }
+  
+  .btn-minus, 
+  .btn-plus,
+  .current-account, 
+  .timer,
+  .btn-show-clicker
+  .btn-show-date {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  
+  .btn-show-clicker {
+    padding: 12px 11px;
+  }
+
+  .btn-show-date {
+    padding: 12px 22px;
+  }
+  
+  &__bottom {
+    max-width: 1180px;
+    margin: 0 auto;
+
+    .list-locations, .number-participants {
+      width: 240px;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      opacity: 0;
+    }
+
+    .date-hike__icon {
+      position: absolute;
+      top: 32%;
+      right: 6.5%;
+    }
+    
+    .date-hike__data {
+      opacity: 0;
+      width: 19px;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 41px;
+
+    .heading {
+      font-family: "NEXT ART";
+    }
+  }
+  
+  .bottom-container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    column-gap: 24px;
+    height: 171px;
+    padding: 0 42px;
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    background-color: #FFFFFF33;
+  }
+
+  .location-tour, .date-hike, .participants, .find-program {
+    width: 270px;
+    height: 52px;
+    border-radius: 4px;
+    margin-bottom: 35px;
+  }
+
+  .location-tour__container, 
+  .date-hike__container, 
+  .participants__container {
+    @include mix.flex(space-between, center, nowrap);
+    
+    position: relative;
+    padding: 14px 16px;
+    height: 52px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .location-tour__desc, .date-hike__desc, .participants__desc {
+    display: block;
+    padding-top: 8px;
+  }
+
+  .location-tour__before-choice, .participants__before-choice {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+  }
+
+  .caret-down-icon {
+    position: absolute;
+    top: 23px;
+    right: 19px;
+  }
+
+  .find-program {
+    max-width: 213px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    
+    &__disabled {
+      background-color: #333333;
+      transform: 1s;
+    }
+
+    &__btn {
+      background-color: var(--primary-color);
+      color: var(--additional-color);
+    }
+
+    &__disabled-btn {
+      background-color: #333333;
+      color: #918d8d;
+      transform: 1s;
+    }
+  }
+}
+
+.header__live-input {
+  @include mix.flex(start, center, nowrap);
+  
+  gap: 50px;
+  position: relative;
+  width: 470px;
+  margin: 15px 0;
+}
+
+.live-input {
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: 270px;
+  padding: 14px 12px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.caret-down {
+  position: absolute;
+  top: 20px;
+  right: 215px;
+  transform: rotate(270deg);
+  cursor: pointer;
+}
