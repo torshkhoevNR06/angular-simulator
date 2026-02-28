@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { MessageService } from '../services/message.service';
+import { MessageComponent } from '../message/message.component';
 import { LocalStorageService } from '../services/local-storage.service';
 import { MessageType } from '../enums/MessageType';
 import { Color } from '../enums/Color';
@@ -12,7 +13,7 @@ import './collection';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterModule, HeaderComponent,  FooterComponent],
+  imports: [FormsModule, RouterModule, HeaderComponent,  FooterComponent, MessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
-import { MessageComponent } from '../message/message.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
-  imports: [MessageComponent, FormsModule],
+  imports: [FormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
