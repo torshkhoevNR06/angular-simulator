@@ -1,27 +1,23 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MessageType } from '../enums/MessageType';
 import { MessageService } from '../services/message.service';
-import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterModule, MessageComponent],
+  imports: [FormsModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
   messageService: MessageService = inject(MessageService);
-  messageType: typeof MessageType = MessageType;
   currentTask!: 'counter' | 'dateTime';
   companyName: string = 'Румтибет';
-  
   dateTime!: string;
   counter: number = 0;
 
-  pages: IPage[] = [
+  pages: INavigation[] = [
     { id: 1, page: "Главная", path: "" },
     { id: 2, page: "Пользователи", path: "users" },
   ];

@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MessageComponent } from '../message/message.component';
-import { MessageType } from '../enums/MessageType';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,7 +12,6 @@ import { FormsModule } from '@angular/forms';
 export class HomePageComponent {
   
   messageService: MessageService = inject(MessageService);
-  messageType: typeof MessageType = MessageType;
   liveInputValue!: string;
   selectedLocation!: boolean;
   selectedDate!: boolean;

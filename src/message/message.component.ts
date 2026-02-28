@@ -10,6 +10,6 @@ import { MessageService } from '../services/message.service';
 })
 export class MessageComponent {
 
-messageService: MessageService = inject(MessageService);
+  messageService: MessageService = inject(MessageService);
 
 }

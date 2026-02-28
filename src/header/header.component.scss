@@ -34,8 +34,8 @@
     }
 
     .active {
-      color: var(--secondary-color);
       font-weight: 800;
+      color: var(--secondary-color);
     }
 
     .btn-consultation {
@@ -43,8 +43,8 @@
       padding: 12px 24px;
       border-radius: 4px;
       margin-left: 38px;
-      color: var(--additional-color);
       background-color: var(--primary-color);
+      color: var(--additional-color);
     }
   }
 
@@ -99,8 +99,8 @@
   .btn-show-clicker, .btn-show-date {
     width: 168px;
     font-weight: 700;
-    color: var(--additional-color);
     background-color: var(--primary-color);
+    color: var(--additional-color);
   }
   
   .btn-show-clicker {

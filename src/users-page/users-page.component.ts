@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
-export class UsersPageComponent {
-
-}
+export class UsersPageComponent {}

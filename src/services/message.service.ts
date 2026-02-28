@@ -18,20 +18,20 @@ export class MessageService {
     }, 5000);
   }
   
-  showWarn(type: MessageType.WARN, text: string) {
-    this.addMessage(type, text);
+  showWarn(text: string): void {
+    this.addMessage(MessageType.WARN, text);
   }
   
-  showError(type: MessageType.ERROR, text: string): void {
-    this.addMessage(type, text);
+  showError(text: string): void {
+    this.addMessage(MessageType.ERROR, text);
   }
   
-  showSuccess(type: MessageType.SUCCESS, text: string): void {
-    this.addMessage(type, text);
+  showSuccess(text: string): void {
+    this.addMessage(MessageType.SUCCESS, text);
   }
   
-  showInfo(type: MessageType.INFO, text: string): void {
-    this.addMessage(type, text);
+  showInfo(text: string): void {
+    this.addMessage(MessageType.INFO, text);
   }
 
   closeMessage(messageToRemove: IMessage): void {

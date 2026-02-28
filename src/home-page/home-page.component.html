@@ -64,7 +64,7 @@
               [class.find-program__disabled-btn]="!isFormValid()"
               id="find-program-btn"
               [disabled]="!isFormValid()"
-              (click)="messageService.showInfo(messageType.INFO, 'Message Content')"
+              (click)="messageService.showInfo('Message Content')"
             >
               Найти программу
             </button>
@@ -99,7 +99,7 @@
         <button 
           class="btn our-approach__btn" 
           id="our-approach-btn"
-          (click)="messageService.showWarn(messageType.WARN, 'Message Content')"
+          (click)="messageService.showWarn('Message Content')"
         >
           Программа тура
         </button>
@@ -209,7 +209,7 @@
         <button 
           class="btn other-material__btn"
           id="other-material__btn"
-          (click)="messageService.showError(messageType.ERROR, 'Message Content')"
+          (click)="messageService.showError('Message Content')"
         >
           Другие материалы
         </button>
@@ -223,12 +223,12 @@
         <h3 class="title">Делимся впечатлениями</h3>
       </div>
       <div class="share-impressions__halileria">
-        <img class="share-impressions__img" src="/images/cappadocia-at-dawn.png" alt="" width="580px" height="250px">
-        <img class="share-impressions__img" src="/images/travelers-gear.png" alt="" width="280px" height="250px">
-        <img class="share-impressions__img" src="/images/burj-al-arab.png" alt="" width="280px" height="250px">
-        <img class="share-impressions__img" src="/images/tropical-species.png" alt="" width="280px" height="250px">
-        <img class="share-impressions__img" src="/images/grand-canyon.png" alt="" width="580px" height="250px">
-        <img class="share-impressions__img" src="/images/traveler-note.png" alt="" width="280px" height="250px">
+        <img class="share-impressions__img" src="/images/cappadocia-at-dawn.png" width="580px" height="250px">
+        <img class="share-impressions__img" src="/images/travelers-gear.png" width="280px" height="250px">
+        <img class="share-impressions__img" src="/images/burj-al-arab.png" width="280px" height="250px">
+        <img class="share-impressions__img" src="/images/tropical-species.png" width="280px" height="250px">
+        <img class="share-impressions__img" src="/images/grand-canyon.png" width="580px" height="250px">
+        <img class="share-impressions__img" src="/images/traveler-note.png" width="280px" height="250px">
       </div>
       <div class="share-impressions__pinterest">
         <button class="btn share-impressions__btn" id="share-impressions__btn">Наш pinterest</button>
