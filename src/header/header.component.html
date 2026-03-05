@@ -1,0 +1,51 @@
+<header class="header">
+  <div class="header__inner">
+    <div class="header__top">
+      <div class="header__container">
+        <div class="header__logo">
+          <img src="/images/logo-rumtibet.svg" alt="Логотип компаний Румтибет">
+          <span class="company-name">{{ companyName }}</span>
+        </div>
+        <nav class="header__nav">
+          @for (page of pages; track page.id) {
+            <a 
+              [routerLink]="page.path"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }" 
+              class="link"
+              [id]="page.id"
+            >
+              {{ page.page }}
+            </a>
+          } @empty {
+            <span>Навигация - пусто!</span>
+          }
+        </nav>
+        <div class="header__btn">
+          <button
+            class="btn btn-consultation" 
+            id="btn-consultation"
+            (click)="messageService.showSuccess('Message Content')"
+          >
+            Консультация
+          </button>
+        </div>
+      </div>
+      @if (currentTask === 'counter') {
+        <div class="header__timer">
+          <span class="timer">{{ dateTime }}</span>
+          <button class="btn btn-show-clicker" (click)="setCurrentTask('dateTime')">Показать кликер</button>
+        </div>
+      } @else {
+        <div class="header__clicker">
+          <div class="clicker-container">
+            <button class="btn-plus" (click)="incrementCounter()">+</button>
+            <span class="current-account">{{ counter }}</span>
+            <button class="btn-minus" (click)="decrementCounter()" [disabled]="counter <= 0">-</button>
+          </div>
+          <button class="btn btn-show-date" (click)="setCurrentTask('counter')">Показать дату</button>
+        </div>
+      }
+    </div>
+  </div>
+</header>

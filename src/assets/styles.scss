@@ -1,6 +1,15 @@
 @use 'fonts';
-@use 'mixins';
+@use 'mixins' as mix;
 @use 'normalize';
+
+*, 
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans";
+}
 
 :root {
   --primary-color: #FDFDFD;
@@ -8,6 +17,14 @@
   --additional-color: #1A3E3E;
   --light-gray-color: #f3f5f4;
   --gold-color: #f2be22;
+}
+
+.container {
+  @include mix.flex(space-between, center, nowrap);
+    
+  max-width: 1180px;
+  margin: 0 auto;
+  column-gap: 90px;
 }
 
 .btn {

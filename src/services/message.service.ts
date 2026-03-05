@@ -9,13 +9,29 @@ export class MessageService {
 
   messages: IMessage[] = [];
 
-  addMessage(type: MessageType, text: string): void {
+  private addMessage(type: MessageType, text: string): void {
     const newMessage: IMessage = { type, text };
     this.messages = [newMessage, ...this.messages];
     
     setTimeout(() => {
       this.closeMessage(newMessage);
     }, 5000);
+  }
+  
+  showWarn(text: string): void {
+    this.addMessage(MessageType.WARN, text);
+  }
+  
+  showError(text: string): void {
+    this.addMessage(MessageType.ERROR, text);
+  }
+  
+  showSuccess(text: string): void {
+    this.addMessage(MessageType.SUCCESS, text);
+  }
+  
+  showInfo(text: string): void {
+    this.addMessage(MessageType.INFO, text);
   }
 
   closeMessage(messageToRemove: IMessage): void {

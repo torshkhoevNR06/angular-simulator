@@ -1,0 +1,15 @@
+@use '../assets/mixins' as mix;
+
+.box {
+  @include mix.flex(center, center, nowrap);
+
+  margin: 0 auto 150px auto;
+  min-height: 100%;
+  height: 150px;
+  background-color: #a45050d2;
+
+  .title {
+    font-size: 29px;
+    color: var(--primary-color);
+  }
+}
