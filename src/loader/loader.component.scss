@@ -1,0 +1,113 @@
+@use '../assets/mixins' as mix;
+
+.loading {
+  @include mix.flex(center, center, nowrap);
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #000;
+  opacity: 0.7;
+
+  &__content {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+  }
+
+  .loader {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    position: relative;
+    transform: rotate(45deg);
+  }
+
+  .loader::before {
+    content: '';
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: -24px;
+    animation: animloader 4s ease infinite;
+  }
+
+  .loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: #f3f5f4;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    animation: animloader2 2s ease infinite;
+  }
+
+  @keyframes animloader {
+    0% {
+      box-shadow: 0 24px #f3f5f4, 24px 24px #347ab700, 24px 48px #337ab700, 0px 48px #337ab700;
+    }
+
+    12% {
+      box-shadow: 0 24px #f3f5f4, 24px 24px #347ab700, 24px 48px #337ab700, 0px 48px #337ab700;
+    }
+
+    25% {
+      box-shadow: 0 24px #f3f5f4, 24px 24px #f3f5f4, 24px 48px #337ab700, 0px 48px #337ab700;
+    }
+
+    37% {
+      box-shadow: 0 24px #f3f5f4, 24px 24px #f3f5f4, 24px 48px #f3f5f4, 0px 48px #337ab700;
+    }
+
+    50% {
+      box-shadow: 0 24px #f3f5f4, 24px 24px #f3f5f4, 24px 48px #f3f5f4, 0px 48px #f3f5f4;
+    }
+
+    62% {
+      box-shadow: 0 24px #337ab700, 24px 24px #f3f5f4, 24px 48px #f3f5f4, 0px 48px #f3f5f4;
+    }
+
+    75% {
+      box-shadow: 0 24px #337ab700, 24px 24px #337ab700, 24px 48px #f3f5f4, 0px 48px #f3f5f4;
+    }
+
+    87% {
+      box-shadow: 0 24px #347ab700, 24px 24px #337ab700, 24px 48px #337ab700, 0px 48px #f3f5f4;
+    }
+
+    100% {
+      box-shadow: 0 24px #337ab700, 24px 24px #337ab700, 24px 48px #337ab700, 0px 48px #337ab700;
+    }
+  }
+
+  @keyframes animloader2 {
+    0% {
+      transform: translate(0, 0) rotateX(0) rotateY(0);
+    }
+
+    25% {
+      transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+    }
+
+    50% {
+      transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+    }
+
+    75% {
+      transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
+    }
+
+    100% {
+      transform: translate(0, 0) rotateX(0) rotateY(360deg);
+    }
+  }
+}
