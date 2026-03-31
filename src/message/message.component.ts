@@ -13,6 +13,7 @@ import { IMessage } from '../interfaces/IMessage';
 export class MessageComponent {
 
   messageService: MessageService = inject(MessageService);
+  
   messages$: Observable<IMessage[]> = this.messageService.messages$;
 
 }

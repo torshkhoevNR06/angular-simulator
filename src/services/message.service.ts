@@ -39,8 +39,8 @@ export class MessageService {
 
   closeMessage(messageToRemove: IMessage): void {
     const messages: IMessage[] = this.messagesSubject.getValue()
-    .filter((message: IMessage) => message !== messageToRemove);
-    this.messagesSubject.next(messages);
+      .filter((message: IMessage) => message !== messageToRemove);
+      this.messagesSubject.next(messages);
   }
   
 }

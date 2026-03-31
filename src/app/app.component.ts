@@ -5,8 +5,6 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { LoaderComponent } from '../loader/loader.component';
 import { MessageComponent } from '../message/message.component';
-import { MessageService } from '../services/message.service';
-import { LocalStorageService } from '../services/local-storage.service';
 import { MessageType } from '../enums/MessageType';
 import { Color } from '../enums/Color';
 import './collection';
@@ -18,9 +16,7 @@ import './collection';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
-  messageService: MessageService = inject(MessageService);
+
   messageType: typeof MessageType = MessageType;
   isLoading: boolean = true;
 

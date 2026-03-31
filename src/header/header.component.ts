@@ -12,6 +12,7 @@ import { MessageService } from '../services/message.service';
 export class HeaderComponent {
 
   messageService: MessageService = inject(MessageService);
+  
   currentTask!: 'counter' | 'dateTime';
   companyName: string = 'Румтибет';
   dateTime!: string;

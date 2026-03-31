@@ -12,11 +12,14 @@ import { Observable, tap } from 'rxjs';
 export class UsersPageComponent {
 
   userService: UserService = inject(UserService);
+  
   users$: Observable<IUser[]> = this.userService.users$;
 
   constructor() {
     this.userService.loadUsers().pipe(
-      tap((users: IUser[]) => this.userService.setUsers(users))
+      tap((users: IUser[]) => {
+        this.userService.setUsers(users);
+      })
     ).subscribe();
   }
 

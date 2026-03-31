@@ -11,7 +11,8 @@ export class UserService {
 
   private loaderService: LoaderService = inject(LoaderService);
   private userApiService: UserApiService = inject(UserApiService);
-  private userMessageService: MessageService = inject(MessageService);
+  private messageService: MessageService = inject(MessageService);
+
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
   
@@ -27,13 +28,13 @@ export class UserService {
     this.loaderService.showLoader();
 
     return this.userApiService.getUsers()
-    .pipe(
-      catchError(() => {
-        this.userMessageService.showError('404 Not Found');
-        return of([]);
-      }),
-      finalize(() => this.loaderService.hideLoader())
-    )
+      .pipe(
+        catchError(() => {
+          this.messageService.showError('404 Not Found');
+          return of([]);
+        }),
+        finalize(() => this.loaderService.hideLoader())
+      )
   }
 
 }
