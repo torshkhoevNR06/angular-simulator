@@ -1,5 +1,5 @@
 <div class="box-message">
-  @for (message of messageService.messages; track $index) {
+  @for (message of messages$ | async; track $index) {
     <ng-container [ngTemplateOutlet]="messageTemplate" [ngTemplateOutletContext]="{ message: message }" />
   }
 </div>
@@ -13,7 +13,7 @@
         id="close-button"
         src="/images/close-icon.svg" 
         alt="иконка закрытие сообщений"
-        (click)="messageService.closeMessage(message)" 
+        (click)="messageService.closeMessage(message)"
       >
     </div>
     <div class="message__info">
