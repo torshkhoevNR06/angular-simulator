@@ -1,188 +1,207 @@
 @use '../assets/mixins' as mix;
 
 .wrapper {
-  margin: 80px 0 190px 0;
+  margin: 80px 0 290px 0;
   max-height: 2670px;
 
   .container {
     max-width: 1460px;
     margin: 0 auto;
 
-    .contact__container,
-    .address__container {
-      @include mix.flex(space-between, stretch, nowrap);
+    .inner {
+      @include mix.flex(start, start, nowrap);
 
       flex-direction: column;
-      row-gap: 10px;
-    }
+      row-gap: 80px;
 
-    .title {
-      font-size: 12px;
-      line-height: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: #1D3939;
-    } 
+      .heading {
+        width: 100%;
 
-    .label {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      color: #667C7C;
-    }
-
-    .value {
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 19px;
-      color: #D4A373;
-    }
-
-    .secondary {
-      color: #1D3939;
-    }
-
-    .error {
-      border-radius: 20px;
-      background-color: #B15757;
-
-      &__title {
-        padding: 30px;
-        font-size: 26px;
-        font-weight: 800;
-        line-height: 30px;
-        color: #FFFFFF;
+        &__item {
+          font-weight: 800;
+          font-size: 48px;
+          text-align: center;
+          line-height: 30px;
+          color: #1D3939;
+        }
       }
-    }
+      
+      .contact__container,
+      .address__container {
+        @include mix.flex(space-between, stretch, nowrap);
   
-    .user {
-      @include mix.flex(center, start, wrap);
-
-      gap: 50px 70px;
-
-      &__card {
-        width: 440px;
-        height: 630px;
-        padding: 35px 30px 49px 30px;
-        border-radius: 4px;
-        border-top: 4px solid #D4A373;
-        box-shadow: 0 10px 30px 0 #0000000F;
+        flex-direction: column;
+        row-gap: 10px;
       }
-      
-      &__info {
-        margin-bottom: 45px;
-      }
-      
-      &__name {
-        margin-bottom: 3px;
-        font-size: 26px;
+  
+      .title {
+        font-size: 12px;
+        line-height: 13px;
         font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #1D3939;
+      } 
+  
+      .label {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19px;
+        color: #667C7C;
+      }
+  
+      .value {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 19px;
+        color: #D4A373;
+      }
+  
+      .secondary {
         color: #1D3939;
       }
   
-      &__username {
-        font-size: 15px;
-        font-weight: 700;
-        color: #D4A373;
+      .error {
+        border-radius: 20px;
+        background-color: #B15757;
+  
+        &__title {
+          padding: 30px;
+          font-size: 26px;
+          font-weight: 800;
+          line-height: 30px;
+          color: #FFFFFF;
+        }
       }
-    }
     
-    .contact {
-      position: relative;
-
-      &__title {
-        margin-bottom: 12px;
+      .user {
+        @include mix.flex(center, start, wrap);
+  
+        gap: 50px 70px;
+  
+        &__card {
+          width: 440px;
+          height: 630px;
+          padding: 35px 30px 49px 30px;
+          border-radius: 4px;
+          border-top: 4px solid #D4A373;
+          box-shadow: 0 10px 30px 0 #0000000F;
+        }
+        
+        &__info {
+          margin-bottom: 45px;
+        }
+        
+        &__name {
+          margin-bottom: 3px;
+          font-size: 26px;
+          font-weight: 800;
+          color: #1D3939;
+        }
+    
+        &__username {
+          font-size: 15px;
+          font-weight: 700;
+          color: #D4A373;
+        }
       }
       
-      &__title::after {
-        content: "";
-        position: absolute;
-        top: 5px;
-        right: 0;
-        width: 288px;
-        height: 1px;
-        background-color: #E2E8F0;
+      .contact {
+        position: relative;
+  
+        &__title {
+          margin-bottom: 12px;
+        }
+        
+        &__title::after {
+          content: "";
+          position: absolute;
+          top: 5px;
+          right: 0;
+          width: 288px;
+          height: 1px;
+          background-color: #E2E8F0;
+        }
+  
+        &__item {
+          @include mix.flex(space-between, start, nowrap);
+        }
       }
-
-      &__item {
-        @include mix.flex(space-between, start, nowrap);
+  
+      .address {
+        position: relative;
+  
+        margin-top: 25px;
+  
+        &__title {
+          margin-bottom: 12px;
+        }
+  
+        &__title::after {
+          content: "";
+          position: absolute;
+          top: 5px;
+          right: 0;
+          width: 211px;
+          height: 1px;
+          background-color: #E2E8F0;
+        }
+  
+        &__item {
+          @include mix.flex(space-between, center, nowrap);
+        }
+  
+        &__inner {
+          @include mix.flex(start, start, nowrap);
+  
+          column-gap: 4px; 
+        }
+  
+        &__inner > .address__value {
+          padding: 1px 6px;
+          font-size: 14px;
+          border-radius: 3px;
+          border: 1px solid #E2E8F0;
+          background-color: #F4F7F5;
+        }
       }
-    }
-
-    .address {
-      position: relative;
-
-      margin-top: 25px;
-
-      &__title {
-        margin-bottom: 12px;
-      }
-
-      &__title::after {
-        content: "";
-        position: absolute;
-        top: 5px;
-        right: 0;
-        width: 211px;
-        height: 1px;
-        background-color: #E2E8F0;
-      }
-
-      &__item {
-        @include mix.flex(space-between, center, nowrap);
-      }
-
-      &__inner {
-        @include mix.flex(start, start, nowrap);
-
-        column-gap: 4px; 
-      }
-
-      &__inner > .address__value {
-        padding: 1px 6px;
-        font-size: 14px;
-        border-radius: 3px;
-        border: 1px solid #E2E8F0;
-        background-color: #F4F7F5;
-      }
-    }
-
-    .work {
-      position: relative;
-      margin-top: 25px;
-
-      &__title {
-        margin-bottom: 12px;
-      }
-
-      &__title::after {
-        content: "";
-        position: absolute;
-        top: 5px;
-        right: 0;
-        width: 255px;
-        height: 1px;
-        background-color: #E2E8F0;
-      }
-
-      &__item {
-        @include mix.flex(space-between, start, nowrap);
-
-        row-gap: 10px;
-      }
-
-      .company {
-        margin-bottom: 10px;
-      }
-
-      .mission {
-        margin-bottom: 26px;
-      }
-
-      .italic {
-        font-style: italic;
-        color: #667C7C;
+  
+      .work {
+        position: relative;
+        margin-top: 25px;
+  
+        &__title {
+          margin-bottom: 12px;
+        }
+  
+        &__title::after {
+          content: "";
+          position: absolute;
+          top: 5px;
+          right: 0;
+          width: 255px;
+          height: 1px;
+          background-color: #E2E8F0;
+        }
+  
+        &__item {
+          @include mix.flex(space-between, start, nowrap);
+  
+          row-gap: 10px;
+        }
+  
+        .company {
+          margin-bottom: 10px;
+        }
+  
+        .mission {
+          margin-bottom: 26px;
+        }
+  
+        .italic {
+          font-style: italic;
+          color: #667C7C;
+        }
       }
     }
   }
