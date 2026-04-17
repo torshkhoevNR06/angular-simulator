@@ -13,13 +13,13 @@ export class LocalStorageService {
     const keyData: string | null = localStorage.getItem(key);
     return keyData ? JSON.parse(keyData) : null;
   }
+  
+  removeItem(key: string): void {
+    localStorage.removeItem(key);
+  }
 
   clear(): void {
     localStorage.clear();
-  }
-
-  removeItem(key: string): void {
-    localStorage.removeItem(key);
   }
 
 }

@@ -1,0 +1,69 @@
+<div class="user__card">
+  <div class="user__info">
+    <h1 class="user__name">{{ user.name }}</h1>
+    <span class="user__username">{{ user.username }}</span>
+  </div>
+  <div class="contact">
+    <h2 class="contact__title title">Контакты</h2>
+    <div class="contact__container">
+      <div class="contact__item">
+        <span class="contact__label label">Эл. почта:</span>
+        <span class="contact__value value">{{ user.email }}</span>
+      </div>
+      <div class="contact__item">
+        <span class="contact__label label">Телефон:</span>
+        <span class="contact__value value secondary">{{ user.phone }}</span>
+      </div>
+      <div class="contact__item">
+        <span class="contact__label label">Веб-сайт:</span>
+        <span class="contact__value value">{{ user.website || 'Неизвестно' }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="address">
+    <h2 class="address__title title">Адрес Проживания</h2>
+    <div class="address__container">
+      <div class="address__item">
+        <span class="address__label label">Город:</span>
+        <span class="address__value value secondary">{{ user.address.city }}</span>
+      </div>
+      <div class="address__item">
+        <span class="address__label label">Улица:</span>
+        <span class="address__value value secondary">{{ user.address.street }}</span>
+      </div>
+      <div class="address__item">
+        <span class="address__label label">Офис:</span>
+        <span class="address__value value secondary">{{ user.address.suite || 'Неизвестно' }}</span>
+      </div>
+      <div class="address__item">
+        <span class="address__label label">Индекс:</span>
+        <span class="address__value value secondary">{{ user.address.zipcode }}</span>
+      </div>
+      <div class="address__item">
+        <span class="address__label label">Координаты:</span>
+        <div class="address__inner">
+          <span class="address__value value secondary">{{ user.address.geo.lat }}</span>
+          <span class="address__value value secondary">{{ user.address.geo.lng }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="work">
+    <h2 class="work__title title">Место работы</h2>
+    <div class="work__item company">
+      <span class="work__label label">Компания:</span>
+      <span class="work__value value secondary">{{ user.company.name }}</span>
+    </div>
+    <div class="work__item mission">
+      <span class="work__label label">Миссия:</span>
+      <span class="work__value value italic">{{ user.company.catchPhrase || 'Неизвестно' }}</span>
+    </div>
+    <div class="work__item">
+      <span class="work__label label">Специализация:</span>
+      <span class="work__value value secondary">{{ user.company.bs || 'Неизвестно' }}</span>
+    </div>
+  </div>
+  <div class="delete-user">
+    <button class="delete-user__btn" (click)="userInfo(user.id)">Удалить пользователя</button>
+  </div>
+</div>
