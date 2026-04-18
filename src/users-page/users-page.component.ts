@@ -21,18 +21,15 @@ export class UsersPageComponent {
   users$: Observable<IUser[]> = this.userService.users$;
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   
-  filteredUsers$: Observable<IUser[]> = combineLatest(
-    [
-      this.users$, 
-      this.filteredSubject
-    ]).pipe(
-        map(([users, name]: [IUser[], string]) => {
-          const term: string = name.trim().toLowerCase();
-          return term !== ''
-            ? users.filter((user: IUser) => 
-              user.name.trim().toLowerCase().includes(term))
-            : users;
-        })
+  filteredUsers$: Observable<IUser[]> = combineLatest([
+    this.users$, 
+    this.filteredSubject
+  ]).pipe(
+    map(([users, name]: [IUser[], string]) => {
+      console.log(name)
+      return users.filter((user: IUser) => 
+        user.name.trim().toLowerCase().includes(name))
+      })
   )
 
   ngOnInit(): void {
