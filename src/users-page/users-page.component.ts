@@ -32,7 +32,7 @@ export class UsersPageComponent {
             ? users.filter((user: IUser) => 
               user.name.trim().toLowerCase().includes(term))
             : users;
-      })
+        })
   )
 
   ngOnInit(): void {
