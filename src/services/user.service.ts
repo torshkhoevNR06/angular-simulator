@@ -40,19 +40,19 @@ export class UserService {
   loadUsers(): Observable<IUser[]> {
     const usersFromStorage: IUser[] = this.localStorageService.getItem('users') as IUser[];
     
-    if(usersFromStorage.length !== 0) {
+    if (usersFromStorage.length !== 0) {
       return of(usersFromStorage);
     } else {
       this.loaderService.showLoader();
       
       return this.userApiService.getUsers()
-      .pipe(
-        catchError(() => {
-          this.messageService.showError('404 Not Found');
-          return of([]);
-        }),
-        finalize(() => this.loaderService.hideLoader())
-      );
+        .pipe(
+          catchError(() => {
+            this.messageService.showError('404 Not Found');
+            return of([]);
+          }),
+          finalize(() => this.loaderService.hideLoader())
+        );
     }
   }
 

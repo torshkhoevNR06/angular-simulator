@@ -17,12 +17,11 @@ export class UsersFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterControl.valueChanges.pipe(
-      map((value: string) => value ? value.toLowerCase().trim() : ''),
       debounceTime(200),
       distinctUntilChanged(),
       tap(() => this.filterUser.emit(this.filterControl.value)),
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe(console.log);
+    ).subscribe();
   }
 
 }

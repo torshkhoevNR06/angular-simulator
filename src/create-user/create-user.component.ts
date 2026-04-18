@@ -15,7 +15,7 @@ export class CreateUserComponent {
 
   private fb: FormBuilder = inject(FormBuilder);
   userForm: FormGroup = this.fb.group({
-    id: Date.now(),
+    id: [],
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(100), Validators.email]],
@@ -38,8 +38,9 @@ export class CreateUserComponent {
     })
   });
 
-  userFormSubmit(): void {
+  submitUserForm(): void {
     if (this.userForm.valid) {
+      this.userForm.patchValue({ id: Date.now() })
       this.createUser.emit(this.userForm.value);
       this.userForm.reset();
     } else {
