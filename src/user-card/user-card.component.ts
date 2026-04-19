@@ -11,7 +11,7 @@ export class UserCardComponent {
   @Input({ required: true }) user!: IUser;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
-  userInfo(id: number) {
+  onDeleteClick(id: number): void {
     this.deleteUser.emit(id);
   }
 

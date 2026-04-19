@@ -32,9 +32,10 @@ export class UsersPageComponent {
   )
 
   ngOnInit(): void {
-    this.userService.loadUsers().pipe(
-      tap((users: IUser[]) => this.userService.setUsers(users))
-    ).subscribe();
+    this.userService.loadUsers()
+      .pipe(
+        tap((users: IUser[]) => this.userService.setUsers(users))
+      ).subscribe();
   }
   
   onAddUser(user: IUser): void {

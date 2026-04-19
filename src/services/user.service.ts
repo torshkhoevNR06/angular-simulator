@@ -19,7 +19,7 @@ export class UserService {
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   addUser(user: IUser): void {
-    const users: IUser[] = this.getUsers() as IUser[];
+    const users: IUser[] = this.getUsers();
     this.setUsers([user, ...users]);
   }
 
@@ -36,9 +36,9 @@ export class UserService {
   getUsers(): IUser[] {
     return this.usersSubject.getValue();
   }
-  
+
   loadUsers(): Observable<IUser[]> {
-    const usersFromStorage: IUser[] = this.localStorageService.getItem('users') as IUser[];
+    const usersFromStorage: IUser[] = this.localStorageService.getItem('users') ?? this.getUsers();
     
     if (usersFromStorage.length !== 0) {
       return of(usersFromStorage);
