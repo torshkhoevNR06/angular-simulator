@@ -18,15 +18,14 @@ export class UsersPageComponent {
   private userService: UserService = inject(UserService);
   private messageService: MessageService = inject(MessageService);
 
-  users$: Observable<IUser[]> = this.userService.users$;
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  users$: Observable<IUser[]> = this.userService.users$;
   
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$, 
     this.filteredSubject
   ]).pipe(
     map(([users, name]: [IUser[], string]) => {
-      console.log(name)
       return users.filter((user: IUser) => 
         user.name.trim().toLowerCase().includes(name))
       })

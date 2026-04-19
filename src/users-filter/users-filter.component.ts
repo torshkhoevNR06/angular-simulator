@@ -19,8 +19,8 @@ export class UsersFilterComponent implements OnInit {
     this.filterControl.valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map((value: string) => value.trim().toLowerCase()),
-      tap((value: string) => this.filterUser.emit(value)),
+      map((name: string) => name.trim().toLowerCase()),
+      tap((name: string) => this.filterUser.emit(name)),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
