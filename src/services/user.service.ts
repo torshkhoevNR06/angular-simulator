@@ -38,7 +38,7 @@ export class UserService {
   }
 
   loadUsers(): Observable<IUser[]> {
-    const usersFromStorage: IUser[] = this.localStorageService.getItem('users') ?? this.getUsers();
+    const usersFromStorage: IUser[] = this.localStorageService.getItem('users') ?? [];
     
     if (usersFromStorage.length !== 0) {
       return of(usersFromStorage);
