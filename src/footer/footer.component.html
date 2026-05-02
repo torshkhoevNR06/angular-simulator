@@ -8,19 +8,22 @@
       <div class="newsletter-form__news-subscription">
         <span class="news-subscription__text">Введите e-mail адрес</span>
         <div class="news-subscription__form">
-          <input class="news-subscription__email" id="news-subscription__email" type="text" placeholder="name@domain.com">
+          <input 
+            class="news-subscription__email" 
+            id="news-subscription__email" 
+            type="text"
+            placeholder="name@domain.com"
+          >
           <button 
-              class="btn news-subscription__btn" 
-              id="news-subscription__btn"
-              (click)="messageService.showSuccess('Message Content')"
-            >
-              Подписаться на новости
-            </button>
+            class="btn news-subscription__btn" 
+            id="news-subscription__btn"
+            (click)="messageService.showSuccess('Message Content')"
+          >
+            Подписаться на новости
+          </button>
         </div>
         <div class="news-subscription__legal-disklayer">
-          <p class="legal-disklayer__text">подписываясь на новости, вы автоматически соглашаетесь с
-          <a href="#" class="legal-disklayer__link" id="legal-disklayer__link-one">условиями обработки персональных данных 
-          </a>и<a href="#" class="legal-disklayer__link-two" id="legal-disklayer__link-two">правилами рекламных рассылок</a></p>
+          <p class="legal-disklayer__text">подписываясь на новости, вы автоматически соглашаетесь с <a href="#" class="legal-disklayer__link" id="legal-disklayer__link-one">условиями обработки персональных данных</a> и <a href="#" class="legal-disklayer__link-two" id="legal-disklayer__link-two">правилами рекламных рассылок</a></p>
         </div>
       </div>
     </div>
@@ -35,7 +38,7 @@
       <div class="footer__socials">
         @for (socialNetwork of socialNetworks; track socialNetwork.id) {
           <a href="#" class="footer__social-link" id="footer__social-link">
-            <img [src]="'/images/' + socialNetwork.image + '.svg'" [alt]="socialNetwork.image">
+            <fa-icon [icon]="socialNetwork.image" />
           </a>
         } @empty {
           <span>Статьи - пусто!</span>
@@ -47,7 +50,7 @@
       <ul class="footer__list">
         @for(favor of favors; track favor.id) {
           <li class="footer__list-item">
-            <img class="footer__arrow" src="/images/caret-right-icon.svg" alt="иконка косая стрелка">
+            <fa-icon [icon]="faAngleRight" />
             <a href="#" class="footer__list-link" id="footer__list-link__favor">{{ favor.favor }}</a>
           </li>
         } @empty {
@@ -60,7 +63,7 @@
       <ul class="footer__list">
         @for (travel of travels; track travel.id) {
           <li class="footer__list-item">
-            <img class="footer__arrow" src="/images/caret-right-icon.svg" alt="иконка косая стрелка">
+            <fa-icon [icon]="faAngleRight" />
             <a href="#" class="footer__list-link" id="footer__list-link__travel">{{ travel.article }}</a>
           </li>
         }

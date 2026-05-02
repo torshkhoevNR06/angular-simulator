@@ -9,10 +9,10 @@
         <nav class="header__nav">
           @for (page of pages; track page.id) {
             <a 
-              [routerLink]="page.path"
-              [routerLinkActive]="'active'"
-              [routerLinkActiveOptions]="{ exact: true }" 
-              class="link"
+              [routerLink]="page.path" 
+              [routerLinkActive]="'active'" 
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="link" 
               [id]="page.id"
             >
               {{ page.page }}
@@ -20,9 +20,16 @@
           } @empty {
             <span>Навигация - пусто!</span>
           }
+          <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleDarkMode($event)">
+            <ng-template #handle let-isToggle="checked">
+              <fa-icon class="pi" [icon]="isToggle ? faMoon : faSun" />
+            </ng-template>
+          </p-toggleswitch>
+          <p-selectbutton [options]="this.themeService.themes" [ngModel]="theme$ | async" optionLabel="name"
+            optionValue="theme" (ngModelChange)="setTheme($event)" aria-labelledby="basic" />
         </nav>
         <div class="header__btn">
-          <button
+          <button 
             class="btn btn-consultation" 
             id="btn-consultation"
             (click)="messageService.showSuccess('Message Content')"

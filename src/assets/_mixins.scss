@@ -4,3 +4,9 @@
   align-items: $align;
   flex-wrap: $wrap;
 };
+
+@mixin ng-deep {
+  :host::ng-deep {
+    @content;
+  }
+}

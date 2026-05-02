@@ -21,14 +21,15 @@
   width: 350px;
   height: 70px;
   border-radius: 10px;
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--bg-container);
   background-color: #0F172A99;
   z-index: 1;
 
-  .message__title, .message__desc {
+  .message__title,
+  .message__desc {
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-text-color);
   }
 
   .message__desc {

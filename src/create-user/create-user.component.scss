@@ -7,7 +7,7 @@
   padding: 40px;
   border-radius: 4px;
   border-top: 4px solid #D4A373;
-  background-color: #FAFBFB;
+  background-color: var(--bg-card);
   box-shadow: 0 10px 30px 30px #0000000F;
 }
 
@@ -20,7 +20,7 @@
   font-size: 28px;
   font-weight: 800;
   line-height: 30px;
-  color: #1D3939;
+  color: var(--secondary-text-color);
 }
 
 .form__section {
@@ -40,7 +40,7 @@
   letter-spacing: 1.2px;
   margin-bottom: 20px;
   padding-bottom: 8px;
-  color: #1D3939;
+  color: var(--secondary-text-color);
 
   &::after {
     content: "";
@@ -66,7 +66,7 @@
 
 .form__column {
   @include mix.flex(start, flex-start, nowrap);
-  
+
   flex: 1;
   flex-direction: column;
   min-width: 0;
@@ -112,7 +112,7 @@
   transition: all 0.3s ease;
   border: 1px solid #E2E8F0;
   background-color: #FFFFFF;
-  color: #1D3939;
+  color: var(--secondary-text-color);
 
   &::placeholder {
     color: #B8BEC0;

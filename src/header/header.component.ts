@@ -1,33 +1,52 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 import { MessageService } from '../services/message.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { ThemeService } from '../services/theme.service';
+import { Theme } from '../enums/Theme';
+import { faMoon, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, FontAwesomeModule, ToggleSwitchModule, ButtonModule, SelectButtonModule, AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   messageService: MessageService = inject(MessageService);
+  themeService: ThemeService = inject(ThemeService);
   
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
+  theme$: Observable<Theme> = this.themeService.theme$;
+
   currentTask!: 'counter' | 'dateTime';
   companyName: string = 'Румтибет';
   dateTime!: string;
   counter: number = 0;
+  
+  faMoon: IconDefinition = faMoon;
+  faSun: IconDefinition = faSun;
 
   pages: INavigation[] = [
     { id: 1, page: "Главная", path: "" },
-    { id: 2, page: "Пользователи", path: "users" },
+    { id: 2, page: "Пользователи", path: "users" }
   ];
 
   constructor() {
     this.saveVisitsCount();
     this.saveLastVisit();
     
-    const saveCounter: number = Number(localStorage.getItem('counter'));
+    const saveCounter: number = this.localStorageService.getItem('counter')!;
     if (saveCounter) {
       this.counter = saveCounter;
     }
@@ -35,6 +54,14 @@ export class HeaderComponent {
     setInterval(() => {
       this.dateTime = new Date().toLocaleString();
     }, 1000);
+  }
+
+  toggleDarkMode(event: ToggleSwitchChangeEvent): void {
+    this.themeService.toggleDarkMode(event.checked)
+  }
+
+  setTheme(theme: Theme): void {
+    this.themeService.setTheme(theme);
   }
 
   incrementCounter(): void {

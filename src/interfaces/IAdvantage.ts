@@ -1,6 +1,8 @@
-interface IAdvantage {
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
+export interface IAdvantage {
   id: number;
-  iconName: string;
+  iconName: IconDefinition;
   title: string;
   description: string;
 }

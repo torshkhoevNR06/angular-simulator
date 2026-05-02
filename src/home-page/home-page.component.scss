@@ -1,8 +1,54 @@
 @use '../assets/mixins' as mix;
 
+@include mix.ng-deep {
+  .svg-inline--fa {
+    position: absolute;
+    height: 19px;
+    top: 17px;
+    right: 14px;
+  }
+
+  .fa-angle-right {
+    transform: rotate(90deg);
+    top: -16px;
+    right: -3px;
+    color: var(--primary-text-color);
+  }
+
+  .fa-people-group,
+  .fa-shield-halved,
+  .fa-tag {
+    position: relative;
+    height: 27px;
+    width: 27px;
+    top: 3px;
+    right: 0;
+  }
+
+  .fa-people-group {
+    color: #008000;
+  }
+
+  .fa-shield-halved {
+    color: #383899;
+  }
+
+  .fa-tag {
+    color: var(--gold-color);
+  }
+
+  .fa-star {
+    position: relative;
+    height: 16px;
+    top: 0;
+    right: 0;
+    color: var(--gold-color);
+  }
+}
+
 .main {
   font-family: "Nunito Sans";
-  color: var(--secondary-color);
+  color: var(--secondary-text-color);
 }
 
 .tour-program {
@@ -14,24 +60,19 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: var(--primary-color);
-    
+  color: var(--secondary-text-color);
+
   .tour-program__wrapper {
     max-width: 1180px;
     margin: 0 auto;
 
-    .list-locations, .number-participants {
+    .list-locations,
+    .number-participants {
       width: 240px;
       font-family: inherit;
       font-size: inherit;
       outline: none;
       opacity: 0;
-    }
-
-    .date-hike__icon {
-      position: absolute;
-      top: 32%;
-      right: 6.5%;
     }
 
     .date-hike__data {
@@ -48,6 +89,7 @@
 
     .heading {
       font-family: "NEXT ART";
+      color: var(--primary-text-color);
     }
   }
 
@@ -60,34 +102,31 @@
     margin: 15px 0;
   }
 
-  .location-tour__container, 
-  .date-hike__container, 
+  .location-tour__container,
+  .date-hike__container,
   .participants__container {
     @include mix.flex(space-between, center, nowrap);
 
     position: relative;
     padding: 14px 16px;
     height: 52px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-text-color);
     border-radius: 10px;
     cursor: pointer;
   }
 
-  .location-tour__desc, .date-hike__desc, .participants__desc {
+  .location-tour__desc,
+  .date-hike__desc,
+  .participants__desc {
     display: block;
     padding-top: 8px;
   }
 
-  .location-tour__before-choice, .participants__before-choice {
+  .location-tour__before-choice,
+  .participants__before-choice {
     position: absolute;
     top: 15px;
     left: 20px;
-  }
-
-  .caret-down-icon {
-    position: absolute;
-    top: 23px;
-    right: 19px;
   }
 
   .find-program {
@@ -104,7 +143,7 @@
 
     &__btn {
       background-color: var(--additional-color);
-      color: var(--primary-color);
+      color: var(--secondary-text-color);
     }
 
     &__disabled-btn {
@@ -123,10 +162,11 @@
     backdrop-filter: blur(5px);
     border-radius: 10px;
     background-color: #FFFFFF33;
+    color: var(--primary-text-color);
   }
 
   .live-input {
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-text-color);
     border-radius: 10px;
     width: 270px;
     padding: 14px 12px;
@@ -142,7 +182,10 @@
     cursor: pointer;
   }
 
-  .location-tour, .date-hike, .participants, .find-program {
+  .location-tour,
+  .date-hike,
+  .participants,
+  .find-program {
     width: 270px;
     height: 52px;
     border-radius: 4px;
@@ -152,17 +195,17 @@
 
 .our-approach {
   @include mix.flex(space-between, center, nowrap);
-  
+
   position: relative;
   min-height: 526px;
   margin-bottom: 100px;
-  
+
   &__showreel {
     position: relative;
     width: 600px;
     height: 526px;
   }
-  
+
   .showreel-container {
     position: absolute;
     bottom: 0;
@@ -203,11 +246,12 @@
 .our-offer {
   @include mix.flex(space-between, start, nowrap);
 
-  background-color: var(--light-gray-color);
+  background-color: var(--bg-container);
   padding: 80px 0 100px 0;
 }
 
-.our-offer__content, .our-offer__desc {
+.our-offer__content,
+.our-offer__desc {
   max-width: 580px;
 }
 
@@ -218,7 +262,7 @@
 }
 
 .our-offer__title {
-  margin: 8px 0 40px 0; 
+  margin: 8px 0 40px 0;
 }
 
 .item-img {
@@ -248,7 +292,7 @@
 
 .our-offer__item {
   @include mix.flex(start, center, nowrap);
-  
+
   margin: 40px 0 40px 0;
 }
 
@@ -274,23 +318,24 @@
 
 .our-offer__images {
   @include mix.flex(start, start, wrap);
-  
+
   max-width: 510px;
   max-height: 510px;
   gap: 10px 10px;
-  
+
   .img-participant {
     display: block;
   }
 }
 
-.popular-destinations__container, 
-.travel-blog__container, 
+.popular-destinations__container,
+.travel-blog__container,
 .share-impressions__container {
   display: block !important;
 }
 
-.popular-destinations__info, .travel-blog__info {
+.popular-destinations__info,
+.travel-blog__info {
   text-align: center;
   padding: 85px 0 40px 0;
 }
@@ -300,7 +345,7 @@
 
   margin-bottom: 50px;
   gap: 20px;
-  
+
   .image-item {
     cursor: pointer;
   }
@@ -326,7 +371,7 @@
   background-color: #FFFFFF4D;
   cursor: pointer;
 
-  &__star, &__desc {
+  &__desc {
     display: block;
   }
 
@@ -334,7 +379,7 @@
     font-size: 14px;
     font-weight: 700;
     color: var(--additional-color);
-  }  
+  }
 }
 
 .box-description {
@@ -351,13 +396,13 @@
   .location__title {
     font-size: 24px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-text-color);
   }
 
   .location__desc {
     font-size: 14px;
     font-weight: 400;
-    color: var(--primary-color);
+    color: var(--primary-text-color);
   }
 }
 
@@ -365,7 +410,7 @@
   @include mix.flex(center, center, nowrap);
 
   background-color: #FFFFFF4D;
-  width: 86px; 
+  width: 86px;
   height: 40px;
   border-radius: 4px;
 
@@ -373,22 +418,23 @@
     display: block;
     font-size: 20px;
     font-weight: 700px;
-    color: var(--primary-color);
+    color: var(--primary-text-color);
   }
 }
 
 .popular-destinations__referral-rating {
-  text-align: center;  
+  text-align: center;
 }
 
-.referral-rating__btn, .other-material__btn {
+.referral-rating__btn,
+.other-material__btn {
   padding: 16px 36px;
   font-weight: 600;
 }
 
 .travel-blog {
   margin: 95px 0 85px 0;
-  background-color: var(--light-gray-color);
+  background-color: var(--bg-container);
 }
 
 .travel-blog__article {
@@ -399,31 +445,31 @@
 
 .article-holder {
   @include mix.flex(center, center, nowrap);
-  
+
   column-gap: 24px;
   width: 580px;
   height: 320px;
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 0 15px 0 #18121E1F;
-  background-color: var(--primary-color);
+  background-color: var(--bg-card);
 }
 
 .article-holder__content {
   @include mix.flex(space-between, start, nowrap);
-  
+
   flex-direction: column;
   width: 294px;
   height: 280px;
   padding: 16px 0 16px 0;
-  
+
   &-item {
     @include mix.flex(start, start, nowrap);
-  
+
     flex-direction: column;
     row-gap: 24px;
   }
-  
+
   &-title {
     font-size: 24px;
     font-weight: 700;
@@ -432,16 +478,17 @@
   }
 
   &-title:hover {
-    color: var(--additional-color);
     text-decoration: underline;
+    color: var(--additional-color);
   }
-  
+
   &-desc {
     max-height: 100px;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     overflow-y: hidden;
+    color: var(--secondary-text-color);
   }
 }
 
@@ -451,15 +498,16 @@
   width: 100%;
 
   .info-article {
-    color: var(--additional-color);
     cursor: pointer;
+    color: var(--additional-color);
   }
 }
 
-.info-date, .info-article {
-  color: var(--gold-color);
+.info-date,
+.info-article {
   font-weight: 700;
   font-size: 14px;
+  color: var(--gold-color);
 }
 
 .travel-blog__other-material {
@@ -479,6 +527,7 @@
   margin: 40px 0 50px 0;
 }
 
-.share-impressions__info, .share-impressions__pinterest {
+.share-impressions__info,
+.share-impressions__pinterest {
   text-align: center;
 }
