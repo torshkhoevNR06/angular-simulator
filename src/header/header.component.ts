@@ -61,7 +61,7 @@ export class HeaderComponent {
   }
 
   setTheme(theme: Theme): void {
-    this.themeService.setTheme(theme);
+    this.themeService.setTheme(theme ?? Theme.AURA);
   }
 
   incrementCounter(): void {

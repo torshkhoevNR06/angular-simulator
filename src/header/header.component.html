@@ -25,8 +25,14 @@
               <fa-icon class="pi" [icon]="isToggle ? faMoon : faSun" />
             </ng-template>
           </p-toggleswitch>
-          <p-selectbutton [options]="this.themeService.themes" [ngModel]="theme$ | async" optionLabel="name"
-            optionValue="theme" (ngModelChange)="setTheme($event)" aria-labelledby="basic" />
+          <p-selectbutton 
+            [options]="this.themeService.themes" 
+            [ngModel]="theme$ | async" 
+            optionLabel="name"
+            optionValue="value" 
+            (ngModelChange)="setTheme($event)" 
+            aria-labelledby="basic" 
+          />
         </nav>
         <div class="header__btn">
           <button 

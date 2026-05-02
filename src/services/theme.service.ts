@@ -3,6 +3,7 @@ import { usePreset } from '@primeuix/themes';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { ITheme } from '../interfaces/ITheme';
+import { matchPresetTheme, PresetVariants } from '../types/PresetVariants';
 import { Theme } from '../enums/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
@@ -26,19 +27,19 @@ export class ThemeService {
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 
   themes: ITheme[] = [
-    { name: 'Nora', theme: Theme.NORA },
-    { name: 'Aura', theme: Theme.AURA },
-    { name: 'Lara', theme: Theme.LARA }
+    { name: 'Nora', value: Theme.NORA },
+    { name: 'Aura', value: Theme.AURA },
+    { name: 'Lara', value: Theme.LARA }
   ];
   
-  private presets = {
+  private presets: matchPresetTheme = {
     [Theme.AURA]: Aura,
     [Theme.NORA]: Nora,
     [Theme.LARA]: Lara
   };
   
   constructor() {
-    const preset = this.presets[this.themeSubject.value];
+    const preset: PresetVariants = this.presets[this.themeSubject.value];
     
     if (this.themeSubject.value === Theme.NORA) {
       usePreset(preset);
@@ -47,7 +48,7 @@ export class ThemeService {
     } else {
       usePreset(preset);
     }
-   }
+  }
   
   private initDarkMode(): boolean {
     return this.localStorageService.getItem('isDarkMode') ?? false;
@@ -59,15 +60,19 @@ export class ThemeService {
   }
   
   private initTheme(): Theme {
-    return this.localStorageService.getItem('preset') ?? Theme.AURA;
+    return this.localStorageService.getItem('theme') ?? Theme.AURA;
   }
 
   setTheme(theme: Theme): void {
-    const saveTheme = this.presets[theme];
+    if (theme === null) {
+      this.themeSubject.next(this.initTheme());
+      usePreset(Aura);
+      return;
+    }
 
     this.themeSubject.next(theme);
-    usePreset(saveTheme);
-    this.localStorageService.setItem('preset', theme);
+    usePreset(this.presets[theme]);
+    this.localStorageService.setItem('theme', theme);
   }
   
 }
