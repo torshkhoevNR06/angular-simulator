@@ -10,7 +10,7 @@ import { faMoon, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { ButtonModule } from 'primeng/button';
-import { SelectButtonModule } from 'primeng/selectbutton';
+import { SelectButtonModule, type SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
 import { Observable } from 'rxjs';
 
@@ -60,8 +60,8 @@ export class HeaderComponent {
     this.themeService.toggleDarkMode(event.checked)
   }
 
-  setTheme(theme: Theme): void {
-    this.themeService.setTheme(theme ?? Theme.AURA);
+  setTheme(theme: SelectButtonChangeEvent): void {
+    this.themeService.setTheme(theme.value);
   }
 
   incrementCounter(): void {

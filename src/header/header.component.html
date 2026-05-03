@@ -30,8 +30,9 @@
             [ngModel]="theme$ | async" 
             optionLabel="name"
             optionValue="value" 
-            (ngModelChange)="setTheme($event)" 
+            (onChange)="setTheme($event)" 
             aria-labelledby="basic" 
+            [allowEmpty]="false"
           />
         </nav>
         <div class="header__btn">

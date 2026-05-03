@@ -3,7 +3,6 @@ import { usePreset } from '@primeuix/themes';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { ITheme } from '../interfaces/ITheme';
-import { matchPresetTheme, PresetVariants } from '../types/PresetVariants';
 import { Theme } from '../enums/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
@@ -27,27 +26,25 @@ export class ThemeService {
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 
   themes: ITheme[] = [
-    { name: 'Nora', value: Theme.NORA },
-    { name: 'Aura', value: Theme.AURA },
-    { name: 'Lara', value: Theme.LARA }
+    { name: 'Nora', value: Theme.NORA, preset: Nora },
+    { name: 'Aura', value: Theme.AURA, preset: Aura },
+    { name: 'Lara', value: Theme.LARA, preset: Lara }
   ];
-  
-  private presets: matchPresetTheme = {
-    [Theme.AURA]: Aura,
-    [Theme.NORA]: Nora,
-    [Theme.LARA]: Lara
-  };
-  
+
   constructor() {
-    const preset: PresetVariants = this.presets[this.themeSubject.value];
-    
-    if (this.themeSubject.value === Theme.NORA) {
-      usePreset(preset);
-    } else if (this.themeSubject.value === Theme.AURA) {
-      usePreset(preset);
-    } else {
-      usePreset(preset);
-    }
+    switch(this.themeSubject.value) {
+      case Theme.NORA:
+        usePreset(Nora);
+        break;
+      
+      case Theme.LARA:
+        usePreset(Lara);
+        break;
+      
+      default:
+        usePreset(Aura);
+        break;
+    }    
   }
   
   private initDarkMode(): boolean {
@@ -64,14 +61,10 @@ export class ThemeService {
   }
 
   setTheme(theme: Theme): void {
-    if (theme === null) {
-      this.themeSubject.next(this.initTheme());
-      usePreset(Aura);
-      return;
-    }
+    const getRelevantTheme: ITheme = this.themes.find((topic: ITheme) => topic.value === theme)!;
 
     this.themeSubject.next(theme);
-    usePreset(this.presets[theme]);
+    usePreset(getRelevantTheme.preset);
     this.localStorageService.setItem('theme', theme);
   }
   

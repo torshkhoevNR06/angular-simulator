@@ -12,12 +12,15 @@ import { PresetVariants } from '../types/PresetVariants';
 const setTheme = (): PresetVariants => {
   const savePreset: string = JSON.parse(localStorage.getItem('theme')!);
     
-  if (savePreset === Theme.NORA) {
-    return usePreset(Nora);
-  } else if (savePreset === Theme.LARA) {
-    return usePreset(Lara);
-  } else {
-    return usePreset(Aura);
+  switch(savePreset) {
+    case Theme.NORA:
+      return Nora;
+    
+    case Theme.LARA:
+      return Lara;
+    
+    default:
+      return Aura;
   }
 }
 
