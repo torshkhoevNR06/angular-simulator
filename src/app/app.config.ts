@@ -2,7 +2,6 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
-import { usePreset } from '@primeuix/styled'
 import { Theme } from '../enums/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
@@ -10,9 +9,9 @@ import Lara from '@primeuix/themes/lara';
 import { PresetVariants } from '../types/PresetVariants';
 
 const setTheme = (): PresetVariants => {
-  const savePreset: string = JSON.parse(localStorage.getItem('theme')!);
+  const getTheme: string = JSON.parse(localStorage.getItem('theme') ?? 'Aura');
     
-  switch(savePreset) {
+  switch(getTheme) {
     case Theme.NORA:
       return Nora;
     

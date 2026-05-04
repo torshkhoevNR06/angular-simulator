@@ -32,6 +32,10 @@ export class ThemeService {
   ];
 
   constructor() {
+    this.currentTheme();
+  }
+
+  private currentTheme(): void {
     switch(this.themeSubject.value) {
       case Theme.NORA:
         usePreset(Nora);
