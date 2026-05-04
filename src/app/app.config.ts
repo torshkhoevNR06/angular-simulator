@@ -8,10 +8,10 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import { PresetVariants } from '../types/PresetVariants';
 
-const setTheme = (): PresetVariants => {
-  const getTheme: string = JSON.parse(localStorage.getItem('theme') ?? 'Aura');
-    
-  switch(getTheme) {
+const getSavedTheme = (): PresetVariants => {
+  const savedTheme: string | Theme = localStorage.getItem('theme') ?? Theme.AURA;
+
+  switch(savedTheme) {
     case Theme.NORA:
       return Nora;
     
@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection(),
     providePrimeNG({
       theme: {
-        preset: setTheme(),
+        preset: getSavedTheme(),
         options: { darkModeSelector: '.p-dark' },
       },
     }),

@@ -31,26 +31,6 @@ export class ThemeService {
     { name: 'Lara', value: Theme.LARA, preset: Lara }
   ];
 
-  constructor() {
-    this.currentTheme();
-  }
-
-  private currentTheme(): void {
-    switch(this.themeSubject.value) {
-      case Theme.NORA:
-        usePreset(Nora);
-        break;
-      
-      case Theme.LARA:
-        usePreset(Lara);
-        break;
-      
-      default:
-        usePreset(Aura);
-        break;
-    }    
-  }
-  
   private initDarkMode(): boolean {
     return this.localStorageService.getItem('isDarkMode') ?? false;
   }
