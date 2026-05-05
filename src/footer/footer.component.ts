@@ -1,15 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram, faVk, faPinterest, faSkype  } from '@fortawesome/free-brands-svg-icons';
+import { ISocialNetwork } from '../interfaces/ISocialNetwork';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
 
   messageService: MessageService = inject(MessageService);
+
+  faAngleRight: IconDefinition = faAngleRight;
+  faTelegram: IconDefinition = faTelegram;
+  faVk: IconDefinition = faVk;
+  faPinterest: IconDefinition = faPinterest;
+  faSkype: IconDefinition = faSkype;
 
   favors: IFavor[] = [
     { id: 1, favor: "Прогулки в горы летом" },
@@ -28,10 +38,10 @@ export class FooterComponent {
   ];
 
   socialNetworks: ISocialNetwork[] = [
-    { id: 1, image: "telegram-icon" },
-    { id: 2, image: "vk-icon" },
-    { id: 3, image: "pinterest-icon" },
-    { id: 4, image: "skype-icon" },
+    { id: 1, image: faTelegram },
+    { id: 2, image: faVk },
+    { id: 3, image: faPinterest },
+    { id: 4, image: faSkype },
   ]
 
 }

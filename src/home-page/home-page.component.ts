@@ -1,10 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faAngleRight, faAngleDown, faCalendar, IconDefinition, faShieldHalved, faPeopleGroup, faTag, faStar } from '@fortawesome/free-solid-svg-icons';
+import type { IAdvantage } from '../interfaces/IAdvantage';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule],
+  imports: [FormsModule, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -16,22 +19,30 @@ export class HomePageComponent {
   selectedDate!: boolean;
   selectedParticipants!: boolean;
   
+  faAngleRight: IconDefinition = faAngleRight;
+  faAngleDown: IconDefinition = faAngleDown;
+  faCalendar: IconDefinition = faCalendar;
+  faShieldHalved: IconDefinition = faShieldHalved;
+  faPeopleGroup: IconDefinition = faPeopleGroup;
+  faTag: IconDefinition = faTag;
+  faStar: IconDefinition = faStar;
+  
   cards: IAdvantage[] = [
     {
       id: 1,
-      iconName: "tourists-icon",
+      iconName: faPeopleGroup,
       title: "Опытный гид",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     },
     {
       id: 2,
-      iconName: "security-icon",
+      iconName: faShieldHalved,
       title: "Безопасный поход",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     },
     {
       id: 3,
-      iconName: "price-tag-icon",
+      iconName: faTag,
       title: "Лояльные цены",
       description: "Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации."
     }

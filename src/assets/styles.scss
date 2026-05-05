@@ -2,7 +2,7 @@
 @use 'mixins' as mix;
 @use 'normalize';
 
-*, 
+*,
 *::before,
 *::after {
   padding: 0;
@@ -12,16 +12,27 @@
 }
 
 :root {
-  --primary-color: #FDFDFD;
-  --secondary-color: #18121E;
+  --primary-text-color: #FDFDFD;
+  --secondary-text-color: #18121E;
   --additional-color: #1A3E3E;
-  --light-gray-color: #f3f5f4;
   --gold-color: #f2be22;
+  --bg-container: #f3f5f4;
+  --bg-card: #f3f5f4;
+  --bg-button: #fdfdfd;
+  --bg-icon: #f2be22;
+}
+
+.p-dark {
+  --secondary-text-color: #FDFDFD;
+  --bg-icon: #7c19b1;
+  --bg-container: #18121E;
+  --bg-card: #27272a;
+  --bg-button: #27272a;
 }
 
 .container {
   @include mix.flex(space-between, center, nowrap);
-    
+
   max-width: 1180px;
   margin: 0 auto;
   column-gap: 90px;
@@ -34,7 +45,7 @@
   font-size: 16px;
   border-radius: 4px;
   background-color: var(--additional-color);
-  color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .entry {

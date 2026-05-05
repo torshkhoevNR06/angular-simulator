@@ -1,4 +1,6 @@
-interface ISocialNetwork {
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
+export interface ISocialNetwork {
   id: number;
-  image: string;
+  image: IconDefinition;
 }
