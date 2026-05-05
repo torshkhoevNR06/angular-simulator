@@ -9,7 +9,7 @@ import Lara from '@primeuix/themes/lara';
 import { PresetVariants } from '../types/PresetVariants';
 
 const getSavedTheme = (): PresetVariants => {
-  const savedTheme: string | Theme = localStorage.getItem('theme') ?? Theme.AURA;
+  const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
 
   switch(savedTheme) {
     case Theme.NORA:
