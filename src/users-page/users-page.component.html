@@ -4,11 +4,16 @@
       <div class="heading">
         <h1 class="heading__item">Список Пользователей</h1>
       </div>
-      <app-create-user (createUser)="onAddUser($event)" />
+      <app-create-user [borderConfiguration]="borderConfiguration" (createUser)="onAddUser($event)" />
       <app-users-filter (filterUser)="onChangeFilter($event)" />
+      {{ numberUsers.toString() | plural: 'Пользователь' : 'Пользователя' : 'Пользователей' }}
       <div class="user">
         @for (user of filteredUsers$ | async; track user.id) {
-          <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)" />
+          <app-user-card 
+            [user]="user" 
+            [borderConfiguration]="borderConfiguration" 
+            (deleteUser)="onDeleteUser($event)" 
+          />
         } @empty {
           <div class="error">
             <h1 class="error__title">Нет пользователей для отображения</h1>

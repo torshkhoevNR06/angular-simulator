@@ -58,3 +58,16 @@
   font-size: 32px;
   font-weight: 800;
 }
+
+
+@keyframes rotate {
+to {
+  --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

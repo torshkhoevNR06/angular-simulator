@@ -7,7 +7,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="name">Имя *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="name"
             type="text"
@@ -19,7 +20,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="username">Юзернейм *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="username"  
             type="text"
@@ -36,7 +38,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="email">Эл. почта *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="email" 
             type="email"
@@ -49,7 +52,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="phone">Телефон *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="phone"  
             type="tel"
@@ -62,7 +66,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="website">Веб-сайт</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="website"  
             type="url"
@@ -79,7 +84,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="city">Город *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="city"  
             type="text"
@@ -92,7 +98,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="street">Улица *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="street"  
             type="text"
@@ -105,7 +112,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="suite">Офис</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="suite"  
             type="text"
@@ -119,7 +127,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="zipcode">Индекс *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="zipcode"  
             type="text"
@@ -132,7 +141,8 @@
       <div class="form__column" formGroupName="geo">
         <div class="form__group">
           <label class="form__label" for="lat">Широта *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="lat"  
             type="number"
@@ -145,7 +155,8 @@
       <div class="form__column" formGroupName="geo">
         <div class="form__group">
           <label class="form__label" for="lng">Долгота *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="lng"  
             type="number"
@@ -162,7 +173,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="company-name">Название *</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="company-name" 
             type="text"
@@ -175,7 +187,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="catchphrase">Слоган</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="catchphrase"  
             type="text"
@@ -188,7 +201,8 @@
       <div class="form__column">
         <div class="form__group">
           <label class="form__label" for="bs">Обслуживание</label>
-          <input 
+          <input
+            AnimatedBorder [GradientConfiguration]="borderConfiguration" 
             class="form__input"
             id="bs"  
             type="text"
@@ -199,7 +213,8 @@
       </div>
     </div>
   </div>
-  <button 
+  <button
+    FontWeightHover
     class="form__button" 
     type="submit" 
     (click)="submitUserForm()"
