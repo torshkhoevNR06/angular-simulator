@@ -5,15 +5,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PluralPipe implements PipeTransform {
 
-  transform(x: string | number, ...args: string[]): (string | number)[] {
+  transform(x: string | number, ...args: string[]): (string | number) {
     const number: number = Number(x);
     
     if (number >= 1 && number < 2) {
-      return [`${number}: ${args[0]}`];
+      return `${number}: ${args[0]}`;
     } else if (number >= 2 && number < 9) {
-      return [`${number}: ${args[1]}`];
+      return `${number}: ${args[1]}`;
     } else {
-      return [`${number}: ${args[2]}`];
+      return `${number}: ${args[2]}`;
     }
   }
 

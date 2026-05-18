@@ -47,7 +47,7 @@ export class UsersPageComponent implements OnInit {
       ).subscribe();
 
     this.filteredUsers$.pipe(
-      tap(users => this.numberUsers = users.length)
+      tap((users: IUser[]) => this.numberUsers = users.length)
     ).subscribe();
   }
   

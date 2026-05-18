@@ -7,7 +7,7 @@ export class AnimatedBorderDirective {
   
   @Input() GradientConfiguration!: IBorderConfiguration;
 
-  timerID!: number;
+  timerId!: number;
 
   @HostBinding('style.border') border: string = '';
   @HostBinding('style.borderRadius') borderRadius: string = '';
@@ -16,7 +16,7 @@ export class AnimatedBorderDirective {
 
   @HostListener('mouseenter')
   onEffectBorder(): void {
-    this.timerID = setTimeout(() => {
+    this.timerId = setTimeout(() => {
       this.borderRadius = this.GradientConfiguration.thickness = '4px';
       this.border = `${this.GradientConfiguration.thickness} solid #0000`;
       this.bgBorder = `
@@ -39,7 +39,7 @@ export class AnimatedBorderDirective {
     this.borderRadius = '';
     this.bgBorder = '';
     this.borderAnimation = '';
-    clearTimeout(this.timerID);
+    clearTimeout(this.timerId);
   }
 
 }

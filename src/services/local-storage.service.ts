@@ -12,7 +12,9 @@ export class LocalStorageService {
   
   getItem<T>(key: string): T | null {
     const keyData: string | null = localStorage.getItem(key);
-    if (keyData === null) return null; 
+    if (!keyData) {
+      return null;
+    }
     
     try {
       return JSON.parse(keyData);

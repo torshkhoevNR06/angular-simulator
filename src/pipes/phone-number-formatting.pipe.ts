@@ -21,13 +21,13 @@ export class PhoneNumberFormatting implements PipeTransform {
 
     switch (numberMode) {
       case NumberPhoneMode.COMPACT:
-        return formattedNumberPhone;
+        return `+${formattedNumberPhone}`;
 
       case NumberPhoneMode.INTERNATIONAL:
         return `+505 ${formattedPartsString}`;
 
       case NumberPhoneMode.MASKED:
-        return `${formattedPartsString}`;
+        return formattedPartsString;
 
       case NumberPhoneMode.NATIONAL:
         return `+505 
