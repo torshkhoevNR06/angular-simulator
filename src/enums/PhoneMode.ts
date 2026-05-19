@@ -1,4 +1,4 @@
-export enum NumberPhoneMode {
+export enum PhoneMode {
   COMPACT = 'compact',
   INTERNATIONAL = 'international',
   NATIONAL = 'national',

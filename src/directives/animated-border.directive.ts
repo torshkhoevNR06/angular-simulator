@@ -17,17 +17,17 @@ export class AnimatedBorderDirective {
   @HostListener('mouseenter')
   onEffectBorder(): void {
     this.timerId = setTimeout(() => {
-      this.borderRadius = this.GradientConfiguration.thickness = '4px';
-      this.border = `${this.GradientConfiguration.thickness} solid #0000`;
+      this.borderRadius = '4px';
+      this.border = `${ this.GradientConfiguration.thickness } solid #0000`;
       this.bgBorder = `
         linear-gradient(
-          ${this.GradientConfiguration.colors![2]}, 
-          ${this.GradientConfiguration.colors![2]}
+          ${ this.GradientConfiguration.colors![2] }, 
+          ${ this.GradientConfiguration.colors![2] }
         ) padding-box,
         linear-gradient(
-          var(--angle), 
-          ${this.GradientConfiguration.colors![2]}, 
-          ${this.GradientConfiguration.colors![0]}
+          var(--angle),
+          ${ this.GradientConfiguration.colors![2] }, 
+          ${ this.GradientConfiguration.colors![0] }
         ) border-box`;
       this.borderAnimation = '8s rotate linear infinite';
       }, this.GradientConfiguration.delay);

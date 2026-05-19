@@ -1,7 +1,7 @@
 import { UpperCasePipe } from '@angular/common';
 import { PhoneNumberFormatting } from '../pipes/phone-number-formatting.pipe';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NumberPhoneMode } from '../enums/NumberPhoneMode';
+import { PhoneMode } from '../enums/PhoneMode';
 import { FontWeightDirective } from '../directives/font-weight.directive';
 import { AnimatedBorderDirective } from '../directives/animated-border.directive';
 
@@ -17,7 +17,7 @@ export class UserCardComponent {
   @Input() borderConfiguration!: IBorderConfiguration;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
-  numberPhoneMode: typeof NumberPhoneMode = NumberPhoneMode;
+  phoneMode: typeof PhoneMode = PhoneMode;
 
   onDeleteClick(id: number): void {
     this.deleteUser.emit(id);
