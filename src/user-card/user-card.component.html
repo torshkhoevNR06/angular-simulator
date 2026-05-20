@@ -1,4 +1,4 @@
-<div AnimatedBorder [GradientConfiguration]="borderConfiguration" class="user__card">
+<div animatedBorder [gradientConfiguration]="borderConfiguration" class="user__card">
   <div class="user__info">
     <h1 class="user__name">{{ user.name | uppercase }}</h1>
     <span class="user__username">{{ user.username }}</span>
@@ -12,7 +12,7 @@
       </div>
       <div class="contact__item">
         <span class="contact__label label">Телефон:</span>
-        <span class="contact__value value secondary">{{ user.phone | phoneNumbers: phoneMode.NATIONAL }}</span>
+        <span class="contact__value value secondary">{{ user.phone | phoneNumber: phoneMode.NATIONAL }}</span>
       </div>
       <div class="contact__item">
         <span class="contact__label label">Веб-сайт:</span>
@@ -64,6 +64,6 @@
     </div>
   </div>
   <div class="delete-user">
-    <button FontWeightHover class="delete-user__btn" (click)="onDeleteClick(user.id)">Удалить пользователя</button>
+    <button fontWeightHover class="delete-user__btn" (click)="onDeleteClick(user.id)">Удалить пользователя</button>
   </div>
 </div>

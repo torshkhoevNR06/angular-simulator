@@ -21,7 +21,8 @@ export class UsersPageComponent implements OnInit {
 
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
-  
+  numberUsers$: Observable<number> = this.userService.numberUsers$;
+
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$, 
     this.filteredSubject
@@ -29,10 +30,8 @@ export class UsersPageComponent implements OnInit {
     map(([users, name]: [IUser[], string]) => {
       return users.filter((user: IUser) => 
         user.name.trim().toLowerCase().includes(name))
-      })
+    })
   );
-
-  numberUsers!: number;
 
   borderConfiguration: IBorderConfiguration = { 
     delay: 1000, 
@@ -46,9 +45,7 @@ export class UsersPageComponent implements OnInit {
         tap((users: IUser[]) => this.userService.setUsers(users))
       ).subscribe();
 
-    this.filteredUsers$.pipe(
-      tap((users: IUser[]) => this.numberUsers = users.length)
-    ).subscribe();
+    this.userService.saveNumberUsers();
   }
   
   onAddUser(user: IUser): void {

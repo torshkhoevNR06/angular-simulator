@@ -12,7 +12,6 @@ import { AnimatedBorderDirective } from '../directives/animated-border.directive
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-
   @Input({ required: true }) user!: IUser;
   @Input() borderConfiguration!: IBorderConfiguration;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
@@ -22,5 +21,4 @@ export class UserCardComponent {
   onDeleteClick(id: number): void {
     this.deleteUser.emit(id);
   }
-
 }

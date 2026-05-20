@@ -1,11 +1,10 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[AnimatedBorder]',
+  selector: '[animatedBorder]',
 })
 export class AnimatedBorderDirective {
-  
-  @Input() GradientConfiguration!: IBorderConfiguration;
+  @Input() gradientConfiguration!: IBorderConfiguration;
 
   timerId!: number;
 
@@ -18,21 +17,21 @@ export class AnimatedBorderDirective {
   onEffectBorder(): void {
     this.timerId = setTimeout(() => {
       this.borderRadius = '4px';
-      this.border = `${ this.GradientConfiguration.thickness } solid #0000`;
+      this.border = `${ this.gradientConfiguration.thickness } solid #0000`;
       this.bgBorder = `
         linear-gradient(
-          ${ this.GradientConfiguration.colors![2] }, 
-          ${ this.GradientConfiguration.colors![2] }
+          ${ this.gradientConfiguration.colors![2] }, 
+          ${ this.gradientConfiguration.colors![2] }
         ) padding-box,
         linear-gradient(
           var(--angle),
-          ${ this.GradientConfiguration.colors![2] }, 
-          ${ this.GradientConfiguration.colors![0] }
+          ${ this.gradientConfiguration.colors![2] }, 
+          ${ this.gradientConfiguration.colors![0] }
         ) border-box`;
       this.borderAnimation = '8s rotate linear infinite';
-      }, this.GradientConfiguration.delay);
-    }
-    
+    }, this.gradientConfiguration.delay);
+  }
+
   @HostListener('mouseleave')
   offEffectBorder(): void {
     this.border = '';
@@ -41,5 +40,4 @@ export class AnimatedBorderDirective {
     this.borderAnimation = '';
     clearTimeout(this.timerId);
   }
-
 }
