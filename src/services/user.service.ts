@@ -17,8 +17,8 @@ export class UserService {
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
-  private numberUsersSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  numberUsers$: Observable<number> = this.numberUsersSubject.asObservable();
+
+  numberUsers: number = 0;
 
   addUser(user: IUser): void {
     const users: IUser[] = this.getUsers();
@@ -60,7 +60,7 @@ export class UserService {
 
   saveNumberUsers(): void {
     this.usersSubject.pipe(
-      tap((users: IUser[]) => this.numberUsersSubject.next(users.length))
+      tap((users: IUser[]) => this.numberUsers = users.length),
     ).subscribe();
   }
 

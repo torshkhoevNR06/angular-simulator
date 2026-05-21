@@ -12,27 +12,27 @@ export class PhoneNumberFormatting implements PipeTransform {
       return cleanPhoneNumber.slice(oneIndex, secondIndex);
     }
 
-    const formattedPartsString: string = `    
-      ${ cutPhoneNumber(0, 3) } 
-      ${ cutPhoneNumber(3, 6) } 
-      ${ cutPhoneNumber(6, 8) } 
-      ${ cutPhoneNumber(8, 10) }`;
+    const formattedPartsString: string = `${ cutPhoneNumber(0, 2) } 
+      ${ cutPhoneNumber(2, 5) } 
+      ${ cutPhoneNumber(5, 8) } 
+      ${ cutPhoneNumber(8, 10) } 
+      ${ cutPhoneNumber(10, 12) }`;
 
     switch (phoneNumberMode) {
       case PhoneMode.COMPACT:
         return `+${ cleanPhoneNumber }`;
 
       case PhoneMode.INTERNATIONAL:
-        return `+505 ${ formattedPartsString }`;
+        return `+${ formattedPartsString }`;
 
       case PhoneMode.MASKED:
         return formattedPartsString;
 
       case PhoneMode.NATIONAL:
-        return `+505 
-                ${ cutPhoneNumber(0, 3) } 
-                ${ cutPhoneNumber(3, 8).replace(/\d/g, '*') } 
-                ${ cutPhoneNumber(8, 10) }`;
+        return `+${ cutPhoneNumber(0, 2) } 
+                 ${ cutPhoneNumber(2, 5) } 
+                 ${ cutPhoneNumber(5, 10).replace(/\d/g, '*') } 
+                 ${ cutPhoneNumber(10, 12) }`;
                 
       default:
         return phoneNumber;

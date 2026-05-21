@@ -6,7 +6,7 @@
       </div>
       <app-create-user [borderConfiguration]="borderConfiguration" (createUser)="onAddUser($event)" />
       <app-users-filter (filterUser)="onChangeFilter($event)" />
-      {{ (numberUsers$ | async) ?? 0 | plural: 'Пользователь' : 'Пользователя' : 'Пользователей' }}
+      {{ userService.numberUsers | plural: 'Пользователь' : 'Пользователя' : 'Пользователей' }}
       <div class="user">
         @for (user of filteredUsers$ | async; track user.id) {
           <app-user-card 

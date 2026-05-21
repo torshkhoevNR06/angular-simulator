@@ -16,12 +16,11 @@ import { PluralPipe } from '../pipes/plural.pipe'
 })
 export class UsersPageComponent implements OnInit {
 
-  private userService: UserService = inject(UserService);
   private messageService: MessageService = inject(MessageService);
+  userService: UserService = inject(UserService);
 
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
-  numberUsers$: Observable<number> = this.userService.numberUsers$;
 
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$, 
