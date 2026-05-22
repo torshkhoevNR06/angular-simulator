@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';
@@ -17,8 +17,6 @@ export class UserService {
 
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
-
-  numberUsers: number = 0;
 
   addUser(user: IUser): void {
     const users: IUser[] = this.getUsers();
@@ -56,12 +54,6 @@ export class UserService {
           finalize(() => this.loaderService.hideLoader())
         );
     }
-  }
-
-  saveNumberUsers(): void {
-    this.usersSubject.pipe(
-      tap((users: IUser[]) => this.numberUsers = users.length),
-    ).subscribe();
   }
 
 }

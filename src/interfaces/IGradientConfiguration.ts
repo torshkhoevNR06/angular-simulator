@@ -1,4 +1,4 @@
-interface IBorderConfiguration {
+interface IGradientConfiguration {
   delay?: number;
   colors?: string[];
   thickness?: string;

@@ -22,6 +22,8 @@ export class UsersPageComponent implements OnInit {
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
 
+  usersCount: number = 0;
+
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$, 
     this.filteredSubject
@@ -29,22 +31,15 @@ export class UsersPageComponent implements OnInit {
     map(([users, name]: [IUser[], string]) => {
       return users.filter((user: IUser) => 
         user.name.trim().toLowerCase().includes(name))
-    })
+    }),
+    tap((users: IUser[]) => this.usersCount = users.length)
   );
-
-  borderConfiguration: IBorderConfiguration = { 
-    delay: 1000, 
-    colors: ["#f2be22", "#7c19b1", "#131219"],
-    thickness: '2px'
-  };
     
   ngOnInit(): void {
     this.userService.loadUsers()
       .pipe(
         tap((users: IUser[]) => this.userService.setUsers(users))
       ).subscribe();
-
-    this.userService.saveNumberUsers();
   }
   
   onAddUser(user: IUser): void {

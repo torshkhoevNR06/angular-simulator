@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from '../services/message.service';
 import { AnimatedBorderDirective } from '../directives/animated-border.directive';
@@ -12,7 +12,6 @@ import { FontWeightDirective } from '../directives/font-weight.directive';
 })
 export class CreateUserComponent {
 
-  @Input() borderConfiguration!: IBorderConfiguration;
   @Output() createUser: EventEmitter<IUser> = new EventEmitter();  
   private messageService: MessageService = inject(MessageService);
 

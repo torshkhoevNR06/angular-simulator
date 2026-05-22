@@ -12,13 +12,14 @@ import { AnimatedBorderDirective } from '../directives/animated-border.directive
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-  @Input({ required: true }) user!: IUser;
-  @Input() borderConfiguration!: IBorderConfiguration;
-  @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
+  @Input({ required: true }) user!: IUser;
+  @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
+  
   phoneMode: typeof PhoneMode = PhoneMode;
 
   onDeleteClick(id: number): void {
     this.deleteUser.emit(id);
   }
+  
 }

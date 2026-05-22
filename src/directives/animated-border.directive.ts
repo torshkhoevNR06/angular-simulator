@@ -4,9 +4,17 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
   selector: '[animatedBorder]',
 })
 export class AnimatedBorderDirective {
-  @Input() gradientConfiguration!: IBorderConfiguration;
+  
+  @Input() gradientConfiguration: IGradientConfiguration = { 
+    delay: 1000, 
+    colors: ["#f2be22", "#7c19b1", "#131219"],
+    thickness: '2px'
+  };
 
   timerId!: number;
+  delay: number = this.gradientConfiguration.delay!;
+  thickness: string = this.gradientConfiguration.thickness!;
+  colors: string[] = this.gradientConfiguration.colors!;
 
   @HostBinding('style.border') border: string = '';
   @HostBinding('style.borderRadius') borderRadius: string = '';
@@ -17,19 +25,14 @@ export class AnimatedBorderDirective {
   onEffectBorder(): void {
     this.timerId = setTimeout(() => {
       this.borderRadius = '4px';
-      this.border = `${ this.gradientConfiguration.thickness } solid #0000`;
+      this.border = `${ this.thickness } solid #0000`;
       this.bgBorder = `
+        linear-gradient(${ this.colors[2] }, ${ this.colors[2] }) padding-box,
         linear-gradient(
-          ${ this.gradientConfiguration.colors![2] }, 
-          ${ this.gradientConfiguration.colors![2] }
-        ) padding-box,
-        linear-gradient(
-          var(--angle),
-          ${ this.gradientConfiguration.colors![2] }, 
-          ${ this.gradientConfiguration.colors![0] }
+          var(--angle), ${ this.colors[2] }, ${ this.colors[0] }
         ) border-box`;
       this.borderAnimation = '8s rotate linear infinite';
-    }, this.gradientConfiguration.delay);
+    }, this.delay);
   }
 
   @HostListener('mouseleave')
@@ -40,4 +43,5 @@ export class AnimatedBorderDirective {
     this.borderAnimation = '';
     clearTimeout(this.timerId);
   }
+
 }
