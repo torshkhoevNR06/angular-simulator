@@ -1,10 +1,12 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from '../services/message.service';
+import { AnimatedBorderDirective } from '../directives/animated-border.directive';
+import { FontWeightDirective } from '../directives/font-weight.directive';
 
 @Component({
   selector: 'app-create-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AnimatedBorderDirective, FontWeightDirective],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.scss',
 })

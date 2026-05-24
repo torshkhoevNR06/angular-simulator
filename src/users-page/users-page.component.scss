@@ -31,6 +31,7 @@
       .user {
         @include mix.flex(center, start, wrap);
 
+        width: 1510px;
         gap: 50px 70px;
       }
 
