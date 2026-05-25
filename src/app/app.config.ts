@@ -2,11 +2,14 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpInterceptor } from '../interceptors/http.interceptor';
+import { errorInterceptor } from '../interceptors/error.interceptor';
+import { PresetVariants } from '../types/PresetVariants';
 import { Theme } from '../enums/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
-import { PresetVariants } from '../types/PresetVariants';
 
 const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
@@ -27,6 +30,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
+    provideHttpClient(withInterceptors([httpInterceptor, errorInterceptor])),
     provideZoneChangeDetection(),
     providePrimeNG({
       theme: {
