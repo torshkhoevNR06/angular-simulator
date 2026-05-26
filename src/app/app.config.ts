@@ -37,7 +37,6 @@ export const appConfig: ApplicationConfig = {
         preset: getSavedTheme(),
         options: { darkModeSelector: '.p-dark' },
       },
-    }),
-    provideHttpClient()
+    })
   ]
 };
