@@ -38,5 +38,6 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: '.p-dark' },
       },
     }),
+    provideHttpClient()
   ]
 };
