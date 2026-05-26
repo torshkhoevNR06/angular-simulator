@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { httpInterceptor } from '../interceptors/http.interceptor';
+import { loggingInterceptor } from '../interceptors/logging.interceptor';
 import { errorInterceptor } from '../interceptors/error.interceptor';
 import { PresetVariants } from '../types/PresetVariants';
 import { Theme } from '../enums/Theme';
@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([httpInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([loggingInterceptor, errorInterceptor])),
     provideZoneChangeDetection(),
     providePrimeNG({
       theme: {
