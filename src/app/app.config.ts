@@ -7,6 +7,7 @@ import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import { PresetVariants } from '../types/PresetVariants';
+import { provideHttpClient } from '@angular/common/http';
 
 const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
@@ -34,5 +35,6 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: '.p-dark' },
       },
     }),
+    provideHttpClient()
   ]
 };
