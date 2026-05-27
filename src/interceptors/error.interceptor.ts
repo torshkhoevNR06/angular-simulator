@@ -9,10 +9,10 @@ export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       const serviceUnavailable: HttpStatusCode = HttpStatusCode.ServiceUnavailable;
-      const InternalServerError: HttpStatusCode = HttpStatusCode.InternalServerError;
+      const internalServerError: HttpStatusCode = HttpStatusCode.InternalServerError;
       
-      if(error.status === InternalServerError) {
-        messageService.showError(`Internal Server Error: ${ InternalServerError }`);
+      if (error.status === internalServerError) {
+        messageService.showError(`Internal Server Error: ${ internalServerError }`);
       } else if (error.status === serviceUnavailable) {
         messageService.showError(`Service Unavailable: ${ serviceUnavailable }`);
       } else {
