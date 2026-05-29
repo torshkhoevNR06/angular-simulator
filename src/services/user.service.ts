@@ -47,10 +47,6 @@ export class UserService {
       
       return this.userApiService.getUsers()
         .pipe(
-          catchError(() => {
-            this.messageService.showError('404 Not Found');
-            return of([]);
-          }),
           finalize(() => this.loaderService.hideLoader())
         );
     }
