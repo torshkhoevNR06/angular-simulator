@@ -32,7 +32,7 @@ export class PostCreateComponent {
     userId: [null, Validators.required]
   })
 
-  createPost(): void {
+  onCreatePost(): void {
     if (this.createPostForm.valid) {
       this.postService.createPost(this.createPostForm.value).pipe(
         tap(() => {

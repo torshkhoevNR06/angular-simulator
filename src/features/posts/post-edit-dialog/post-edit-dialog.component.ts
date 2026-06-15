@@ -35,7 +35,7 @@ export class PostEditDialogComponent {
     views: ['', Validators.required]
   });
 
-  editPost(): void {
+  onEditPost(): void {
     this.loaderService.showLoader();
     this.postService.editPost(this.postId, this.editPostForm.value).pipe(
       delay(1500),
