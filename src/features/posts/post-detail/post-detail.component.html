@@ -1,0 +1,23 @@
+<div class="post">
+  <p class="post__id">{{ post.id }}</p>
+  <p class="post__title">{{ post.title }}</p>
+  <p class="post__body">{{ post.body }}</p>
+  <p class="post__tags">{{ post.tags }}</p>
+  <div class="post__stats">
+    <div class="post__stat">
+      <span class="post__stat-value">{{ post.reactions.likes }}</span>
+      <span class="post__stat-label">Лайков</span>
+    </div>
+    <div class="post__stat">
+      <span class="post__stat-value">{{ post.views }}</span>
+      <span class="post__stat-label">Просмотров</span>
+    </div>
+    <div class="post__stat">
+      <span class="post__stat-value">{{ post.userId }}</span>
+      <span class="post__stat-label">Автор</span>
+    </div>
+  </div>
+  <div class="post__actions">
+    <a class="post__back-link" [routerLink]="['/posts']">Вернуться к таблице</a>
+  </div>
+</div>

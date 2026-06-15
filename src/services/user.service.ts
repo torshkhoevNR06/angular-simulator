@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, finalize, of } from 'rxjs';
+import { BehaviorSubject, Observable, finalize, of } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';

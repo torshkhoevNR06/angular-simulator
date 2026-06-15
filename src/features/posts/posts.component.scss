@@ -1,0 +1,98 @@
+@use '../../assets/mixins' as mix;
+
+@include mix.ng-deep {
+  *::before,
+  *::after {
+    font-family: 'primeicons';
+  };
+
+  .posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 40px 0 28px 0;
+  }
+
+  .posts__create-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 0 18px;
+    overflow: hidden;
+    border: 1px solid rgba(179, 136, 255, 0.4);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(179, 136, 255, 0.16), rgba(179, 136, 255, 0.04));
+    color: #d8c7ff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .posts__create-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+    transition: transform 0.55s ease;
+  }
+
+  .posts__create-link-icon {
+    position: relative;
+    z-index: 1;
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(179, 136, 255, 0.18);
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .posts__create-link span:last-child {
+    position: relative;
+    z-index: 1;
+  }
+
+  .posts__create-link:hover,
+  .posts__create-link:focus-visible {
+    transform: translateY(-2px);
+    border-color: #b388ff;
+    color: #ffffff;
+    box-shadow: 0 10px 26px rgba(179, 136, 255, 0.22);
+  }
+
+  .posts__create-link:hover::before,
+  .posts__create-link:focus-visible::before {
+    transform: translateX(120%);
+  }
+
+  .posts__create-link:hover .posts__create-link-icon,
+  .posts__create-link:focus-visible .posts__create-link-icon {
+    transform: rotate(90deg) scale(1.08);
+    background-color: rgba(179, 136, 255, 0.32);
+  }
+
+  .posts__create-link:focus-visible {
+    outline: 2px solid rgba(179, 136, 255, 0.45);
+    outline-offset: 3px;
+  }
+  
+  .p-paginator {
+    margin: 0 20px 130px;
+  }
+
+  .m-10 {
+    margin: 0 10px;
+  }
+}

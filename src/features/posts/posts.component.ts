@@ -1,0 +1,95 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { TableModule } from 'primeng/table';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ToastModule } from 'primeng/toast';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { PostService } from './post.service';
+import { MessageService } from '../../services/message.service';
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { IPost } from './IPost';
+import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
+import { MenuItem } from 'primeng/api';
+import { AsyncPipe } from '@angular/common';
+import { delay, Observable, tap } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
+
+@Component({
+  selector: 'app-posts',
+  imports: [TableModule, SkeletonModule, DialogModule, ButtonModule, ContextMenuModule, DynamicDialogModule, ToastModule, DialogModule, InputTextModule, AsyncPipe, RouterLink],
+  providers: [DialogService],
+  templateUrl: './posts.component.html',
+  styleUrl: './posts.component.scss'
+})
+export class PostsComponent implements OnInit {
+
+  private loaderService: LoaderService = inject(LoaderService);
+  private messageService: MessageService = inject(MessageService);
+  private dialogService: DialogService = inject(DialogService);
+  postService: PostService = inject(PostService);
+
+  private ref!: DynamicDialogRef | null;
+  
+  posts$: Observable<IPost[]> = this.postService.posts$;
+  totalRecords$: Observable<number> = this.postService.totalRecords$;
+
+  menuItems!: MenuItem[];
+  skeletonRows: IPost[] = Array(10).fill(0);
+
+  ngOnInit(): void {
+    this.postService.displayPostData();
+    
+    this.menuItems = [
+      { 
+        label: 'View', 
+        icon: 'pi pi-fw pi-search', 
+        command: () => this.onViewPost(this.postService.selectedPost!) 
+      },
+      { 
+        label: 'Delete', 
+        icon: 'pi pi-fw pi-times', 
+        command: () => this.onDeletePost(this.postService.selectedPost!) 
+      },
+      { 
+        label: 'Editing', 
+        icon: 'pi pi-fw pi-pencil', 
+        command: () => this.onEditPost(this.postService.selectedPost!) 
+      }
+    ];
+  }
+
+  showModal(currentPost: IPost): void {
+    this.ref = this.dialogService.open(PostEditDialogComponent, {
+      data: currentPost,
+      header: 'Post List',
+      width: '20vw',
+      modal: true,
+      closable: true
+    })
+  }
+
+  onViewPost(currentPost: IPost): void {
+    this.messageService.showInfo('Пост выбран');
+    this.postService.postPageRedirect(currentPost);
+  }
+  
+  onDeletePost(currentPost: IPost): void {
+    this.loaderService.showLoader();
+    
+    this.postService.deletePost(currentPost).pipe(
+      delay(2000),
+      tap(() => {
+        this.loaderService.hideLoader();
+        this.messageService.showInfo("Пост удалён");
+      })
+    ).subscribe();
+  }
+
+  onEditPost(currentPost: IPost): void {
+    this.showModal(currentPost);
+  }
+  
+}

@@ -39,7 +39,8 @@ export class HeaderComponent {
 
   pages: INavigation[] = [
     { id: 1, page: "Главная", path: "" },
-    { id: 2, page: "Пользователи", path: "users" }
+    { id: 2, page: "Пользователи", path: "users" },
+    { id: 3, page: "Посты", path: "posts" }
   ];
 
   constructor() {

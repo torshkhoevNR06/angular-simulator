@@ -1,0 +1,216 @@
+:host {
+  display: block;
+}
+
+.post-create {
+  max-width: 700px;
+  margin: 40px auto 140px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #12111a;
+  border: 1px solid #2e2b45;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.post-create__label {
+  margin: 0 0 10px;
+  color: #555270;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-create__label::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b388ff, rgba(179, 136, 255, 0));
+}
+
+.post-create__title {
+  margin: 0 0 28px;
+  color: #b388ff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.post-create__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.post-create__field {
+  display: grid;
+  gap: 8px;
+}
+
+.post-create__field label,
+.post-create__stat label {
+  color: #9c96ba;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.post-create__field label span {
+  color: #555270;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.post-create__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #312c4a;
+  border-radius: 10px;
+  background-color: #171522;
+  color: #e0e0f0;
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.post-create__input::placeholder {
+  color: #5d5878;
+}
+
+.post-create__input:focus {
+  border-color: #b388ff;
+  background-color: #1a1727;
+  box-shadow: 0 0 0 3px rgba(179, 136, 255, 0.16);
+}
+
+.post-create__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.post-create__stat {
+  padding: 16px;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(179, 136, 255, 0.12), rgba(179, 136, 255, 0.04)),
+    #171522;
+  border: 1px solid #312c4a;
+}
+
+.post-create__input--stat {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.post-create__input--stat:focus {
+  box-shadow: none;
+}
+
+.post-create__input--stat::placeholder {
+  color: #5d5878;
+}
+
+.post-create__stats--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.post-create__actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #2e2b45;
+}
+
+.post-create__back,
+.post-create__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.post-create__back {
+  border: 1px solid #4a3f72;
+  background-color: #231f36;
+  color: #d8c7ff;
+}
+
+.post-create__back:hover,
+.post-create__back:focus-visible {
+  border-color: #b388ff;
+  background-color: #2d2745;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.post-create__back:focus-visible,
+.post-create__submit:focus-visible {
+  outline: 2px solid rgba(179, 136, 255, 0.45);
+  outline-offset: 3px;
+}
+
+.post-create__submit {
+  border: 1px solid #b388ff;
+  background-color: #b388ff;
+  color: #ffffff;
+}
+
+.post-create__submit:hover {
+  background-color: #9f73ff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .post-create {
+    margin: 24px 16px 96px;
+    padding: 24px;
+  }
+
+  .post-create__stats,
+  .post-create__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .post-create__stats {
+    gap: 12px;
+  }
+
+  .post-create__actions {
+    flex-direction: column;
+  }
+
+  .post-create__back,
+  .post-create__submit {
+    width: 100%;
+  }
+}
