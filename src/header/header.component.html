@@ -7,7 +7,7 @@
           <span class="company-name">{{ companyName }}</span>
         </div>
         <nav class="header__nav">
-          @for (page of pages; track $index) {
+          @for (page of pages; track page.page) {
             <a 
               [routerLink]="page.path" 
               [routerLinkActive]="'active'" 
