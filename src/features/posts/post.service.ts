@@ -3,7 +3,7 @@ import { PostApiService } from './post-api.service';
 import { IPost } from './IPost';
 import { IPostResponse } from './IPostResponse';
 import { TablePageEvent } from 'primeng/table';
-import { BehaviorSubject, map, tap, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, tap, Observable, takeUntil, catchError, throwError, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -20,7 +20,6 @@ export class PostService {
   private totalRecordsSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalRecords$: Observable<number> = this.totalRecordsSubject.asObservable();
   
-  responsePost!: IPostResponse;
   selectedPost: IPost | null = null;
   
   limit: number = 10;
@@ -28,25 +27,27 @@ export class PostService {
   
   isLoading: boolean = true;
 
-  displayPostData(): void {
+  getPostTableData(): void {
     this.isLoading = true;
 
     this.postApiService.getPosts(this.limit, this.skip)
       .pipe(
         tap((postResponse: IPostResponse) => {
           this.isLoading = false;
-          this.responsePost = postResponse;
-          this.postsSubject.next(this.responsePost.posts);
-          this.totalRecordsSubject.next(this.responsePost.total);
-          takeUntil(this.postsSubject);
+          this.postsSubject.next(postResponse.posts);
+          this.totalRecordsSubject.next(postResponse.total);
+        }),
+        catchError((error: string) => {
+          throwError(() => new Error(`Ошибка при получений данных: ${ error }`))
+          return of([]);
         })
       ).subscribe();
   }
 
-  pageChange(event: TablePageEvent): void {
+  changePostsPage(event: TablePageEvent): void {
     this.limit = event.rows;
     this.skip = event.first;
-    this.displayPostData();
+    this.getPostTableData();
   }
   
   deletePost(currentPost: IPost): Observable<IPost[]> {
@@ -62,35 +63,45 @@ export class PostService {
           this.totalRecordsSubject.next(--totalRecords);
           this.selectedPost = null;
         }),
+        catchError((error: string) => {
+          throwError(() => new Error(`Ошибка при удалений: ${ error }`))
+          return of([]);
+        })
       );
   }
 
   editPost(postId: number, postForm: IPost): Observable<IPost[]> {
     return this.postApiService.updatePosts({ ...postForm, id: postId }).pipe(
       map(() => this.postsSubject.value.map((post: IPost) => {
-        return postForm.id === post.id 
-          ? { ...post, 
-              title: postForm.title, 
-              tags: postForm.tags, 
-              views: postForm.views 
-            }
-          : post;
+        if (postId === post.id) {
+          return { ...post, title: postForm.title, tags: postForm.tags, views: postForm.views }
+        } else {
+          return post;
+        } 
       })),
+      catchError((error: string) => {
+        throwError(() => new Error(`Ошибка при редактирований: ${ error }`))
+        return of([]);
+      }),
       tap((posts: IPost[]) => this.postsSubject.next(posts))
     );
   }
 
-  createPost(currentPost: IPost) {
-    return this.postApiService.setPost(currentPost).pipe(
+  createPost(currentPost: IPost): Observable<Observable<IPost[]> | never[]> {
+    return this.postApiService.createPost(currentPost).pipe(
       map(() => this.postsSubject.pipe(
         tap((posts: IPost[]) => {
           this.postsSubject.next([currentPost, ...posts]);
         })
       )),
+      catchError((error: string) => {
+        throwError(() => new Error(`Ошибка при добавлений: ${ error }`))
+        return of([]);
+      })
     );
   }
 
-  postPageRedirect(post: IPost): void {
+  redirectToPostsPage(post: IPost): void {
     this.router.navigate([`/posts/${ post.id.toString() }`]);
   }
 

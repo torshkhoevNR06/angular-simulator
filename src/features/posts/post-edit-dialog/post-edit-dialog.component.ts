@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IPost } from '../IPost';
 import { MessageService } from '../../../services/message.service';
 import { LoaderService } from '../../../services/loader.service';
-import { delay, tap } from 'rxjs';
+import { catchError, delay, of, tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -31,20 +31,24 @@ export class PostEditDialogComponent {
 
   editPostForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
-    tags: [[''], Validators.required],
+    tags: [[], Validators.required],
     views: ['', Validators.required]
   });
 
   onEditPost(): void {
-    this.loaderService.showLoader();
-    this.postService.editPost(this.postId, this.editPostForm.value).pipe(
-      delay(1500),
-      tap(() => {
-        this.loaderService.hideLoader();
-        this.closeModal();
-        this.messageService.showInfo('Пост изменён');
-      })
-    ).subscribe();
+    if (this.editPostForm.valid) {
+      this.loaderService.showLoader();
+      this.postService.editPost(this.postId, this.editPostForm.value).pipe(
+        delay(1500),
+        tap(() => {
+          this.loaderService.hideLoader();
+          this.closeModal();
+          this.messageService.showInfo('Пост изменён');
+        })
+      ).subscribe();
+    } else {
+      this.messageService.showError('Форма не валидна');
+    }
   }
 
   closeModal(): void {

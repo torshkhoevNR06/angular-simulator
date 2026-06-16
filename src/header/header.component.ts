@@ -38,9 +38,9 @@ export class HeaderComponent {
   faSun: IconDefinition = faSun;
 
   pages: INavigation[] = [
-    { id: 1, page: "Главная", path: "" },
-    { id: 2, page: "Пользователи", path: "users" },
-    { id: 3, page: "Посты", path: "posts" }
+    { page: "Главная", path: "" },
+    { page: "Пользователи", path: "users" },
+    { page: "Посты", path: "posts" }
   ];
 
   constructor() {

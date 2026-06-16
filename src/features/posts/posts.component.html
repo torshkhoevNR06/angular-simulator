@@ -21,7 +21,7 @@
     [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem', 'padding': '20px 20px 0px 20px' }"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    (onPage)="postService.pageChange($event)"
+    (onPage)="postService.changePostsPage($event)"
     [rowsPerPageOptions]="[10, 25, 50]"
   >
     <ng-template #header>
@@ -32,7 +32,7 @@
       </tr>
     </ng-template>
     <ng-template #body let-post>
-      <tr [pContextMenuRow]="post" (dblclick)="postService.postPageRedirect(post)">
+      <tr [pContextMenuRow]="post" (dblclick)="postService.redirectToPostsPage(post)">
         @if (postService.isLoading) {
           <td><p-skeleton /></td>
           <td><p-skeleton /></td>

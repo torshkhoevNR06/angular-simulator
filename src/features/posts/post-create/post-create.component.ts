@@ -20,10 +20,9 @@ export class PostCreateComponent {
   postService: PostService = inject(PostService);
 
   createPostForm: FormGroup = this.fb.group({
-    id: [Date.now(), Validators.required],
     title: ['', Validators.required],
     body: ['', Validators.required],
-    tags: [[''], Validators.required],
+    tags: [[], Validators.required],
     reactions: this.fb.group({
       likes: [null, Validators.required],
       dislikes: [null, Validators.required]

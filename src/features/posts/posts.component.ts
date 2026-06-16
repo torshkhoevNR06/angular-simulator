@@ -40,7 +40,7 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
-    this.postService.displayPostData();
+    this.postService.getPostTableData();
     
     this.menuItems = [
       { 
@@ -73,7 +73,7 @@ export class PostsComponent implements OnInit {
 
   onViewPost(currentPost: IPost): void {
     this.messageService.showInfo('Пост выбран');
-    this.postService.postPageRedirect(currentPost);
+    this.postService.redirectToPostsPage(currentPost);
   }
   
   onDeletePost(currentPost: IPost): void {

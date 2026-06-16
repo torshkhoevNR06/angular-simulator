@@ -10,25 +10,26 @@ import { Observable } from 'rxjs';
 export class PostApiService {
   
   http: HttpClient = inject(HttpClient);
+  apiUrl: string = 'https://dummyjson.com/posts';
 
-  setPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>('https://dummyjson.com/posts/add', post);
+  createPost(post: IPost): Observable<IPost> {
+    return this.http.post<IPost>(`${ this.apiUrl }/add`, post);
   }
 
   getPosts(limit: number, skip: number): Observable<IPostResponse> {
-    return this.http.get<IPostResponse>(`https://dummyjson.com/posts?limit=${ limit }&skip=${ skip }`);
+    return this.http.get<IPostResponse>(`${ this.apiUrl }?limit=${ limit }&skip=${ skip }`);
   }
 
   getPostById(postId: string | null): Observable<IPost> {
-    return this.http.get<IPost>(`https://dummyjson.com/posts/${ postId }`);
+    return this.http.get<IPost>(`${ this.apiUrl }/${ postId }`);
   }
 
-  updatePosts(post: IPost) {
-    return this.http.patch<IPost>(`https://dummyjson.com/posts/${ post.id }`, post);
+  updatePosts(post: IPost): Observable<IPost> {
+    return this.http.patch<IPost>(`${ this.apiUrl }/${ post.id }`, post);
   }
    
   deletePost(post: IPost): Observable<IPost> {
-    return this.http.delete<IPost>(`https://dummyjson.com/posts/${ post.id }`);
+    return this.http.delete<IPost>(`${ this.apiUrl }/${ post.id }`);
   }
 
 }

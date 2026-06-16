@@ -7,13 +7,12 @@
           <span class="company-name">{{ companyName }}</span>
         </div>
         <nav class="header__nav">
-          @for (page of pages; track page.id) {
+          @for (page of pages; track $index) {
             <a 
               [routerLink]="page.path" 
               [routerLinkActive]="'active'" 
               [routerLinkActiveOptions]="{ exact: true }"
               class="link" 
-              [id]="page.id"
             >
               {{ page.page }}
             </a>
