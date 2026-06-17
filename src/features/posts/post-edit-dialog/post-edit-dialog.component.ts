@@ -39,7 +39,6 @@ export class PostEditDialogComponent {
     if (this.editPostForm.valid) {
       this.loaderService.showLoader();
       this.postService.editPost(this.postId, this.editPostForm.value).pipe(
-        delay(1500),
         tap(() => {
           this.loaderService.hideLoader();
           this.closeModal();

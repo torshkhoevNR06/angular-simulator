@@ -40,7 +40,7 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
-    this.postService.getPostTableData();
+    this.postService.initPostsData();
     
     this.menuItems = [
       { 
@@ -56,12 +56,12 @@ export class PostsComponent implements OnInit {
       { 
         label: 'Editing', 
         icon: 'pi pi-fw pi-pencil', 
-        command: () => this.onEditPost(this.postService.selectedPost!) 
+        command: () => this.showPostEditingModal(this.postService.selectedPost!) 
       }
     ];
   }
 
-  showModal(currentPost: IPost): void {
+  showPostEditingModal(currentPost: IPost): void {
     this.ref = this.dialogService.open(PostEditDialogComponent, {
       data: currentPost,
       header: 'Post List',
@@ -73,23 +73,18 @@ export class PostsComponent implements OnInit {
 
   onViewPost(currentPost: IPost): void {
     this.messageService.showInfo('Пост выбран');
-    this.postService.redirectToPostsPage(currentPost);
+    this.postService.redirectToPostPage(currentPost);
   }
   
   onDeletePost(currentPost: IPost): void {
     this.loaderService.showLoader();
     
     this.postService.deletePost(currentPost).pipe(
-      delay(2000),
       tap(() => {
         this.loaderService.hideLoader();
         this.messageService.showInfo("Пост удалён");
       })
     ).subscribe();
-  }
-
-  onEditPost(currentPost: IPost): void {
-    this.showModal(currentPost);
   }
   
 }

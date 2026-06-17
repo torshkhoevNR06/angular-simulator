@@ -24,7 +24,7 @@ export class PostApiService {
     return this.http.get<IPost>(`${ this.apiUrl }/${ postId }`);
   }
 
-  updatePosts(post: IPost): Observable<IPost> {
+  updatePost(post: IPost): Observable<IPost> {
     return this.http.patch<IPost>(`${ this.apiUrl }/${ post.id }`, post);
   }
    

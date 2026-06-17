@@ -5,6 +5,7 @@ import { IPostResponse } from './IPostResponse';
 import { TablePageEvent } from 'primeng/table';
 import { BehaviorSubject, map, tap, Observable, takeUntil, catchError, throwError, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { MessageService } from '../../services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class PostService {
   
   private postApiService: PostApiService = inject(PostApiService);
+  private messageService: MessageService = inject(MessageService);
   private router: Router = inject(Router);
 
   private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
@@ -27,7 +29,7 @@ export class PostService {
   
   isLoading: boolean = true;
 
-  getPostTableData(): void {
+  initPostsData(): void {
     this.isLoading = true;
 
     this.postApiService.getPosts(this.limit, this.skip)
@@ -38,16 +40,17 @@ export class PostService {
           this.totalRecordsSubject.next(postResponse.total);
         }),
         catchError((error: string) => {
-          throwError(() => new Error(`Ошибка при получений данных: ${ error }`))
+          this.messageService.showError(`Ошибка при получений данных: ${ error }`);
+          throwError(() => new Error(`Ошибка: ${ error }`))
           return of([]);
         })
       ).subscribe();
   }
 
-  changePostsPage(event: TablePageEvent): void {
+  changePagination(event: TablePageEvent): void {
     this.limit = event.rows;
     this.skip = event.first;
-    this.getPostTableData();
+    this.initPostsData();
   }
   
   deletePost(currentPost: IPost): Observable<IPost[]> {
@@ -64,14 +67,15 @@ export class PostService {
           this.selectedPost = null;
         }),
         catchError((error: string) => {
-          throwError(() => new Error(`Ошибка при удалений: ${ error }`))
+          this.messageService.showError(`Ошибка при удалений: ${ error }`);
+          throwError(() => new Error(`Ошибка: ${ error }`))
           return of([]);
         })
       );
   }
 
   editPost(postId: number, postForm: IPost): Observable<IPost[]> {
-    return this.postApiService.updatePosts({ ...postForm, id: postId }).pipe(
+    return this.postApiService.updatePost({ ...postForm, id: postId }).pipe(
       map(() => this.postsSubject.value.map((post: IPost) => {
         if (postId === post.id) {
           return { ...post, title: postForm.title, tags: postForm.tags, views: postForm.views }
@@ -80,28 +84,29 @@ export class PostService {
         } 
       })),
       catchError((error: string) => {
-        throwError(() => new Error(`Ошибка при редактирований: ${ error }`))
+        this.messageService.showError(`Ошибка при редактирований: ${ error }`);
+        throwError(() => new Error(`Ошибка: ${ error }`))
         return of([]);
       }),
       tap((posts: IPost[]) => this.postsSubject.next(posts))
     );
   }
 
-  createPost(currentPost: IPost): Observable<Observable<IPost[]> | never[]> {
+  createPost(currentPost: IPost): Observable<IPost | never[]> {
     return this.postApiService.createPost(currentPost).pipe(
-      map(() => this.postsSubject.pipe(
-        tap((posts: IPost[]) => {
-          this.postsSubject.next([currentPost, ...posts]);
-        })
-      )),
+      tap((post: IPost) => {
+        const posts: IPost[] = this.postsSubject.value;
+        return this.postsSubject.next([post, ...posts]);
+      }),
       catchError((error: string) => {
-        throwError(() => new Error(`Ошибка при добавлений: ${ error }`))
+        this.messageService.showError(`Ошибка при добавлений: ${ error }`);
+        throwError(() => new Error(`Ошибка: ${ error }`))
         return of([]);
       })
     );
   }
 
-  redirectToPostsPage(post: IPost): void {
+  redirectToPostPage(post: IPost): void {
     this.router.navigate([`/posts/${ post.id.toString() }`]);
   }
 
