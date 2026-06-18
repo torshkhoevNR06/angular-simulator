@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MessageService } from '../../../services/message.service';
 import { PostService } from '../post.service';
 import { catchError, of, tap, throwError } from 'rxjs';
+import type { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-create',
@@ -43,7 +44,7 @@ export class PostCreateComponent {
           this.messageService.showInfo('Новый пост создан');
           this.createPostForm.reset();
         }),
-        catchError((error: string) => {
+        catchError((error: HttpErrorResponse) => {
           this.messageService.showError(`Ошибка при созданий: ${ error }`);
           return throwError(() => error);
         })

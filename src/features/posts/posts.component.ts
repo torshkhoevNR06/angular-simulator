@@ -16,6 +16,7 @@ import { AsyncPipe } from '@angular/common';
 import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
+import type { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -47,7 +48,7 @@ export class PostsComponent implements OnInit {
         this.isLoading = false;
         this.messageService.showInfo('Посты загружены');
       }),
-      catchError((error: string) => {
+      catchError((error: HttpErrorResponse) => {
         this.messageService.showError(`Ошибка при загрузке: ${ error }`);
         return throwError(() => error);
       })
@@ -80,7 +81,7 @@ export class PostsComponent implements OnInit {
         this.messageService.showInfo('Страница сменена');
         this.isLoading = false;
       }),
-      catchError((error: string) => {
+      catchError((error: HttpErrorResponse) => {
         this.messageService.showError(`Ошибка при смене страницы: ${ error }`);
         return throwError(() => error);
       }),
@@ -111,7 +112,7 @@ export class PostsComponent implements OnInit {
         this.loaderService.hideLoader();
         this.messageService.showInfo("Пост удалён");
       }),
-      catchError((error: string) => {
+      catchError((error: HttpErrorResponse) => {
         this.messageService.showError(`Ошибка при удалений: ${ error }`);
         return throwError(() => error);
       })

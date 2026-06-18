@@ -10,6 +10,7 @@ import { IPost } from '../IPost';
 import { MessageService } from '../../../services/message.service';
 import { LoaderService } from '../../../services/loader.service';
 import { catchError, tap, throwError } from 'rxjs';
+import type { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -48,7 +49,7 @@ export class PostEditDialogComponent {
           this.closeModal();
           this.messageService.showInfo('Пост изменён');
         }),
-        catchError((error: string) => {
+        catchError((error: HttpErrorResponse) => {
           this.messageService.showError(`Ошибка при изменений: ${ error }`);
           return throwError(() => error);
         })
