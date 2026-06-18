@@ -33,7 +33,7 @@ export class PostCreateComponent {
   })
 
   onCreatePost(): void {
-    const tags: string = this.createPostForm.get('tags')!.value
+    const tags: string[] = this.createPostForm.get('tags')!.value
       .split(',').map((str: string) => str.trim())
       .filter((str: string) => str  !== '');
 
