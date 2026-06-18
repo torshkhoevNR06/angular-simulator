@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IPost } from '../IPost';
 import { MessageService } from '../../../services/message.service';
 import { LoaderService } from '../../../services/loader.service';
-import { catchError, delay, of, tap, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -36,13 +36,21 @@ export class PostEditDialogComponent {
   });
 
   onEditPost(): void {
+    const tags: string = this.editPostForm.get('tags')!.value
+      .split(',').map((str: string) => str.trim())
+      .filter((str: string) => str  !== '');
+
     if (this.editPostForm.valid) {
       this.loaderService.showLoader();
-      this.postService.editPost(this.postId, this.editPostForm.value).pipe(
+      this.postService.editPost(this.postId, { ...this.editPostForm.value, tags: tags }).pipe(
         tap(() => {
           this.loaderService.hideLoader();
           this.closeModal();
           this.messageService.showInfo('Пост изменён');
+        }),
+        catchError((error: string) => {
+          this.messageService.showError(`Ошибка при изменений: ${ error }`);
+          return throwError(() => error);
         })
       ).subscribe();
     } else {

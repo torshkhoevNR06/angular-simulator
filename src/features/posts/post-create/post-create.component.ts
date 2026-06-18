@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { MessageService } from '../../../services/message.service';
 import { PostService } from '../post.service';
-import { tap } from 'rxjs';
+import { catchError, of, tap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-post-create',
@@ -16,8 +16,8 @@ export class PostCreateComponent {
   private fb: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
 
-  messageService: MessageService = inject(MessageService);
-  postService: PostService = inject(PostService);
+  private messageService: MessageService = inject(MessageService);
+  private postService: PostService = inject(PostService);
 
   createPostForm: FormGroup = this.fb.group({
     title: ['', Validators.required],
@@ -32,12 +32,20 @@ export class PostCreateComponent {
   })
 
   onCreatePost(): void {
+    const tags: string = this.createPostForm.get('tags')!.value
+      .split(',').map((str: string) => str.trim())
+      .filter((str: string) => str  !== '');
+
     if (this.createPostForm.valid) {
-      this.postService.createPost(this.createPostForm.value).pipe(
+      this.postService.createPost({...this.createPostForm.value, tags: tags }).pipe(
         tap(() => {
           this.router.navigate([`/posts`]);
           this.messageService.showInfo('Новый пост создан');
           this.createPostForm.reset();
+        }),
+        catchError((error: string) => {
+          this.messageService.showError(`Ошибка при созданий: ${ error }`);
+          return throwError(() => error);
         })
       ).subscribe();
     } else {

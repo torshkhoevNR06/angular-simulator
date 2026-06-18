@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { TableModule } from 'primeng/table';
+import { TableModule, type TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ToastModule } from 'primeng/toast';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -13,7 +13,7 @@ import { IPost } from './IPost';
 import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
 import { MenuItem } from 'primeng/api';
 import { AsyncPipe } from '@angular/common';
-import { delay, Observable, tap } from 'rxjs';
+import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 
@@ -32,6 +32,8 @@ export class PostsComponent implements OnInit {
   postService: PostService = inject(PostService);
 
   private ref!: DynamicDialogRef | null;
+
+  isLoading: boolean = true;
   
   posts$: Observable<IPost[]> = this.postService.posts$;
   totalRecords$: Observable<number> = this.postService.totalRecords$;
@@ -40,7 +42,16 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
-    this.postService.initPostsData();
+    this.postService.getInitPosts().pipe(
+      tap(() => {
+        this.isLoading = false;
+        this.messageService.showInfo('Посты загружены');
+      }),
+      catchError((error: string) => {
+        this.messageService.showError(`Ошибка при загрузке: ${ error }`);
+        return throwError(() => error);
+      })
+    ).subscribe();
     
     this.menuItems = [
       { 
@@ -59,6 +70,22 @@ export class PostsComponent implements OnInit {
         command: () => this.showPostEditingModal(this.postService.selectedPost!) 
       }
     ];
+  }
+
+  onPageChange(event: TablePageEvent): void {
+    this.isLoading = true;
+
+    this.postService.updatePostPage(event).pipe(
+      tap(() => {
+        this.messageService.showInfo('Страница сменена');
+        this.isLoading = false;
+      }),
+      catchError((error: string) => {
+        this.messageService.showError(`Ошибка при смене страницы: ${ error }`);
+        return throwError(() => error);
+      }),
+      finalize(() => this.isLoading = false)
+    ).subscribe();
   }
 
   showPostEditingModal(currentPost: IPost): void {
@@ -83,6 +110,10 @@ export class PostsComponent implements OnInit {
       tap(() => {
         this.loaderService.hideLoader();
         this.messageService.showInfo("Пост удалён");
+      }),
+      catchError((error: string) => {
+        this.messageService.showError(`Ошибка при удалений: ${ error }`);
+        return throwError(() => error);
       })
     ).subscribe();
   }
