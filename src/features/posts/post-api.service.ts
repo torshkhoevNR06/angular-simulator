@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class PostApiService {
   
-  http: HttpClient = inject(HttpClient);
-  apiUrl: string = 'https://dummyjson.com/posts';
+  private http: HttpClient = inject(HttpClient);
+  private apiUrl: string = 'https://dummyjson.com/posts';
 
   createPost(post: IPost): Observable<IPost> {
     return this.http.post<IPost>(`${ this.apiUrl }/add`, post);

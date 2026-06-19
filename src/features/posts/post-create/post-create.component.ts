@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { MessageService } from '../../../services/message.service';
 import { PostService } from '../post.service';
-import { catchError, of, tap, throwError } from 'rxjs';
-import type { HttpErrorResponse } from '@angular/common/http';
+import { catchError, tap, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-create',

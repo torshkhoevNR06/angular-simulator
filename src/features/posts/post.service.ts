@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { PostApiService } from './post-api.service';
 import { IPost } from './IPost';
 import { IPostResponse } from './IPostResponse';
-import { TablePageEvent } from 'primeng/table';
 import { BehaviorSubject, map, tap, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -21,18 +20,13 @@ export class PostService {
   totalRecords$: Observable<number> = this.totalRecordsSubject.asObservable();
   
   selectedPost: IPost | null = null;
-  
-  limit: number = 10;
-  skip: number = 0;
 
-  initPosts(limit: number, skip: number): Observable<IPostResponse> {
-    return this.postApiService.getPosts(limit, skip)
+  initPosts(limit?: number, skip?: number): Observable<IPostResponse> {
+    return this.postApiService.getPosts(limit!, skip!)
       .pipe(
         tap((postResponse: IPostResponse) => {
           this.postsSubject.next(postResponse.posts);
           this.totalRecordsSubject.next(postResponse.total);
-          this.limit = limit;
-          this.skip = skip;
         })
       )
   }

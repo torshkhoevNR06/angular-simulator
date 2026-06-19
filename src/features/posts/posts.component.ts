@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { TableModule, type TablePageEvent } from 'primeng/table';
+import { TableModule, TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ToastModule } from 'primeng/toast';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -16,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
 import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
-import type { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -34,6 +34,9 @@ export class PostsComponent implements OnInit {
 
   private ref!: DynamicDialogRef | null;
 
+  limit: number = 10;
+  skip: number = 0;
+
   isLoading: boolean = true;
   
   posts$: Observable<IPost[]> = this.postService.posts$;
@@ -43,7 +46,7 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
-    this.postService.initPosts(this.postService.limit, this.postService.skip).pipe(
+    this.postService.initPosts(this.limit, this.skip).pipe(
       tap(() => {
         this.isLoading = false;
         this.messageService.showInfo('Посты загружены');
@@ -80,6 +83,8 @@ export class PostsComponent implements OnInit {
       tap(() => {
         this.messageService.showInfo('Страница сменена');
         this.isLoading = false;
+        this.limit = event.rows;
+        this.skip = event.first;
       }),
       catchError((error: HttpErrorResponse) => {
         this.messageService.showError(`Ошибка при смене страницы: ${ error }`);
