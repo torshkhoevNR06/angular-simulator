@@ -43,7 +43,7 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
-    this.postService.getInitPosts().pipe(
+    this.postService.initPosts(this.postService.limit, this.postService.skip).pipe(
       tap(() => {
         this.isLoading = false;
         this.messageService.showInfo('Посты загружены');
@@ -76,7 +76,7 @@ export class PostsComponent implements OnInit {
   onPageChange(event: TablePageEvent): void {
     this.isLoading = true;
 
-    this.postService.updatePostPage(event).pipe(
+    this.postService.initPosts(event.rows, event.first).pipe(
       tap(() => {
         this.messageService.showInfo('Страница сменена');
         this.isLoading = false;

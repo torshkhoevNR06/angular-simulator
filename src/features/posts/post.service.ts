@@ -25,20 +25,16 @@ export class PostService {
   limit: number = 10;
   skip: number = 0;
 
-  getInitPosts(): Observable<IPostResponse> {
-    return this.postApiService.getPosts(this.limit, this.skip)
+  initPosts(limit: number, skip: number): Observable<IPostResponse> {
+    return this.postApiService.getPosts(limit, skip)
       .pipe(
         tap((postResponse: IPostResponse) => {
           this.postsSubject.next(postResponse.posts);
           this.totalRecordsSubject.next(postResponse.total);
+          this.limit = limit;
+          this.skip = skip;
         })
       )
-  }
-
-  updatePostPage(event: TablePageEvent): Observable<IPostResponse> {
-    this.limit = event.rows;
-    this.skip = event.first;
-    return this.getInitPosts();
   }
   
   deletePost(currentPost: IPost): Observable<IPost[]> {
