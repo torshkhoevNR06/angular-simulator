@@ -1,0 +1,133 @@
+.post {
+  max-width: 700px;
+  margin: 40px auto 140px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #12111a;
+  border: 1px solid #2e2b45;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.post__id {
+  font-size: 12px;
+  color: #555270;
+  margin-bottom: 10px;
+}
+
+.post__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #b388ff;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.post__body {
+  font-size: 15px;
+  color: #c0bcd6;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.post__tags {
+  display: inline-block;
+  font-size: 12px;
+  color: #b388ff;
+  background: #1e1b30;
+  border: 1px solid #3d3660;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.post__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.post__stat {
+  padding: 16px;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(179, 136, 255, 0.12), rgba(179, 136, 255, 0.04)),
+    #171522;
+  border: 1px solid #312c4a;
+}
+
+.post__stat-value {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.post__stat-label {
+  display: block;
+  color: #9c96ba;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.post__actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #2e2b45;
+}
+
+.post__back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background-color: #231f36;
+  border: 1px solid #4a3f72;
+  color: #d8c7ff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.post__back-link:hover,
+.post__back-link:focus-visible {
+  background-color: #2d2745;
+  border-color: #b388ff;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.post__back-link:focus-visible {
+  outline: 2px solid rgba(179, 136, 255, 0.45);
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .post {
+    margin: 24px 16px 96px;
+    padding: 24px;
+  }
+
+  .post__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .post__back-link {
+    justify-content: center;
+    width: 100%;
+  }
+}

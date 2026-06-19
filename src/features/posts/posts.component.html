@@ -1,0 +1,57 @@
+<div class="posts">
+  <h1 class="posts__title title">Таблица постов</h1>
+  <a class="posts__create-link" routerLink="/posts/create">
+    <span class="posts__create-link-icon" aria-hidden="true">+</span>
+    <span>Создать пост</span>
+  </a>
+</div>
+
+<div class="card">
+  <p-contextmenu #cm [model]="menuItems" (onHide)="postService.selectedPost = null" />
+  <p-table
+    [value]="(posts$ | async) ?? skeletonRows"
+    [totalRecords]="(totalRecords$ | async)!" 
+    [(contextMenuSelection)]="postService.selectedPost"
+    [contextMenu]="cm"
+    dataKey="id"
+    [lazy]="true"
+    [paginator]="true"
+    [first]="skip"
+    [rows]="limit"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem', 'padding': '20px 20px 0px 20px' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    (onPage)="onPageChange($event)"
+    [rowsPerPageOptions]="[10, 25, 50]"
+  >
+    <ng-template #header>
+      <tr>
+        <th style="text-align: left; width:25%">Title</th>
+        <th style="text-align: center; width:30%">Tags</th>
+        <th style="text-align: right; width:25%">Views</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-post>
+      <tr [pContextMenuRow]="post" (dblclick)="postService.redirectToPostPage(post)">
+        @if (isLoading) {
+          <td><p-skeleton /></td>
+          <td><p-skeleton /></td>
+          <td><p-skeleton /></td>
+        } @else {
+          <td style="text-align: left;">{{ post.title }}</td>
+          <td style="text-align: center;">{{ post.tags }}</td>
+          <td style="text-align: right;">{{ post.views }}</td>
+        }
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      @for (post of skeletonRows; track $index) {
+        <tr>
+          <td><p-skeleton /></td>
+          <td><p-skeleton /></td>
+          <td><p-skeleton /></td>
+        </tr>
+      }
+    </ng-template>
+  </p-table>
+</div>

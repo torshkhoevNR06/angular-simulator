@@ -22,7 +22,7 @@ export class UsersPageComponent implements OnInit {
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
 
-  usersCount: number = 0;
+  usersCount!: number;
 
   filteredUsers$: Observable<IUser[]> = combineLatest([
     this.users$, 
@@ -32,7 +32,9 @@ export class UsersPageComponent implements OnInit {
       return users.filter((user: IUser) => 
         user.name.trim().toLowerCase().includes(name))
     }),
-    tap((users: IUser[]) => this.usersCount = users.length)
+    tap((users: IUser[]) => setTimeout(() => {
+      this.usersCount = users.length;
+    }))
   );
     
   ngOnInit(): void {

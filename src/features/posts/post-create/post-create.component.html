@@ -1,0 +1,90 @@
+<form [formGroup]="createPostForm" class="post-create">
+  <div class="post-create__header">
+    <p class="post-create__label">Новый пост</p>
+    <h1 class="post-create__title">Создание записи</h1>
+  </div>
+  <div class="post-create__fields">
+    <div class="post-create__field">
+      <label for="title">Заголовок*</label>
+      <input 
+        formControlName="title" 
+        class="post-create__input" 
+        id="title" 
+        type="text"
+        placeholder="Введите заголовок..." 
+      />
+    </div>
+    <div class="post-create__field post-create__field--wide">
+      <label for="body">Текст*</label>
+      <input 
+        formControlName="body" 
+        class="post-create__input" 
+        id="body" 
+        type="text"
+        placeholder="Введите текст поста..." 
+      />
+    </div>
+    <div class="post-create__field">
+      <label for="tags">Теги* <span>через запятую</span></label>
+      <input 
+        formControlName="tags" 
+        class="post-create__input" 
+        id="tags" 
+        type="text"
+        placeholder="history, crime, american" 
+      />
+    </div>
+  </div>
+  <div formGroupName="reactions" class="post-create__stats post-create__stats--two">
+    <div class="post-create__stat">
+      <label for="likes">Лайков*</label>
+      <input 
+        formControlName="likes" 
+        class="post-create__input post-create__input--stat" 
+        id="likes" 
+        type="number"
+        placeholder="0" 
+        min="0" 
+      />
+    </div>
+    <div class="post-create__stat">
+      <label for="dislikes">Дизлайков*</label>
+      <input 
+        formControlName="dislikes" 
+        class="post-create__input post-create__input--stat" 
+        id="dislikes" 
+        type="number"
+        placeholder="0" 
+        min="0" 
+      />
+    </div>
+  </div>
+  <div class="post-create__stats post-create__stats--two">
+    <div class="post-create__stat">
+      <label for="views">Просмотров*</label>
+      <input 
+        formControlName="views" 
+        class="post-create__input post-create__input--stat" 
+        id="views" 
+        type="number"
+        placeholder="0" 
+        min="0" 
+      />
+    </div>
+    <div class="post-create__stat">
+      <label for="userId">Автор*</label>
+      <input 
+        formControlName="userId" 
+        class="post-create__input post-create__input--stat" 
+        id="userId" 
+        type="number"
+        placeholder="0" 
+        min="0" 
+      />
+    </div>
+  </div>
+  <div class="post-create__actions">
+    <a class="post-create__back" routerLink="/posts">Вернуться к таблице</a>
+    <button class="post-create__submit" type="button" (click)="onCreatePost()">Сохранить</button>
+  </div>
+</form>

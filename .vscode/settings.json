@@ -1,4 +1,6 @@
 {
+  "editor.inlayHints.enabled": false,
+  "editor.inlineSuggest.enabled": false,
   "cSpell.words": [
     "гггг",
     "дизейблится",
@@ -11,7 +13,10 @@
     "Сount",
     "юзернейм",
     "consectetur",
+    "dynamicdialog",
+    "emptymessage",
     "fontawesome",
+    "inputtext",
     "primeuix",
     "selectbutton",
     "toggleswitch"
