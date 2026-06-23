@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IAuth } from './IAuth';
 import { Observable } from 'rxjs';
+import type { ITokenResponse } from './ITokenResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +16,12 @@ export class AuthApiService {
     return this.http.post<IAuth>(`${ this.apiUrl }/login`, auth);
   }
 
-  getMe(): Observable<IAuth> {
-    return this.http.get<IAuth>(`${ this.apiUrl }/me`);
+  getMe(): Observable<ITokenResponse> {
+    return this.http.get<ITokenResponse>(`${ this.apiUrl }/me`);
   }
 
-  getRefreshToken(auth: IAuth): Observable<IAuth> {
-    return this.http.post<IAuth>(`${ this.apiUrl }/refresh`, {
+  getRefreshToken(auth: ITokenResponse): Observable<ITokenResponse> {
+    return this.http.post<ITokenResponse>(`${ this.apiUrl }/refresh`, {
       refreshToken: `${ auth.refreshToken }`
     });
   }

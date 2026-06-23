@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { catchError, finalize, switchMap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { IAuth } from './IAuth';
+import type { ITokenResponse } from './ITokenResponse';
 
 let isRefreshing: boolean = false;
 
@@ -40,7 +41,7 @@ const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, 
     
     return authService.authRefreshToken()
       .pipe(
-        switchMap((auth: IAuth) => {
+        switchMap((auth: ITokenResponse) => {
           isRefreshing = false;
           return next(addToken(req, auth.accessToken));
         }),

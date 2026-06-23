@@ -1,11 +1,6 @@
-export interface IAuth {
-  id: number;
+import type { ITokenResponse } from "./ITokenResponse";
+
+export interface IAuth extends ITokenResponse {
   username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  image: string;
-  accessToken: string;
-  refreshToken: string;
+  password: string;
 }

@@ -7,6 +7,7 @@ import { MessageService } from '../../services/message.service';
 import { LoaderService } from '../../services/loader.service';
 import { IAuth } from './IAuth';
 import { HttpErrorResponse } from '@angular/common/http';
+import type { ITokenResponse } from './ITokenResponse';
 
 @Component({
   selector: 'app-auth',

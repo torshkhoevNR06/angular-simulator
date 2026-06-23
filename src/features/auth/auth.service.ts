@@ -4,6 +4,7 @@ import { IAuth } from './IAuth';
 import { Observable, tap } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
+import type { ITokenResponse } from './ITokenResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -14,25 +15,25 @@ export class AuthService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   private router: Router = inject(Router);
 
-  apiUserData!: IAuth | null;
+  tokenResponse!: ITokenResponse | null;
   accessToken!: string | null;
   refreshToken!: string | null;
   
   authorizeUser(userForm: IAuth): Observable<IAuth> {
     return this.authApiService.getUser(userForm).pipe(
-      tap((userApiData: IAuth) => this.saveTokens(userApiData))
+      tap((tokenResponse: IAuth) => this.saveTokens(tokenResponse))
     )
   }
 
-  authRefreshToken(): Observable<IAuth> {
-    return this.authApiService.getRefreshToken(this.apiUserData!).pipe(
-      tap((tokensResponse: IAuth) => this.saveTokens(tokensResponse))
+  authRefreshToken(): Observable<ITokenResponse> {
+    return this.authApiService.getRefreshToken(this.tokenResponse!).pipe(
+      tap((tokenResponse: ITokenResponse) => this.saveTokens(tokenResponse))
     )
   }
 
   isAuth(): boolean {
     if (!this.accessToken) {
-      this.apiUserData = this.localStorageService.getItem('userApiData')!;
+      this.tokenResponse = this.localStorageService.getItem('userApiData')!;
       this.accessToken = this.localStorageService.getItem('accessToken')!;
       this.refreshToken = this.localStorageService.getItem('refreshToken')!;
     }
@@ -40,8 +41,8 @@ export class AuthService {
     return !!this.accessToken;
   }
 
-  saveTokens(userApiData: IAuth): void {
-    this.apiUserData = userApiData;
+  saveTokens(userApiData: ITokenResponse): void {
+    this.tokenResponse = userApiData;
     this.accessToken = userApiData.accessToken;
     this.refreshToken = userApiData.refreshToken;
 
@@ -54,7 +55,7 @@ export class AuthService {
     this.localStorageService.removeItem('userApiData');
     this.localStorageService.removeItem('accessToken');
     this.localStorageService.removeItem('refreshToken');
-    this.apiUserData = null;
+    this.tokenResponse = null;
     this.accessToken = null;
     this.refreshToken = null;
     this.router.navigate(['/login']);
