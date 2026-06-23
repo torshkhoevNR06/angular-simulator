@@ -4,7 +4,7 @@ import { IAuth } from './IAuth';
 import { Observable, tap } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
-import type { ITokenResponse } from './ITokenResponse';
+import { ITokenResponse } from './ITokenResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class AuthService {
 
   isAuth(): boolean {
     if (!this.accessToken) {
-      this.tokenResponse = this.localStorageService.getItem('userApiData')!;
+      this.tokenResponse = this.localStorageService.getItem('tokenResponse')!;
       this.accessToken = this.localStorageService.getItem('accessToken')!;
       this.refreshToken = this.localStorageService.getItem('refreshToken')!;
     }
@@ -41,18 +41,18 @@ export class AuthService {
     return !!this.accessToken;
   }
 
-  saveTokens(userApiData: ITokenResponse): void {
-    this.tokenResponse = userApiData;
-    this.accessToken = userApiData.accessToken;
-    this.refreshToken = userApiData.refreshToken;
+  saveTokens(tokenResponse: ITokenResponse): void {
+    this.tokenResponse = tokenResponse;
+    this.accessToken = tokenResponse.accessToken;
+    this.refreshToken = tokenResponse.refreshToken;
 
-    this.localStorageService.setItem('userApiData', userApiData);
-    this.localStorageService.setItem('accessToken', userApiData.accessToken);
-    this.localStorageService.setItem('refreshToken', userApiData.refreshToken);
+    this.localStorageService.setItem('tokenResponse', tokenResponse);
+    this.localStorageService.setItem('accessToken', tokenResponse.accessToken);
+    this.localStorageService.setItem('refreshToken', tokenResponse.refreshToken);
   }
 
   logout(): void {
-    this.localStorageService.removeItem('userApiData');
+    this.localStorageService.removeItem('tokenResponse');
     this.localStorageService.removeItem('accessToken');
     this.localStorageService.removeItem('refreshToken');
     this.tokenResponse = null;
