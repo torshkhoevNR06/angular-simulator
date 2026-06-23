@@ -10,6 +10,7 @@ import { Theme } from '../enums/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
+import { authInterceptor } from '../features/auth/auth.interceptor';
 
 const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
@@ -30,7 +31,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([loggingInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor, errorInterceptor])),
     provideZoneChangeDetection(),
     providePrimeNG({
       theme: {

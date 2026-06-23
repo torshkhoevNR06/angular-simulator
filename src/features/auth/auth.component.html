@@ -1,0 +1,42 @@
+<main class="auth">
+  <section class="auth__card">
+    <div class="auth__content">
+      <p class="auth__label">Авторизация</p>
+      <h1 class="auth__title">Вход в аккаунт</h1>
+      <form [formGroup]="authForm" class="auth__form">
+        <div class="auth__field">
+          <label for="username">Имя пользователя</label>
+          <input
+            formControlName="username" 
+            class="auth__input" 
+            [class.is-invalid]="authForm.get('username')?.invalid"
+            id="username" 
+            type="username" 
+            placeholder="Введите имя пользователя"
+          />
+          @if(authForm.get('username')?.hasError('mismatch')) {
+            <div class="error-text">
+              Значение не совпадает с данными из базы данных.
+            </div>
+          }
+        </div>
+        <div class="auth__field">
+          <label for="password">Пароль</label>
+          <input
+            formControlName="password" 
+            class="auth__input" 
+            id="password"
+            type="password" 
+            placeholder="Введите пароль"
+          />
+        </div>
+        <button (click)="onAuthForm()" class="auth__submit" type="submit">Войти</button>
+      </form>
+    </div>
+    <aside class="auth__panel">
+      <span class="auth__panel-label">IT Simulator</span>
+      <h2>Управляйте постами, пользователями и контентом в одном месте</h2>
+      <p>Тёмный интерфейс, быстрая навигация и привычная структура работы с данными.</p>
+    </aside>
+  </section>
+</main>

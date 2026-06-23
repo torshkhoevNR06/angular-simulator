@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, faAngleDown, faCalendar, IconDefinition, faShieldHalved, faPeopleGroup, faTag, faStar } from '@fortawesome/free-solid-svg-icons';
 import type { IAdvantage } from '../interfaces/IAdvantage';
+import { AuthApiService } from '../features/auth/auth-api.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,9 +12,11 @@ import type { IAdvantage } from '../interfaces/IAdvantage';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   
   messageService: MessageService = inject(MessageService);
+  authApiService = inject(AuthApiService);
+
   liveInputValue!: string;
   selectedLocation!: boolean;
   selectedDate!: boolean;
@@ -123,7 +126,11 @@ export class HomePageComponent {
     { id: 8, name: "Ольга" },
     { id: 9, name: "Андрей" },
     { id: 10, name: "Наталья" }
-  ]
+  ];
+
+  ngOnInit(): void {
+    this.authApiService.getMe().subscribe();
+  }
 
    isFormValid(): boolean {
     return this.selectedLocation && this.selectedDate && this.selectedParticipants;

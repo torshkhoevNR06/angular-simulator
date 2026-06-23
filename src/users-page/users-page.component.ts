@@ -7,6 +7,7 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
 import { PluralPipe } from '../pipes/plural.pipe'
+import { AuthApiService } from '../features/auth/auth-api.service';
 
 @Component({
   selector: 'app-users-page',
@@ -17,6 +18,7 @@ import { PluralPipe } from '../pipes/plural.pipe'
 export class UsersPageComponent implements OnInit {
 
   private messageService: MessageService = inject(MessageService);
+  private authApiService = inject(AuthApiService);
   userService: UserService = inject(UserService);
 
   private filteredSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -38,6 +40,9 @@ export class UsersPageComponent implements OnInit {
   );
     
   ngOnInit(): void {
+   
+    this.authApiService.getMe().subscribe();
+
     this.userService.loadUsers()
       .pipe(
         tap((users: IUser[]) => this.userService.setUsers(users))

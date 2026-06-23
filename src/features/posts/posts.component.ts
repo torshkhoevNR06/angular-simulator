@@ -17,6 +17,7 @@ import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthApiService } from '../auth/auth-api.service';
 
 @Component({
   selector: 'app-posts',
@@ -30,6 +31,7 @@ export class PostsComponent implements OnInit {
   private loaderService: LoaderService = inject(LoaderService);
   private messageService: MessageService = inject(MessageService);
   private dialogService: DialogService = inject(DialogService);
+  private authApiService: AuthApiService = inject(AuthApiService);
   postService: PostService = inject(PostService);
 
   private ref!: DynamicDialogRef | null;
@@ -46,6 +48,8 @@ export class PostsComponent implements OnInit {
   skeletonRows: IPost[] = Array(10).fill(0);
 
   ngOnInit(): void {
+    this.authApiService.getMe().subscribe();
+    
     this.postService.initPosts(this.limit, this.skip).pipe(
       tap(() => {
         this.isLoading = false;
