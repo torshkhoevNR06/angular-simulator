@@ -20,17 +20,13 @@ export class AuthService {
   
   authorizeUser(userForm: IAuth): Observable<IAuth> {
     return this.authApiService.getUser(userForm).pipe(
-      tap((userApiData: IAuth) => {
-        return this.saveTokens(userApiData)
-      })
+      tap((userApiData: IAuth) => this.saveTokens(userApiData))
     )
   }
 
   authRefreshToken(): Observable<IAuth> {
     return this.authApiService.getRefreshToken(this.apiUserData!).pipe(
-      tap((tokensResponse: IAuth) => {
-        return this.saveTokens(tokensResponse)
-      })
+      tap((tokensResponse: IAuth) => this.saveTokens(tokensResponse))
     )
   }
 

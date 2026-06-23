@@ -1,4 +1,4 @@
-import { Component, inject, type OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
@@ -40,7 +40,6 @@ export class UsersPageComponent implements OnInit {
   );
     
   ngOnInit(): void {
-   
     this.authApiService.getMe().subscribe();
 
     this.userService.loadUsers()
