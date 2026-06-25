@@ -12,7 +12,7 @@ export class NotFoundPageComponent {
   private authApiService: AuthApiService = inject(AuthApiService);
 
   ngOnInit(): void {
-    this.authApiService.getMe().subscribe();
+    this.authApiService.getAuthUser().subscribe();
   }
 
 }

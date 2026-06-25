@@ -5,9 +5,9 @@ import { AuthService } from './auth.service';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { MessageService } from '../../services/message.service';
 import { LoaderService } from '../../services/loader.service';
-import { IAuth } from './IAuth';
+import { ILogin } from './ILogin';
 import { HttpErrorResponse } from '@angular/common/http';
-import type { ITokenResponse } from './ITokenResponse';
+import type { IAuthUser } from './IAuthUser';
 
 @Component({
   selector: 'app-auth',
@@ -23,6 +23,7 @@ export class AuthComponent {
 
   private router: Router = inject(Router);
   private fb: FormBuilder = inject(FormBuilder);
+  private authUser$ = this.authService.authUser$;
 
   username!: string;
 
@@ -36,9 +37,11 @@ export class AuthComponent {
       const username: string = this.authForm.get('username')?.value;
       this.loaderService.showLoader();
       
-      this.authService.authorizeUser(this.authForm.value).pipe(
-        tap((userApiData: IAuth) => {
-          this.username = userApiData.username;
+      this.authService.login(this.authForm.value).pipe(
+        tap(() => {
+          this.authUser$.pipe(
+            tap((user: IAuthUser | null) => this.username = user!.username)
+          )
           this.isValidLogin(username, this.username);
           this.router.navigate(['']);
           this.messageService.showInfo('Вы авторизовались');

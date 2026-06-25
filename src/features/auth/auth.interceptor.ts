@@ -2,23 +2,22 @@ import { HttpInterceptorFn, HttpHandlerFn, HttpRequest, HttpErrorResponse } from
 import { inject } from '@angular/core';
 import { catchError, finalize, switchMap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { IAuth } from './IAuth';
-import type { ITokenResponse } from './ITokenResponse';
+import { IToken } from './IToken';
 
 let isRefreshing: boolean = false;
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService: AuthService = inject(AuthService);
 
-  if (!authService.accessToken) {
+  if (!authService.getToken()?.accessToken) {
     return next(req);
   }
 
   if (isRefreshing) {
-    return refreshAndProceed(authService, req, next); 
+    return refreshAndProceed(authService, req, next);
   }
 
-  const modifiedReq: HttpRequest<unknown> = addToken(req, authService.accessToken);
+  const modifiedReq: HttpRequest<unknown> = addToken(req, authService.getToken()?.accessToken!);
   
   return next(modifiedReq).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -41,9 +40,9 @@ const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, 
     
     return authService.authRefreshToken()
       .pipe(
-        switchMap((auth: ITokenResponse) => {
+        switchMap((tokenResponse: IToken) => {
           isRefreshing = false;
-          return next(addToken(req, auth.accessToken));
+          return next(addToken(req, tokenResponse.accessToken!));
         }),
         catchError((error: HttpErrorResponse) => {
           authService.logout();
@@ -53,7 +52,7 @@ const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, 
       );
   }
 
-  return next(addToken(req, authService.accessToken!));
+  return next(addToken(req, authService.getToken()?.accessToken!));
 }
 
 const addToken = (req: HttpRequest<unknown>, accessToken: string) => {

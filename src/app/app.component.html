@@ -1,11 +1,5 @@
 <app-loader></app-loader>
 <app-message></app-message>
 <div class="wrapper">
-  @if (showMenu) {
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-  } @else {
-    <router-outlet></router-outlet>
-  }
+  <router-outlet></router-outlet>
 </div>
