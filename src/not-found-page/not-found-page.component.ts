@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { AuthApiService } from '../features/auth/auth-api.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-not-found-page',
@@ -7,12 +6,4 @@ import { AuthApiService } from '../features/auth/auth-api.service';
   templateUrl: './not-found-page.component.html',
   styleUrl: './not-found-page.component.scss',
 })
-export class NotFoundPageComponent {
-
-  private authApiService: AuthApiService = inject(AuthApiService);
-
-  ngOnInit(): void {
-    this.authApiService.getAuthUser().subscribe();
-  }
-
-}
+export class NotFoundPageComponent {}

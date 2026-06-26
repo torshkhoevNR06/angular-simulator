@@ -20,29 +20,31 @@ export class AuthService {
   authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
 
   getToken(): IToken | null {
-    return this.localStorageService.getItem('tokenResponse');
+    return this.localStorageService.getItem('token');
   }
   
   login(loginData: ILogin): Observable<IAuthUser> {
-    return this.authApiService.getToken(loginData).pipe(
+    return this.authApiService.login(loginData).pipe(
       tap((token: IToken) => {
-        this.localStorageService.setItem('tokenResponse', {
+        this.localStorageService.setItem('token', {
           accessToken: token.accessToken, 
           refreshToken: token.refreshToken 
         });
       }),
-      concatMap(() => this.authApiService.getAuthUser().pipe(
-        tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
+      concatMap(() => this.authApiService.getUser()
+        .pipe(
+          tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
       ))
-    )
+    );
   }
 
-  authRefreshToken(): Observable<IToken> {
-    return this.authApiService.getRefreshToken(this.getToken()!).pipe(
-      tap((tokenResponse: IToken) => {
-        return this.localStorageService.setItem('tokenResponse', tokenResponse);
+  refreshToken(): Observable<IToken> {
+    return this.authApiService.refreshToken(this.getToken()!)
+      .pipe(
+        tap((token: IToken) => {
+          return this.localStorageService.setItem('token', token);
       })
-    )
+    );
   }
 
   isAuth(): boolean {
@@ -50,7 +52,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.localStorageService.removeItem('tokenResponse');
+    this.localStorageService.removeItem('token');
     this.authUserSubject.next(null);
     this.router.navigate(['/login']);
   }

@@ -9,16 +9,10 @@
           <input
             formControlName="username" 
             class="auth__input" 
-            [class.is-invalid]="authForm.get('username')?.invalid"
             id="username" 
             type="username" 
             placeholder="Введите имя пользователя"
           />
-          @if(authForm.get('username')?.hasError('mismatch')) {
-            <div class="error-text">
-              Значение не совпадает с данными из базы данных.
-            </div>
-          }
         </div>
         <div class="auth__field">
           <label for="password">Пароль</label>

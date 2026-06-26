@@ -38,11 +38,11 @@ const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, 
   if (!isRefreshing) {
     isRefreshing = true;
     
-    return authService.authRefreshToken()
+    return authService.refreshToken()
       .pipe(
-        switchMap((tokenResponse: IToken) => {
+        switchMap((token: IToken) => {
           isRefreshing = false;
-          return next(addToken(req, tokenResponse.accessToken!));
+          return next(addToken(req, token.accessToken!));
         }),
         catchError((error: HttpErrorResponse) => {
           authService.logout();

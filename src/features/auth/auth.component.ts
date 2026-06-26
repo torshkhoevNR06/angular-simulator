@@ -23,7 +23,6 @@ export class AuthComponent {
 
   private router: Router = inject(Router);
   private fb: FormBuilder = inject(FormBuilder);
-  private authUser$ = this.authService.authUser$;
 
   username!: string;
 
@@ -39,15 +38,10 @@ export class AuthComponent {
       
       this.authService.login(this.authForm.value).pipe(
         tap(() => {
-          this.authUser$.pipe(
-            tap((user: IAuthUser | null) => this.username = user!.username)
-          )
-          this.isValidLogin(username, this.username);
           this.router.navigate(['']);
           this.messageService.showInfo('Вы авторизовались');
         }),
         catchError((error: HttpErrorResponse) => {
-          this.isValidLogin(username, this.username);
           this.messageService.showError(`Ошибка ${ error.status }: Вы ввели не верный username`);
           return throwError(() => error);
         }),
@@ -55,14 +49,6 @@ export class AuthComponent {
       ).subscribe();
     } else {
       this.messageService.showError('Форма не валидна');
-    }
-  }
-
-  isValidLogin(usernameForm: string, usernameApi: string) {
-    if (usernameForm !== usernameApi) {
-      this.authForm.get('username')?.setErrors({ mismatch: true });
-    } else {
-      this.authForm.get('username')?.setErrors(null);
     }
   }
 
