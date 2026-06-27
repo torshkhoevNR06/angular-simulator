@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { BehaviorSubject, concatMap, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, concatMap, Observable, of, tap, throwError } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { ILogin } from './ILogin';
 import { IToken } from './IToken';
 import { IAuthUser } from './IAuthUser';
+import type { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,16 @@ export class AuthService {
 
   getToken(): IToken | null {
     return this.localStorageService.getItem('token');
+  }
+  
+  restoreSession(): Observable<IAuthUser | null> {
+    if (this.getToken()) {
+      return this.authApiService.getUser().pipe(
+        tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
+      );
+    }
+
+    return of(null);
   }
   
   login(loginData: ILogin): Observable<IAuthUser> {
@@ -48,7 +59,7 @@ export class AuthService {
   }
 
   isAuth(): boolean {
-    return !!this.getToken()?.accessToken;
+    return !!this.authUserSubject.value;
   }
 
   logout(): void {

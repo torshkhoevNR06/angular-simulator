@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
@@ -11,6 +11,8 @@ import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from '../features/auth/auth.interceptor';
+import { AuthService } from '../features/auth/auth.service';
+import { catchError, firstValueFrom, of } from 'rxjs';
 
 const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
@@ -38,6 +40,10 @@ export const appConfig: ApplicationConfig = {
         preset: getSavedTheme(),
         options: { darkModeSelector: '.p-dark' },
       },
-    })
+    }),
+    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreSession()
+      .pipe(
+        catchError(() => of(null))
+      )))
   ]
 };
