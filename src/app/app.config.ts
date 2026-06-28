@@ -12,7 +12,7 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from '../features/auth/auth.interceptor';
 import { AuthService } from '../features/auth/auth.service';
-import { catchError, firstValueFrom, of } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
@@ -41,9 +41,6 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: '.p-dark' },
       },
     }),
-    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreSession()
-      .pipe(
-        catchError(() => of(null))
-      )))
+    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState()))
   ]
 };

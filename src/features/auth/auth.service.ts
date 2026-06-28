@@ -1,12 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { BehaviorSubject, catchError, concatMap, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, concatMap, Observable, tap } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { ILogin } from './ILogin';
 import { IToken } from './IToken';
 import { IAuthUser } from './IAuthUser';
-import type { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -24,37 +23,41 @@ export class AuthService {
     return this.localStorageService.getItem('token');
   }
   
-  restoreSession(): Observable<IAuthUser | null> {
+  restoreAuthState(): Observable<IAuthUser | IToken> {
     if (this.getToken()) {
-      return this.authApiService.getUser().pipe(
-        tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
-      );
+      return this.authApiService.getUser()
+        .pipe(
+          tap((authUser: IAuthUser) => this.authUserSubject.next(authUser)),
+          catchError(() => this.refreshToken())
+        );  
     }
 
-    return of(null);
+    return this.refreshToken();
   }
   
   login(loginData: ILogin): Observable<IAuthUser> {
-    return this.authApiService.login(loginData).pipe(
-      tap((token: IToken) => {
-        this.localStorageService.setItem('token', {
-          accessToken: token.accessToken, 
-          refreshToken: token.refreshToken 
-        });
-      }),
-      concatMap(() => this.authApiService.getUser()
-        .pipe(
-          tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
-      ))
-    );
+    return this.authApiService.login(loginData)
+      .pipe(
+        tap((token: IToken) => {
+          this.localStorageService.setItem('token', {
+            accessToken: token.accessToken, 
+            refreshToken: token.refreshToken 
+          });
+        }),
+        concatMap(() => this.authApiService.getUser()
+          .pipe(
+            tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
+        ))
+      );
   }
 
   refreshToken(): Observable<IToken> {
     return this.authApiService.refreshToken(this.getToken()!)
       .pipe(
         tap((token: IToken) => {
+          this.restoreAuthState();
           return this.localStorageService.setItem('token', token);
-      })
+        })
     );
   }
 
