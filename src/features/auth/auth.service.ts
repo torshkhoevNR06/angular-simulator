@@ -46,7 +46,10 @@ export class AuthService {
         }),
         concatMap(() => this.authApiService.getUser()
           .pipe(
-            tap((authUser: IAuthUser) => this.authUserSubject.next(authUser))
+            tap((authUser: IAuthUser) => {
+            this.authUserSubject.next(authUser);
+            this.localStorageService.setItem('role', authUser.role);
+          })
         ))
       );
   }
@@ -65,8 +68,19 @@ export class AuthService {
     return !!this.authUserSubject.value;
   }
 
+  isAdmin(): string {
+    let role: string = this.authUserSubject.getValue()!.role;
+    
+    if (!role) {
+      role = this.localStorageService.getItem('role')!;
+    }
+
+    return role;
+  }
+
   logout(): void {
     this.localStorageService.removeItem('token');
+    this.localStorageService.removeItem('role');
     this.authUserSubject.next(null);
     this.router.navigate(['/login']);
   }
