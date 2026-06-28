@@ -33,6 +33,9 @@
             aria-labelledby="basic" 
             [allowEmpty]="false"
           />
+          <a class="header__logout" (click)="authService.logout()" aria-label="Выйти">
+            <fa-icon [icon]="faRightFromBracket" />
+          </a>
         </nav>
         <div class="header__btn">
           <button 

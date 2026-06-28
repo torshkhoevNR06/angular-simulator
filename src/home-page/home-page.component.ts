@@ -14,6 +14,7 @@ import type { IAdvantage } from '../interfaces/IAdvantage';
 export class HomePageComponent {
   
   messageService: MessageService = inject(MessageService);
+
   liveInputValue!: string;
   selectedLocation!: boolean;
   selectedDate!: boolean;
@@ -123,7 +124,7 @@ export class HomePageComponent {
     { id: 8, name: "Ольга" },
     { id: 9, name: "Андрей" },
     { id: 10, name: "Наталья" }
-  ]
+  ];
 
    isFormValid(): boolean {
     return this.selectedLocation && this.selectedDate && this.selectedParticipants;

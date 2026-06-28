@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { LoaderComponent } from '../loader/loader.component';
 import { MessageComponent } from '../message/message.component';
 import { MessageType } from '../enums/MessageType';
@@ -10,14 +8,13 @@ import { Color } from '../enums/Color';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterModule, HeaderComponent,  FooterComponent, LoaderComponent, MessageComponent],
+  imports: [FormsModule, RouterModule, LoaderComponent, MessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
 
   messageType: typeof MessageType = MessageType;
-  isLoading: boolean = true;
 
   constructor() {
     this.isPrimaryColor(Color.RED);

@@ -1,6 +1,6 @@
 import { UpperCasePipe } from '@angular/common';
 import { PhoneNumberFormatting } from '../pipes/phone-number-formatting.pipe';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { PhoneMode } from '../enums/PhoneMode';
 import { FontWeightDirective } from '../directives/font-weight.directive';
 import { AnimatedBorderDirective } from '../directives/animated-border.directive';
