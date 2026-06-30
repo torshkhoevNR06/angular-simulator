@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ILogin } from './ILogin';
 import { IToken } from './IToken';
 import { IAuthUser } from './IAuthUser';
+import { Role } from './Role';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class AuthService {
   private router: Router = inject(Router);
 
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
-  authUser$: Observable<IAuthUser | null> = this.authUserSubject.asObservable();
+  private roleSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   getToken(): IToken | null {
     return this.localStorageService.getItem('token');
@@ -27,7 +28,10 @@ export class AuthService {
     if (this.getToken()) {
       return this.authApiService.getUser()
         .pipe(
-          tap((authUser: IAuthUser) => this.authUserSubject.next(authUser)),
+          tap((authUser: IAuthUser) => {
+            this.authUserSubject.next(authUser);
+            this.roleSubject.next(authUser.role);
+          }),
           catchError(() => this.refreshToken())
         );  
     }
@@ -47,8 +51,7 @@ export class AuthService {
         concatMap(() => this.authApiService.getUser()
           .pipe(
             tap((authUser: IAuthUser) => {
-            this.authUserSubject.next(authUser);
-            this.localStorageService.setItem('role', authUser.role);
+              this.authUserSubject.next(authUser);
           })
         ))
       );
@@ -68,14 +71,12 @@ export class AuthService {
     return !!this.authUserSubject.value;
   }
 
-  isAdmin(): string {
-    let role: string = this.authUserSubject.getValue()!.role;
-    
-    if (!role) {
-      role = this.localStorageService.getItem('role')!;
+  isAdmin(): boolean {
+    if (Role.ADMIN === this.roleSubject.value) {
+      return true;
     }
 
-    return role;
+    return !this.roleSubject.value;
   }
 
   logout(): void {
