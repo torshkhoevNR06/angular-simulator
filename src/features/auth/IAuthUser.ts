@@ -1,3 +1,5 @@
+import { Role } from "./Role";
+
 export interface IAuthUser {
   id: number;
   firstName: string;
@@ -66,5 +68,5 @@ export interface IAuthUser {
   };
   macAddress: string;
   ip: string;
-  role: string;
+  role: Role;
 }

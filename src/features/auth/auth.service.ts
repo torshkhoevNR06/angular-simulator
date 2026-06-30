@@ -18,7 +18,7 @@ export class AuthService {
   private router: Router = inject(Router);
 
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
-  private roleSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private roleSubject: BehaviorSubject<Role | null> = new BehaviorSubject<Role | null>(null);
 
   getToken(): IToken | null {
     return this.localStorageService.getItem('token');
@@ -76,7 +76,7 @@ export class AuthService {
       return true;
     }
 
-    return !this.roleSubject.value;
+    return !!this.roleSubject.value;
   }
 
   logout(): void {
