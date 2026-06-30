@@ -76,7 +76,7 @@ export class AuthService {
       return true;
     }
 
-    return !!this.roleSubject.value;
+    return !this.roleSubject.value;
   }
 
   logout(): void {
