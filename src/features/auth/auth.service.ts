@@ -18,7 +18,6 @@ export class AuthService {
   private router: Router = inject(Router);
 
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
-  private roleSubject: BehaviorSubject<Role | null> = new BehaviorSubject<Role | null>(null);
 
   getToken(): IToken | null {
     return this.localStorageService.getItem('token');
@@ -30,7 +29,6 @@ export class AuthService {
         .pipe(
           tap((authUser: IAuthUser) => {
             this.authUserSubject.next(authUser);
-            this.roleSubject.next(authUser.role);
           }),
           catchError(() => this.refreshToken())
         );  
@@ -72,16 +70,15 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    if (Role.ADMIN === this.roleSubject.value) {
+    if (Role.ADMIN === this.authUserSubject.getValue()!.role) {
       return true;
     }
 
-    return !this.roleSubject.value;
+    return false;
   }
 
   logout(): void {
     this.localStorageService.removeItem('token');
-    this.localStorageService.removeItem('role');
     this.authUserSubject.next(null);
     this.router.navigate(['/login']);
   }
