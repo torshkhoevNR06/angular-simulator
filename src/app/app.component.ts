@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../loader/loader.component';
 import { MessageComponent } from '../message/message.component';
-import { MessageType } from '../enums/MessageType';
-import { Color } from '../enums/Color';
+import { MessageType } from '../enum/MessageType';
+import { Color } from '../enum/Color';
 
 @Component({
   selector: 'app-root',

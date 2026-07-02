@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { MessageService } from '../services/message.service';
-import { LocalStorageService } from '../services/local-storage.service';
-import { ThemeService } from '../services/theme.service';
-import { Theme } from '../enums/Theme';
+import { MessageService } from '../service/message.service';
+import { LocalStorageService } from '../service/local-storage.service';
+import { ThemeService } from '../service/theme.service';
+import { Theme } from '../enum/Theme';
 import { faMoon, faRightFromBracket, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule, SelectButtonChangeEvent } from 'primeng/selectbutton';
 import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
 import { Observable } from 'rxjs';
-import { AuthService } from '../features/auth/auth.service';
+import { AuthService } from '../features/auth/service/auth.service';
 
 @Component({
   selector: 'app-header',

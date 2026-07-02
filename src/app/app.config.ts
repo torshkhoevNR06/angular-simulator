@@ -3,15 +3,15 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { loggingInterceptor } from '../interceptors/logging.interceptor';
-import { errorInterceptor } from '../interceptors/error.interceptor';
-import { PresetVariants } from '../types/PresetVariants';
-import { Theme } from '../enums/Theme';
+import { loggingInterceptor } from '../interceptor/logging.interceptor';
+import { errorInterceptor } from '../interceptor/error.interceptor';
+import { PresetVariants } from '../type/PresetVariants';
+import { Theme } from '../enum/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
-import { authInterceptor } from '../features/auth/auth.interceptor';
-import { AuthService } from '../features/auth/auth.service';
+import { authInterceptor } from '../features/auth/interceptor/auth.interceptor';
+import { AuthService } from '../features/auth/service/auth.service';
 import { firstValueFrom } from 'rxjs';
 
 const getSavedTheme = (): PresetVariants => {
