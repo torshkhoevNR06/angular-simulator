@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../service/message.service';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, faAngleDown, faCalendar, IconDefinition, faShieldHalved, faPeopleGroup, faTag, faStar } from '@fortawesome/free-solid-svg-icons';
-import type { IAdvantage } from '../interfaces/IAdvantage';
+import type { IAdvantage } from '../interface/IAdvantage';
 
 @Component({
   selector: 'app-home-page',

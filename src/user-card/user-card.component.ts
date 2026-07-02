@@ -1,9 +1,9 @@
 import { UpperCasePipe } from '@angular/common';
-import { PhoneNumberFormatting } from '../pipes/phone-number-formatting.pipe';
+import { PhoneNumberFormatting } from '../pipe/phone-number-formatting.pipe';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { PhoneMode } from '../enums/PhoneMode';
-import { FontWeightDirective } from '../directives/font-weight.directive';
-import { AnimatedBorderDirective } from '../directives/animated-border.directive';
+import { PhoneMode } from '../enum/PhoneMode';
+import { FontWeightDirective } from '../directive/font-weight.directive';
+import { AnimatedBorderDirective } from '../directive/animated-border.directive';
 
 @Component({
   selector: 'app-user-card',

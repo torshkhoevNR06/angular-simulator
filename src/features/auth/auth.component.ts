@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 import { catchError, finalize, tap, throwError } from 'rxjs';
-import { MessageService } from '../../services/message.service';
-import { LoaderService } from '../../services/loader.service';
-import { ILogin } from './ILogin';
+import { MessageService } from '../../service/message.service';
+import { LoaderService } from '../../service/loader.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import type { IAuthUser } from './IAuthUser';
 
 @Component({
   selector: 'app-auth',

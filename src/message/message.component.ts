@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../service/message.service';
 import { Observable } from 'rxjs';
-import { IMessage } from '../interfaces/IMessage';
+import { IMessage } from '../interface/IMessage';
 
 @Component({
   selector: 'app-message',

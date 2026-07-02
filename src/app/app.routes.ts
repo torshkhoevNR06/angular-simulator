@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { postResolver } from '../features/posts/post.resolver';
-import { authGuard } from '../features/auth/auth.guard';
-import { adminGuard } from '../features/auth/admin.guard';
+import { postResolver } from '../features/posts/resolver/post.resolver';
+import { authGuard } from '../features/auth/guard/auth.guard';
+import { adminGuard } from '../features/auth/guard/admin.guard';
 
 export const routes: Routes = [
   { 
@@ -24,12 +24,12 @@ export const routes: Routes = [
       {
         path: 'posts/create',
         canActivate: [adminGuard],
-        loadComponent: () => import('../features/posts/post-create/post-create.component').then(c => c.PostCreateComponent),
+        loadComponent: () => import('../features/posts/layout/post-create/post-create.component').then(c => c.PostCreateComponent),
       },
       { 
         path: 'posts/:id', 
         canActivate: [adminGuard],
-        loadComponent: () => import('../features/posts/post-detail/post-detail.component').then(c => c.PostDetailComponent),
+        loadComponent: () => import('../features/posts/layout/post-detail/post-detail.component').then(c => c.PostDetailComponent),
         resolve: { post: postResolver },
       },
       { 

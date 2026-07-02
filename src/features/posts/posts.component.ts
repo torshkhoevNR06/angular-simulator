@@ -6,16 +6,16 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { PostService } from './post.service';
-import { MessageService } from '../../services/message.service';
+import { PostService } from './service/post.service';
+import { MessageService } from '../../service/message.service';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { IPost } from './IPost';
-import { PostEditDialogComponent } from './post-edit-dialog/post-edit-dialog.component';
+import { IPost } from './interface/IPost';
+import { PostEditDialogComponent } from './components/post-edit-dialog/post-edit-dialog.component';
 import { MenuItem } from 'primeng/api';
 import { AsyncPipe } from '@angular/common';
 import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { LoaderService } from '../../services/loader.service';
+import { LoaderService } from '../../service/loader.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

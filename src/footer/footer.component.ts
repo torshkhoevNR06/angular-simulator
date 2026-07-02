@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../services/message.service';
+import { MessageService } from '../service/message.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faTelegram, faVk, faPinterest, faSkype  } from '@fortawesome/free-brands-svg-icons';
-import { ISocialNetwork } from '../interfaces/ISocialNetwork';
+import { ISocialNetwork } from '../interface/ISocialNetwork';
 
 @Component({
   selector: 'app-footer',
