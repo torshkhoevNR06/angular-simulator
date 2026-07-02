@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return Role.ADMIN === this.authUserSubject.getValue()!.role
+    return Role.ADMIN === this.authUserSubject.getValue()!.role;
   }
 
   logout(): void {
