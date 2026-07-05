@@ -23,9 +23,8 @@ module.exports = defineConfig([
             "accessors": "explicit",
             "methods": "no-public",
             "properties": "no-public",
-            "parameterProperties": {
-              accessors: 'off'
-            },
+            "constructors": 'off',
+            "parameterProperties": "explicit",
           },
         }
       ],
