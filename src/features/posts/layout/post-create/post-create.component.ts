@@ -10,7 +10,7 @@ import { PostService } from '../../service/post.service';
   selector: 'app-post-create',
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './post-create.component.html',
-  styleUrl: './post-create.component.scss',
+  styleUrl: './post-create.component.scss'
 })
 export class PostCreateComponent {
 
@@ -30,15 +30,15 @@ export class PostCreateComponent {
     }),
     views: [null, Validators.required],
     userId: [null, Validators.required]
-  })
+  });
 
   onCreatePost(): void {
     const tags: string[] = this.createPostForm.get('tags')!.value
       .split(',').map((str: string) => str.trim())
-      .filter((str: string) => str  !== '');
+      .filter((str: string) => str !== '');
 
     if (this.createPostForm.valid) {
-      this.postService.createPost({...this.createPostForm.value, tags: tags }).pipe(
+      this.postService.createPost({ ...this.createPostForm.value, tags: tags }).pipe(
         tap(() => {
           this.router.navigate([`/posts`]);
           this.messageService.showInfo('Новый пост создан');

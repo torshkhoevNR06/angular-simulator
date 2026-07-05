@@ -9,7 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ThemeService {
 
@@ -22,6 +22,7 @@ export class ThemeService {
       isDarkMode ? element.classList.add('p-dark') : element.classList.remove('p-dark');
     })
   );
+
   private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.initTheme());
   theme$: Observable<Theme> = this.themeSubject.asObservable();
 

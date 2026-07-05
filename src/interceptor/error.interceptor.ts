@@ -15,4 +15,4 @@ export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
       return throwError(() => error);
     })
   );
-}
+};

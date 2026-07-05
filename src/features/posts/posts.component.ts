@@ -101,7 +101,7 @@ export class PostsComponent implements OnInit {
       width: '20vw',
       modal: true,
       closable: true
-    })
+    });
   }
 
   onViewPost(currentPost: IPost): void {
@@ -115,7 +115,7 @@ export class PostsComponent implements OnInit {
     this.postService.deletePost(currentPost).pipe(
       tap(() => {
         this.loaderService.hideLoader();
-        this.messageService.showInfo("Пост удалён");
+        this.messageService.showInfo('Пост удалён');
       }),
       catchError((error: HttpErrorResponse) => {
         this.messageService.showError(`Ошибка при удалений: ${ error }`);

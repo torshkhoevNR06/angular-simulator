@@ -19,7 +19,7 @@ import { AuthService } from '../features/auth/service/auth.service';
   selector: 'app-header',
   imports: [FormsModule, RouterModule, FontAwesomeModule, ToggleSwitchModule, ButtonModule, SelectButtonModule, AsyncPipe],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
@@ -41,9 +41,9 @@ export class HeaderComponent {
   faRightFromBracket: IconDefinition = faRightFromBracket;
 
   pages: INavigation[] = [
-    { page: "Главная", path: "" },
-    { page: "Пользователи", path: "users" },
-    { page: "Посты", path: "posts" }
+    { page: 'Главная', path: '' },
+    { page: 'Пользователи', path: 'users' },
+    { page: 'Посты', path: 'posts' }
   ];
 
   constructor() {
@@ -61,7 +61,7 @@ export class HeaderComponent {
   }
 
   toggleDarkMode(event: ToggleSwitchChangeEvent): void {
-    this.themeService.toggleDarkMode(event.checked)
+    this.themeService.toggleDarkMode(event.checked);
   }
 
   setTheme(theme: SelectButtonChangeEvent): void {
@@ -84,13 +84,13 @@ export class HeaderComponent {
 
   private saveLastVisit(): void {
     const date: string = new Date().toString();
-    localStorage.setItem("userDate", JSON.stringify(date));
+    localStorage.setItem('userDate', JSON.stringify(date));
   }
 
   private saveVisitsCount(): void {
-    const visitsRaw: number = Number(localStorage.getItem("user-visit"));
+    const visitsRaw: number = Number(localStorage.getItem('user-visit'));
     const visits: number = isNaN(visitsRaw) ? 1 : visitsRaw + 1;
-    localStorage.setItem("user-visit", JSON.stringify(visits));
+    localStorage.setItem('user-visit', JSON.stringify(visits));
   }
 
 }

@@ -6,7 +6,7 @@ import { IToken } from '../interface/IToken';
 import { IAuthUser } from '../interface/IAuthUser';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthApiService {
   

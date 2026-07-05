@@ -9,7 +9,7 @@ import { AnimatedBorderDirective } from '../directive/animated-border.directive'
   selector: 'app-user-card',
   imports: [UpperCasePipe, PhoneNumberFormatting, FontWeightDirective, AnimatedBorderDirective],
   templateUrl: './user-card.component.html',
-  styleUrl: './user-card.component.scss',
+  styleUrl: './user-card.component.scss'
 })
 export class UserCardComponent {
 

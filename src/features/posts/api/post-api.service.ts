@@ -5,7 +5,7 @@ import { IPost } from '../interface/IPost';
 import { IPostResponse } from '../interface/IPostResponse';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PostApiService {
   

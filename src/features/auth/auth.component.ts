@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-auth',
   imports: [ReactiveFormsModule],
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
 

@@ -8,11 +8,11 @@ import { FontWeightDirective } from '../directive/font-weight.directive';
   selector: 'app-create-user',
   imports: [ReactiveFormsModule, AnimatedBorderDirective, FontWeightDirective],
   templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.scss',
+  styleUrl: './create-user.component.scss'
 })
 export class CreateUserComponent {
 
-  @Output() createUser: EventEmitter<IUser> = new EventEmitter();  
+  @Output() createUser = new EventEmitter<IUser>();  
   private messageService: MessageService = inject(MessageService);
 
   private fb: FormBuilder = inject(FormBuilder);
@@ -28,8 +28,8 @@ export class CreateUserComponent {
       zipcode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
       geo: this.fb.group({
         lat: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(90)]],
-        lng: ['', [Validators.required, Validators.minLength(60), Validators.maxLength(180)]],
-      }),
+        lng: ['', [Validators.required, Validators.minLength(60), Validators.maxLength(180)]]
+      })
     }),
     phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(25)]],
     website: ['', [Validators.maxLength(100)]],
@@ -42,7 +42,7 @@ export class CreateUserComponent {
 
   submitUserForm(): void {
     if (this.userForm.valid) {
-      this.userForm.patchValue({ id: Date.now() })
+      this.userForm.patchValue({ id: Date.now() });
       this.createUser.emit(this.userForm.value);
       this.userForm.reset();
     } else {

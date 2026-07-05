@@ -6,7 +6,7 @@ import { LoaderService } from './loader.service';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
 

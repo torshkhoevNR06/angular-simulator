@@ -9,7 +9,7 @@ import { IAuthUser } from '../interface/IAuthUser';
 import { Role } from '../enum/Role';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   
@@ -50,8 +50,8 @@ export class AuthService {
           .pipe(
             tap((authUser: IAuthUser) => {
               this.authUserSubject.next(authUser);
-          })
-        ))
+            })
+          ))
       );
   }
 
@@ -62,7 +62,7 @@ export class AuthService {
           this.restoreAuthState();
           return this.localStorageService.setItem('token', token);
         })
-    );
+      );
   }
 
   isAuth(): boolean {

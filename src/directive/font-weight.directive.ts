@@ -1,7 +1,7 @@
 import { Directive, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[fontWeightHover]',
+  selector: '[fontWeightHover]'
 })
 export class FontWeightDirective {
 
