@@ -37,7 +37,7 @@ module.exports = defineConfig([
           trailingUnderscore: 'allow',
         },
         {
-          selector: 'enum',
+          selector: 'memberLike',
           format: ['UPPER_CASE'],
           leadingUnderscore: 'forbid',
           trailingUnderscore: 'allow',
