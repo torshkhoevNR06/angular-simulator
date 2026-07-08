@@ -8,7 +8,7 @@ import { IMessage } from '../interface/IMessage';
   selector: 'app-message',
   imports: [NgTemplateOutlet, AsyncPipe],
   templateUrl: './message.component.html',
-  styleUrl: './message.component.scss',
+  styleUrl: './message.component.scss'
 })
 export class MessageComponent {
 

@@ -38,7 +38,7 @@ export class PostEditDialogComponent {
   onEditPost(): void {
     const tags: string[] = this.editPostForm.get('tags')!.value
       .split(',').map((str: string) => str.trim())
-      .filter((str: string) => str  !== '');
+      .filter((str: string) => str !== '');
 
     if (this.editPostForm.valid) {
       this.loaderService.showLoader();

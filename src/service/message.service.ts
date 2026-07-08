@@ -4,7 +4,7 @@ import { IMessage } from '../interface/IMessage';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MessageService {
 
@@ -40,7 +40,7 @@ export class MessageService {
   closeMessage(messageToRemove: IMessage): void {
     const messages: IMessage[] = this.messagesSubject.getValue()
       .filter((message: IMessage) => message !== messageToRemove);
-      this.messagesSubject.next(messages);
+    this.messagesSubject.next(messages);
   }
   
 }

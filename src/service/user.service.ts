@@ -4,9 +4,10 @@ import { UserApiService } from './user-api.service';
 import { MessageService } from './message.service';
 import { LoaderService } from './loader.service';
 import { LocalStorageService } from './local-storage.service';
+import type { IUser } from '../interface/IUser';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
 

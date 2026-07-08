@@ -18,16 +18,16 @@ const getSavedTheme = (): PresetVariants => {
   const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
 
   switch(savedTheme) {
-    case Theme.NORA:
-      return Nora;
+  case Theme.NORA:
+    return Nora;
     
-    case Theme.LARA:
-      return Lara;
+  case Theme.LARA:
+    return Lara;
     
-    default:
-      return Aura;
+  default:
+    return Aura;
   }
-}
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,8 +38,8 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: getSavedTheme(),
-        options: { darkModeSelector: '.p-dark' },
-      },
+        options: { darkModeSelector: '.p-dark' }
+      }
     }),
     provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState()))
   ]

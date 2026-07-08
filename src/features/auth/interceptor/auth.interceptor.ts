@@ -17,7 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
     return refreshAndProceed(authService, req, next);
   }
 
-  const modifiedReq: HttpRequest<unknown> = addToken(req, authService.getToken()?.accessToken!);
+  const modifiedReq: HttpRequest<unknown> = addToken(req, authService.getToken()!.accessToken!);
   
   return next(modifiedReq).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -31,7 +31,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
       
       return throwError(() => error);
     })
-  )
+  );
 };
 
 const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, next: HttpHandlerFn) => {
@@ -52,11 +52,11 @@ const refreshAndProceed = (authService: AuthService, req: HttpRequest<unknown>, 
       );
   }
 
-  return next(addToken(req, authService.getToken()?.accessToken!));
-}
+  return next(addToken(req, authService.getToken()!.accessToken!));
+};
 
 const addToken = (req: HttpRequest<unknown>, accessToken: string) => {
   return req.clone({
     headers: req.headers.set('Authorization', `Bearer ${ accessToken }`)
   });
-}
+};

@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import type { IUser } from '../interface/IUser';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserApiService {
 

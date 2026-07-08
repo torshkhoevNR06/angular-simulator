@@ -1,4 +1,4 @@
-interface ITravel {
+export interface ITravel {
   id: number;
   article: string;
 }

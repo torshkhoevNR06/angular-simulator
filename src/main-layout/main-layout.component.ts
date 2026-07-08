@@ -7,7 +7,7 @@ import { AuthService } from '../features/auth/service/auth.service';
 @Component({
   selector: 'app-main-layout',
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
-  templateUrl: './main-layout.component.html',
+  templateUrl: './main-layout.component.html'
 })
 export class MainLayoutComponent {
 

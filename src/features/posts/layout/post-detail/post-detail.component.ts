@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { IPost } from '../../interface/IPost';
@@ -7,9 +7,9 @@ import { IPost } from '../../interface/IPost';
   selector: 'app-post-detail',
   imports: [RouterLink],
   templateUrl: './post-detail.component.html',
-  styleUrl: './post-detail.component.scss',
+  styleUrl: './post-detail.component.scss'
 })
-export class PostDetailComponent {
+export class PostDetailComponent implements OnInit {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
   post!: IPost;

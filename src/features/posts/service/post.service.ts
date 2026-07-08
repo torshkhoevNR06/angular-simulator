@@ -28,7 +28,7 @@ export class PostService {
           this.postsSubject.next(postResponse.posts);
           this.totalRecordsSubject.next(postResponse.total);
         })
-      )
+      );
   }
   
   deletePost(currentPost: IPost): Observable<IPost[]> {

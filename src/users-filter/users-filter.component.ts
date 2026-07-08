@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-users-filter',
   imports: [ReactiveFormsModule],
   templateUrl: './users-filter.component.html',
-  styleUrl: './users-filter.component.scss',
+  styleUrl: './users-filter.component.scss'
 })
 export class UsersFilterComponent implements OnInit {
 

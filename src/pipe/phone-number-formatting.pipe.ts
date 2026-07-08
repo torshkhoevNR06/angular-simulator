@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { PhoneMode } from '../enum/PhoneMode';
 
 @Pipe({
-  name: 'phoneNumber',
+  name: 'phoneNumber'
 })
 export class PhoneNumberFormatting implements PipeTransform {
 
@@ -10,7 +10,7 @@ export class PhoneNumberFormatting implements PipeTransform {
     const cleanPhoneNumber: string = phoneNumber.replace(/\D/g, '');
     const cutPhoneNumber = (oneIndex: number, secondIndex: number): string => {
       return cleanPhoneNumber.slice(oneIndex, secondIndex);
-    }
+    };
 
     const formattedPartsString: string = `${ cutPhoneNumber(0, 2) } 
       ${ cutPhoneNumber(2, 5) } 
@@ -19,23 +19,23 @@ export class PhoneNumberFormatting implements PipeTransform {
       ${ cutPhoneNumber(10, 12) }`;
 
     switch (phoneNumberMode) {
-      case PhoneMode.COMPACT:
-        return `+${ cleanPhoneNumber }`;
+    case PhoneMode.COMPACT:
+      return `+${ cleanPhoneNumber }`;
 
-      case PhoneMode.INTERNATIONAL:
-        return `+${ formattedPartsString }`;
+    case PhoneMode.INTERNATIONAL:
+      return `+${ formattedPartsString }`;
 
-      case PhoneMode.MASKED:
-        return formattedPartsString;
+    case PhoneMode.MASKED:
+      return formattedPartsString;
 
-      case PhoneMode.NATIONAL:
-        return `+${ cutPhoneNumber(0, 2) } 
+    case PhoneMode.NATIONAL:
+      return `+${ cutPhoneNumber(0, 2) } 
                  ${ cutPhoneNumber(2, 5) } 
                  ${ cutPhoneNumber(5, 10).replace(/\d/g, '*') } 
                  ${ cutPhoneNumber(10, 12) }`;
                 
-      default:
-        return phoneNumber;
+    default:
+      return phoneNumber;
     }
   }
 
