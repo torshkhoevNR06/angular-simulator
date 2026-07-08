@@ -1,4 +1,4 @@
-interface IFavor {
+export interface IFavor {
   id: number;
   favor: string;
 }

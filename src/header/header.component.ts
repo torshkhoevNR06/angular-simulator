@@ -14,6 +14,7 @@ import { SelectButtonModule, SelectButtonChangeEvent } from 'primeng/selectbutto
 import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
 import { Observable } from 'rxjs';
 import { AuthService } from '../features/auth/service/auth.service';
+import { INavigation } from '../interface/INavigation';
 
 @Component({
   selector: 'app-header',

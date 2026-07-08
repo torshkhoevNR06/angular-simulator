@@ -4,6 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faTelegram, faVk, faPinterest, faSkype } from '@fortawesome/free-brands-svg-icons';
 import { ISocialNetwork } from '../interface/ISocialNetwork';
+import { ITravel } from '../interface/ITravel';
+import { IFavor } from '../interface/IFavor';
 
 @Component({
   selector: 'app-footer',

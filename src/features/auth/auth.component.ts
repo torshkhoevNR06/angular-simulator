@@ -31,7 +31,6 @@ export class AuthComponent {
 
   onAuthForm(): void {
     if (this.authForm.valid) {
-      const username: string = this.authForm.get('username')?.value;
       this.loaderService.showLoader();
       
       this.authService.login(this.authForm.value).pipe(

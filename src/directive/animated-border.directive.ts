@@ -1,4 +1,5 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
+import { IGradientConfiguration } from '../interface/IGradientConfiguration';
 
 @Directive({
   selector: '[animatedBorder]'

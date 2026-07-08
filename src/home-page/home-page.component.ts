@@ -3,7 +3,11 @@ import { MessageService } from '../service/message.service';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleRight, faAngleDown, faCalendar, IconDefinition, faShieldHalved, faPeopleGroup, faTag, faStar } from '@fortawesome/free-solid-svg-icons';
-import type { IAdvantage } from '../interface/IAdvantage';
+import { IAdvantage } from '../interface/IAdvantage';
+import { IDirection } from '../interface/IDirection';
+import { IArticle } from '../interface/IArticle';
+import { ILocation } from '../interface/ILocation';
+import { IParticipant } from '../interface/IParticipant';
 
 @Component({
   selector: 'app-home-page',

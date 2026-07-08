@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MessageService } from '../service/message.service';
 import { AnimatedBorderDirective } from '../directive/animated-border.directive';
 import { FontWeightDirective } from '../directive/font-weight.directive';
+import { IUser } from '../interface/IUser';
 
 @Component({
   selector: 'app-create-user',
