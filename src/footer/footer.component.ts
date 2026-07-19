@@ -6,6 +6,8 @@ import { faTelegram, faVk, faPinterest, faSkype } from '@fortawesome/free-brands
 import { ISocialNetwork } from '../interface/ISocialNetwork';
 import { ITravel } from '../interface/ITravel';
 import { IFavor } from '../interface/IFavor';
+import { APP_CONFIG } from '../app-setup.token';
+import { IAppConfig } from '../interface/IAppConfig';
 
 @Component({
   selector: 'app-footer',
@@ -16,6 +18,8 @@ import { IFavor } from '../interface/IFavor';
 export class FooterComponent {
 
   messageService: MessageService = inject(MessageService);
+
+  APP_CONFIG: IAppConfig = inject(APP_CONFIG);
 
   faAngleRight: IconDefinition = faAngleRight;
   faTelegram: IconDefinition = faTelegram;

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe, DatePipeConfig } from '@angular/common';
 import { MessageService } from '../service/message.service';
 import { LocalStorageService } from '../service/local-storage.service';
 import { ThemeService } from '../service/theme.service';
@@ -15,26 +15,31 @@ import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitc
 import { Observable } from 'rxjs';
 import { AuthService } from '../features/auth/service/auth.service';
 import { INavigation } from '../interface/INavigation';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '../format-date.token';
+import { IAppConfig } from '../interface/IAppConfig';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, RouterModule, FontAwesomeModule, ToggleSwitchModule, ButtonModule, SelectButtonModule, AsyncPipe],
+  imports: [FormsModule, DatePipe, RouterModule, FontAwesomeModule, ToggleSwitchModule, ButtonModule, SelectButtonModule, AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+  
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   messageService: MessageService = inject(MessageService);
   themeService: ThemeService = inject(ThemeService);
-  authService = inject(AuthService);
+  authService: AuthService = inject(AuthService);
   
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   theme$: Observable<Theme> = this.themeService.theme$;
-
+  
+  APP_CONFIG: IAppConfig = this.themeService.APP_CONFIG;
+  DATE_PIPE_DEFAULT_OPTIONS: DatePipeConfig = inject(DATE_PIPE_DEFAULT_OPTIONS);
+  
   currentTask!: 'counter' | 'dateTime';
   companyName: string = 'Румтибет';
-  dateTime!: string;
+  dateTime!: Date;
   counter: number = 0;
   
   faMoon: IconDefinition = faMoon;
@@ -57,7 +62,7 @@ export class HeaderComponent {
     }
 
     setInterval(() => {
-      this.dateTime = new Date().toLocaleString();
+      this.dateTime = new Date();
     }, 1000);
   }
 
@@ -84,8 +89,7 @@ export class HeaderComponent {
   }
 
   private saveLastVisit(): void {
-    const date: string = new Date().toString();
-    localStorage.setItem('userDate', JSON.stringify(date));
+    localStorage.setItem('userDate', JSON.stringify(new Date()));
   }
 
   private saveVisitsCount(): void {

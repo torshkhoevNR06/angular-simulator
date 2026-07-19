@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../loader/loader.component';
 import { MessageComponent } from '../message/message.component';
 import { MessageType } from '../enum/MessageType';
 import { Color } from '../enum/Color';
+import { APP_CONFIG } from '../app-setup.token';
+import { IAppConfig } from '../interface/IAppConfig';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,7 @@ import { Color } from '../enum/Color';
 })
 export class AppComponent {
 
+  APP_CONFIG: IAppConfig = inject(APP_CONFIG);
   messageType: typeof MessageType = MessageType;
 
   constructor() {

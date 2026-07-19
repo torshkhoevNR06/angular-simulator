@@ -7,6 +7,8 @@ import { Theme } from '../enum/Theme';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
+import { APP_CONFIG } from '../app-setup.token';
+import { IAppConfig } from '../interface/IAppConfig';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ import Lara from '@primeuix/themes/lara';
 export class ThemeService {
 
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  APP_CONFIG: IAppConfig = inject(APP_CONFIG);
   
   private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.initDarkMode());
   isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable().pipe(
@@ -33,7 +37,11 @@ export class ThemeService {
   ];
 
   private initDarkMode(): boolean {
-    return this.localStorageService.getItem('isDarkMode') ?? false;
+    if (this.APP_CONFIG.enableTheming) {
+      return this.localStorageService.getItem('isDarkMode') ?? false;
+    }
+
+    return !this.APP_CONFIG.enableTheming;
   }
 
   toggleDarkMode(isDarkMode: boolean): void {
@@ -42,7 +50,11 @@ export class ThemeService {
   }
   
   private initTheme(): Theme {
-    return this.localStorageService.getItem('theme') ?? Theme.AURA;
+    if (this.APP_CONFIG.enableTheming) {
+      return this.localStorageService.getItem('theme') ?? Theme.AURA;
+    }
+    
+    return Theme.AURA;
   }
 
   setTheme(theme: Theme): void {

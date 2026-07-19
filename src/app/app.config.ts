@@ -13,9 +13,19 @@ import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from '../features/auth/interceptor/auth.interceptor';
 import { AuthService } from '../features/auth/service/auth.service';
 import { firstValueFrom } from 'rxjs';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '../format-date.token';
+import { IAppConfig } from '../interface/IAppConfig';
+import { APP_CONFIG } from '../app-setup.token';
 
-const getSavedTheme = (): PresetVariants => {
-  const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+const getSavedTheme = (appConfigValue: IAppConfig): PresetVariants => {
+  let savedTheme: Theme;
+
+  if (!appConfigValue.enableTheming) {
+    localStorage.setItem('theme', Theme.AURA);
+    savedTheme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+  } else {
+    savedTheme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+  }
 
   switch(savedTheme) {
   case Theme.NORA:
@@ -29,18 +39,34 @@ const getSavedTheme = (): PresetVariants => {
   }
 };
 
+const appConfigValue: IAppConfig = {
+  companyName: 'IT-Simulator | Румтибет',
+  enableLogs: false,
+  enableNotifications: false,
+  enableTheming: false,
+  sessionTimeout: 40
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState())),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor, errorInterceptor])),
     provideZoneChangeDetection(),
+    {
+      provide: APP_CONFIG,
+      useValue: appConfigValue
+    },
+    { 
+      provide: DATE_PIPE_DEFAULT_OPTIONS, 
+      useValue: { dateFormat: 'shortDate' } 
+    },
     providePrimeNG({
       theme: {
-        preset: getSavedTheme(),
+        preset: getSavedTheme(appConfigValue),
         options: { darkModeSelector: '.p-dark' }
       }
-    }),
-    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState()))
+    })
   ]
 };
