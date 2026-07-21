@@ -13,20 +13,19 @@ import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from '../features/auth/interceptor/auth.interceptor';
 import { AuthService } from '../features/auth/service/auth.service';
 import { firstValueFrom } from 'rxjs';
-import { DATE_PIPE_DEFAULT_OPTIONS } from '../format-date.token';
 import { IAppConfig } from '../interface/IAppConfig';
-import { APP_CONFIG } from '../app-setup.token';
+import { APP_CONFIG } from '../app-config.token';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
 const getSavedTheme = (appConfigValue: IAppConfig): PresetVariants => {
-  let savedTheme: Theme;
+  let savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+  const element: HTMLHtmlElement = document.querySelector('html')!;
 
   if (!appConfigValue.enableTheming) {
-    localStorage.setItem('theme', Theme.AURA);
-    savedTheme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
-  } else {
-    savedTheme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+    element.classList.add('p-dark');
+    savedTheme = Theme.AURA;
   }
-
+  
   switch(savedTheme) {
   case Theme.NORA:
     return Nora;

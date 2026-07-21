@@ -8,8 +8,7 @@ import { IDirection } from '../interface/IDirection';
 import { IArticle } from '../interface/IArticle';
 import { ILocation } from '../interface/ILocation';
 import { IParticipant } from '../interface/IParticipant';
-import { DatePipe, type DatePipeConfig } from '@angular/common';
-import { DATE_PIPE_DEFAULT_OPTIONS } from '../format-date.token';
+import { DATE_PIPE_DEFAULT_OPTIONS, DatePipe, type DatePipeConfig } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',

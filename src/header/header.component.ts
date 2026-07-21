@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe, DatePipe, DatePipeConfig } from '@angular/common';
+import { AsyncPipe, DATE_PIPE_DEFAULT_OPTIONS, DatePipe, DatePipeConfig } from '@angular/common';
 import { MessageService } from '../service/message.service';
 import { LocalStorageService } from '../service/local-storage.service';
 import { ThemeService } from '../service/theme.service';
@@ -15,7 +15,6 @@ import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitc
 import { Observable } from 'rxjs';
 import { AuthService } from '../features/auth/service/auth.service';
 import { INavigation } from '../interface/INavigation';
-import { DATE_PIPE_DEFAULT_OPTIONS } from '../format-date.token';
 import { IAppConfig } from '../interface/IAppConfig';
 
 @Component({

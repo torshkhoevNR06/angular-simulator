@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { tap } from 'rxjs';
-import { APP_CONFIG } from '../app-setup.token';
+import { APP_CONFIG } from '../app-config.token';
 import { IAppConfig } from '../interface/IAppConfig';
 
 export const loggingInterceptor: HttpInterceptorFn = (

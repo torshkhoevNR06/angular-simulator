@@ -39,3 +39,19 @@
 3. DashboardComponent думаю что получить именно рутовый поскольку здесь компоненты разделены на ветки отдельная ветка HeaderComponent и DashboardComponent, которые не пересекаются, получается что Ангуляр у HeaderComponent искать не будут и дойдёт сразу до root'a
 4. С UserCardComponent будет тоже самое
 5. UserCardComponent => DashboardComponent => AppComponent => RootContainer
+
+Задача №13
+- Для создания класса - A нужно получить вернуть зависимость класса - B а для него нужно вернуть зависимость класса - C и для него нужно вернуть зависимость класса - D а класс D нужно вернуть зависимость LoggerService, по этой цепочке уже идёт обратная начиная с зависимости LoggerService? создаётся класс D и затем уже остальные. Потом Angular кеширует все эти зависимости чтобы отдавать их мгновенно
+
+Задача №14
+1. Сколько объектов существует в памяти?
+- Ноль, потому что ленивая инициализация
+2. Сколько объектов появится теперь? Почему?
+- Появиться 3 объекта, потому что для создания UserService нужен ApiService а он в свою очередь нуждается в LoggerService, Angular спускается прямо к нему и возвращает его, затем ApiService создаётся а потом уже создаётся и UserService
+
+Задача №15
+- providedIn: 'root': Для сервисов, которые нужны везде и хранят общее состояние. Это ApiService, AuthService, CartService, NotificationService, ThemeService, ModalService
+- Providers маршрута: Для данных, которые должны сохраняться при перемещении между вкладками одной страницы, но удаляться при уходе с неё. Подходит для ProductFilterService
+- Providers компонента: Для временных данных, которые создаются заново при каждом открытии компонента. Это DashboardStatisticsService и UserTableStateService
+- useFactory: Если создание сервиса требует логики или условий. Это LoggerService и AnalyticsService
+- InjectionToken + useValue: Для данных, которые не являются классами. Это AppConfig и CurrencyFormatter

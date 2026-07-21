@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ILogin } from '../interface/ILogin';
 import { IToken } from '../interface/IToken';
 import { IAuthUser } from '../interface/IAuthUser';
-import { APP_CONFIG } from '../../../app-setup.token';
+import { APP_CONFIG } from '../../../app-config.token';
 import { IAppConfig } from '../../../interface/IAppConfig';
 
 @Injectable({
