@@ -4,7 +4,7 @@
       <div class="header__container">
         <div class="header__logo">
           <img src="/images/logo-rumtibet.svg" alt="Логотип компаний Румтибет">
-          <span class="company-name">{{ companyName }}</span>
+          <span class="company-name">{{ APP_CONFIG.companyName }}</span>
         </div>
         <nav class="header__nav">
           @for (page of pages; track page.page) {
@@ -19,26 +19,31 @@
           } @empty {
             <span>Навигация - пусто!</span>
           }
-          <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleDarkMode($event)">
-            <ng-template #handle let-isToggle="checked">
-              <fa-icon class="pi" [icon]="isToggle ? faMoon : faSun" />
-            </ng-template>
-          </p-toggleswitch>
-          <p-selectbutton 
-            [options]="this.themeService.themes" 
-            [ngModel]="theme$ | async" 
-            optionLabel="name"
-            optionValue="value" 
-            (onChange)="setTheme($event)" 
-            aria-labelledby="basic" 
-            [allowEmpty]="false"
-          />
+          @if (APP_CONFIG.enableTheming) {
+            <p-toggleswitch 
+              [ngModel]="isDarkMode$ | async" 
+              (onChange)="toggleDarkMode($event)"
+            >
+              <ng-template #handle let-isToggle="checked">
+                <fa-icon class="pi" [icon]="isToggle ? faMoon : faSun" />
+              </ng-template>
+            </p-toggleswitch>
+            <p-selectbutton 
+              [options]="this.themeService.themes" 
+              [ngModel]="theme$ | async" 
+              optionLabel="name"
+              optionValue="value" 
+              (onChange)="setTheme($event)" 
+              aria-labelledby="basic" 
+              [allowEmpty]="false"
+            />
+          }
           <a class="header__logout" (click)="authService.logout()" aria-label="Выйти">
             <fa-icon [icon]="faRightFromBracket" />
           </a>
         </nav>
         <div class="header__btn">
-          <button 
+          <button   
             class="btn btn-consultation" 
             id="btn-consultation"
             (click)="messageService.showSuccess('Message Content')"
@@ -49,7 +54,7 @@
       </div>
       @if (currentTask === 'counter') {
         <div class="header__timer">
-          <span class="timer">{{ dateTime }}</span>
+          <span class="timer">{{ dateTime | date: DATE_PIPE_DEFAULT_OPTIONS.dateFormat }}</span>
           <button class="btn btn-show-clicker" (click)="setCurrentTask('dateTime')">Показать кликер</button>
         </div>
       } @else {

@@ -13,10 +13,19 @@ import Lara from '@primeuix/themes/lara';
 import { authInterceptor } from '../features/auth/interceptor/auth.interceptor';
 import { AuthService } from '../features/auth/service/auth.service';
 import { firstValueFrom } from 'rxjs';
+import { IAppConfig } from '../interface/IAppConfig';
+import { APP_CONFIG } from '../app-config.token';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
-const getSavedTheme = (): PresetVariants => {
-  const savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+const getSavedTheme = (appConfigValue: IAppConfig): PresetVariants => {
+  let savedTheme: Theme = localStorage.getItem('theme') as Theme ?? Theme.AURA;
+  const element: HTMLHtmlElement = document.querySelector('html')!;
 
+  if (!appConfigValue.enableTheming) {
+    element.classList.add('p-dark');
+    savedTheme = Theme.AURA;
+  }
+  
   switch(savedTheme) {
   case Theme.NORA:
     return Nora;
@@ -29,18 +38,34 @@ const getSavedTheme = (): PresetVariants => {
   }
 };
 
+const appConfigValue: IAppConfig = {
+  companyName: 'IT-Simulator | Румтибет',
+  enableLogs: false,
+  enableNotifications: false,
+  enableTheming: false,
+  sessionTimeout: 40
+};
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState())),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor, errorInterceptor])),
     provideZoneChangeDetection(),
+    {
+      provide: APP_CONFIG,
+      useValue: appConfigValue
+    },
+    { 
+      provide: DATE_PIPE_DEFAULT_OPTIONS, 
+      useValue: { dateFormat: 'shortDate' } 
+    },
     providePrimeNG({
       theme: {
-        preset: getSavedTheme(),
+        preset: getSavedTheme(appConfigValue),
         options: { darkModeSelector: '.p-dark' }
       }
-    }),
-    provideAppInitializer(() => firstValueFrom(inject(AuthService).restoreAuthState()))
+    })
   ]
 };

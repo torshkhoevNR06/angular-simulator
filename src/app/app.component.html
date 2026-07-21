@@ -1,5 +1,7 @@
 <app-loader />
-<app-message />
+@if (APP_CONFIG.enableNotifications) {
+  <app-message />
+}
 <div class="wrapper">
   <router-outlet />
 </div>

@@ -8,10 +8,11 @@ import { IDirection } from '../interface/IDirection';
 import { IArticle } from '../interface/IArticle';
 import { ILocation } from '../interface/ILocation';
 import { IParticipant } from '../interface/IParticipant';
+import { DATE_PIPE_DEFAULT_OPTIONS, DatePipe, type DatePipeConfig } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, FontAwesomeModule],
+  imports: [FormsModule, FontAwesomeModule, DatePipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -21,8 +22,9 @@ export class HomePageComponent {
 
   liveInputValue!: string;
   selectedLocation!: boolean;
-  selectedDate!: boolean;
+  selectedDate!: string;
   selectedParticipants!: boolean;
+  DATE_PIPE_DEFAULT_OPTIONS: DatePipeConfig = inject(DATE_PIPE_DEFAULT_OPTIONS);
   
   faAngleRight: IconDefinition = faAngleRight;
   faAngleDown: IconDefinition = faAngleDown;
@@ -86,28 +88,28 @@ export class HomePageComponent {
       image: 'manarola-sunset',
       title: 'Красивая Италия, какая она в реальности?',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      data: '01/11/2023'
+      date: Date.now()
     },
     {
       id: 2,
       image: 'flight-dawn',
       title: 'Долой сомнения! Весь мир открыт для вас!',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих условий активизации ...',
-      data: '12/12/2023'
+      date: Date.now()
     },
     {
       id: 3,
       image: 'road-trip',
       title: 'Как подготовиться к путешествию в одиночку?',
       description: 'Для современного мира базовый вектор развития предполагает.',
-      data: '08/03/2024'
+      date: Date.now()
     },
     {
       id: 4,
       image: 'taj-mahal',
       title: 'Индия ... летим?',
       description: 'Для современного мира базовый.',
-      data: '25/06/2024'
+      date: Date.now()
     }
   ];
 
@@ -131,7 +133,7 @@ export class HomePageComponent {
   ];
 
   isFormValid(): boolean {
-    return this.selectedLocation && this.selectedDate && this.selectedParticipants;
+    return this.selectedLocation && !!this.selectedDate && this.selectedParticipants;
   }
 
 }
