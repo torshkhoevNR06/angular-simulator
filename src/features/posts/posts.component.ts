@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, DoCheck } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ToastModule } from 'primeng/toast';
@@ -26,7 +26,7 @@ import { MessageService } from '../../core/ui/message/service/message.service';
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
-export class PostsComponent implements OnInit, DoCheck {
+export class PostsComponent implements OnInit {
 
   private loaderService: LoaderService = inject(LoaderService);
   private messageService: MessageService = inject(MessageService);
@@ -60,10 +60,6 @@ export class PostsComponent implements OnInit, DoCheck {
         })
       ).subscribe();
 
-    this.ngDoCheck();
-  }
-
-  ngDoCheck(): void {
     this.menuItems = [
       {
         label: this.translate.instant('postsPage.menu.view'),

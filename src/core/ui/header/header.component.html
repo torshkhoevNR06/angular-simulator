@@ -42,20 +42,31 @@
               </ng-template>
             </p-selectbutton>
           }
+          @if (productsRouteActive()) {
+            <div class="header__cart">
+              <p-button
+                icon="pi pi-shopping-cart"
+                [badge]="cartService.itemsCount().toString()"
+                styleClass="header__cart-button m-0"
+                [attr.aria-label]="'header.cart' | translate"
+                [routerLink]="['/cart']"
+              />
+            </div>
+          }
           <a class="header__logout" (click)="authService.logout()" [attr.aria-label]="'header.logout' | translate">
             <fa-icon [icon]="faRightFromBracket" />
           </a>
         </nav>
         <app-language mode="normal" />
-        <div class="header__btn">
-          <button   
-            class="btn btn-consultation" 
-            id="btn-consultation"
-            (click)="onConsultation()"
-          >
-            {{ 'header.btnConsultation' | translate }}
-          </button>
-        </div>
+      </div>
+      <div class="header__btn">
+        <button   
+          class="btn btn-consultation" 
+          id="btn-consultation"
+          (click)="onConsultation()"
+        >
+          {{ 'header.btnConsultation' | translate }}
+        </button>
       </div>
       @if (currentTask === 'counter') {
         <div class="header__timer">

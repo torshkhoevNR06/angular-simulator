@@ -273,6 +273,88 @@
       "header": "Postlar ro'yxati"
     }
   },
+  "productsPage": {
+    "filters": {
+      "searchPlaceholder": "Mahsulotlarni qidirish",
+      "categoryPlaceholder": "Kategoriya",
+      "sortByPlaceholder": "Saralash mezoni",
+      "sortOrderPlaceholder": "Saralash yo'nalishi",
+      "reset": "Filtrlarni tozalash"
+    },
+    "sort": {
+      "title": "Nomi",
+      "price": "Narxi",
+      "rating": "Reytingi",
+      "stock": "Ombordagi soni"
+    },
+    "sortOrder": {
+      "ascending": "O'sish tartibida",
+      "descending": "Kamayish tartibida"
+    },
+    "table": {
+      "pageReport": "{totalRecords} tadan {first}–{last} ko'rsatilmoqda",
+      "name": "Nomi",
+      "image": "Rasm",
+      "price": "Narxi",
+      "category": "Kategoriya",
+      "reviews": "Sharhlar",
+      "stock": "Ombordagi soni",
+      "ordersFor": "{{ title }} uchun buyurtmalar"
+    },
+    "messages": {
+      "loaded": "Mahsulotlar yuklandi",
+      "filterError": "Mahsulotlarni filtrlab bo'lmadi: {{ error }}",
+      "pageChanged": "Sahifa o'zgartirildi"
+    }
+  },
+  "productDetail": {
+    "imageAlt": "Mahsulot rasmi",
+    "inStock": "mavjud",
+    "weight": "Og'irligi",
+    "dimensions": "O'lchamlari",
+    "minimumOrder": "Minimal buyurtma",
+    "pieces": "dona",
+    "warranty": "Kafolat",
+    "shipping": "Yetkazib berish",
+    "returnPolicy": "Qaytarish shartlari",
+    "barcode": "Shtrix-kod",
+    "reviews": "Sharhlar",
+    "addToCart": "Savatga qo'shish",
+    "backToProducts": "Mahsulotlarga qaytish",
+    "messages": {
+      "addedToCart": "Mahsulot savatga qo'shildi",
+      "addToCartError": "Mahsulotni savatga qo'shib bo'lmadi: {{ error }}"
+    }
+  },
+  "cartPage": {
+    "title": "Savatcha",
+    "backToShopping": "Xaridni davom ettirish",
+    "itemsAriaLabel": "Savatchadagi mahsulotlar",
+    "quantityAriaLabel": "Mahsulot miqdori",
+    "decreaseQuantity": "Miqdorni kamaytirish",
+    "increaseQuantity": "Miqdorni oshirish",
+    "removeProduct": "Mahsulotni savatchadan olib tashlash",
+    "summaryTitle": "Buyurtma xulosasi",
+    "items": "Mahsulotlar",
+    "subtotal": "Oraliq jami",
+    "tax": "Soliq",
+    "total": "Jami",
+    "checkout": "Buyurtma berish",
+    "clearCart": "Savatchani tozalash",
+    "empty": {
+      "title": "Savatcha bo'sh",
+      "description": "Savatchaga mahsulot qo'shing."
+    },
+    "messages": {
+      "increased": "Mahsulot miqdori oshirildi",
+      "increaseError": "Mahsulot miqdorini oshirib bo'lmadi: {{ error }}",
+      "decreased": "Mahsulot miqdori kamaytirildi",
+      "decreaseError": "Mahsulot miqdorini kamaytirib bo'lmadi: {{ error }}",
+      "removed": "Mahsulot olib tashlandi",
+      "removeError": "Mahsulotni olib tashlab bo'lmadi: {{ error }}",
+      "orderPlaced": "Buyurtma rasmiylashtirildi"
+    }
+  },
   "footer": {
     "companyName": "IT-Simulyator | Rumtibet",
     "desc": "Uning ildizlari eramizdan avvalgi 45-yilning klassik lotincha parchasi bilan bogʻliq, yaʼni ikki ming yildan ortiq vaqt oldinga boradi. Richard MakKlintok, Hampden-Sydney kollejining lotin tili professori.",

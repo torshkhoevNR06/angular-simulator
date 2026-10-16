@@ -1,5 +1,39 @@
 @use '../../../assets/mixins' as mix;
 
+:host::ng-deep {
+  .p-button {
+    background: #c4a055;
+    border: 1px solid #7b5d1c;
+  }
+
+  .header__cart .p-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    overflow: visible;
+  }
+
+  .header__cart .p-button .p-button-icon {
+    color: #000000;
+    font-weight: 700;
+    -webkit-text-stroke: 0.35px currentColor;
+  }
+
+  .header__cart .p-button .p-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    background: #ffffff;
+    color: #000000;
+    z-index: 1;
+  }
+}
+
 @include mix.ng-deep {
 
   .p-toggleswitch,
@@ -116,6 +150,9 @@
     }
 
     .btn-consultation {
+      position: absolute;
+      bottom: 10px;
+      right: 305px;
       font-family: inherit;
       width: 175px;
       padding: 12px 24px;
@@ -219,8 +256,8 @@
 
     width: 270px;
     position: absolute;
-    bottom: 15px;
-    right: 222px;
+    bottom: 10px;
+    right: 495px;
   }
 
   &__clicker {

@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { postResolver } from '../features/posts/resolver/post.resolver';
 import { adminGuard } from '../core/guard/admin.guard';
 import { authGuard } from '../core/guard/auth.guard';
+import { MessageService } from 'primeng/api';
+import { productResolver } from '../features/products/resolver/product.resolver';
 
 export const routes: Routes = [
   {
@@ -41,6 +43,22 @@ export const routes: Routes = [
         path: 'posts',
         canActivate: [adminGuard],
         loadComponent: () => import('../features/posts/posts.component').then((c) => c.PostsComponent)
+      },
+      {
+        path: 'products/:id',
+        canActivate: [adminGuard],
+        loadComponent: () => import('../features/products/components/product-detail/product-detail.component').then((c) => c.ProductDetailComponent),
+        resolve: { product: productResolver }
+      },
+      {
+        path: 'products',
+        canActivate: [adminGuard],
+        providers: [MessageService],
+        loadComponent: () => import('../features/products/products.component').then((c) => c.ProductsComponent)
+      },
+      {
+        path: 'cart',
+        loadComponent: () => import('../features/products/components/product-cart/product-cart.component').then((c) => c.CartComponent)
       },
       {
         path: '**',
