@@ -8,11 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartService } from '../../service/cart.service';
-import type { ICartItem } from '../../interface/ICartItem';
+import { ICartItem } from '../../interface/ICartItem';
 import { MessageService } from '../../../../core/ui/message/service/message.service';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { LoaderService } from '../../../../core/ui/loader/service/loader.service';
-import type { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -25,8 +25,8 @@ export class ProductDetailComponent {
 
   productService: ProductService = inject(ProductService);
   cartService: CartService = inject(CartService);
-  messageService = inject(MessageService);
-  loaderService = inject(LoaderService);
+  messageService: MessageService = inject(MessageService);
+  loaderService: LoaderService = inject(LoaderService);
   private readonly translateService = inject(TranslateService);
 
   private router: ActivatedRoute = inject(ActivatedRoute);

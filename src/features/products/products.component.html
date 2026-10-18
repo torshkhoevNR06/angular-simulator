@@ -33,8 +33,7 @@
             [placeholder]="'productsPage.filters.searchPlaceholder' | translate" 
           />
           <p-autocomplete
-            [ngModel]="productService.category()"
-            (ngModelChange)="productService.setCategory($event)"
+            [(ngModel)]="productService.category"
             [suggestions]="sortByOptions"
             (completeMethod)="filterCategories($event)" 
             [virtualScrollItemSize]="34" 
@@ -45,8 +44,7 @@
           />
           <p-select 
             [options]="sortByCategories" 
-            [ngModel]="productService.sortBy()"
-            (ngModelChange)="productService.setSortBy($event)" 
+            [(ngModel)]="productService.sortBy"            
             optionLabel="name"
             optionValue="sortBy" 
             [placeholder]="'productsPage.filters.sortByPlaceholder' | translate" 
@@ -61,8 +59,7 @@
           </p-select>
           <p-select 
             [options]="sortByOrders" 
-            [ngModel]="productService.sortOrder()"
-            (ngModelChange)="productService.setSortOrder($event)"
+            [(ngModel)]="productService.sortOrder"
             [disabled]="!productService.sortBy()" 
             optionLabel="name"
             optionValue="sortOrder" 
@@ -96,7 +93,7 @@
         <th style="text-align: right;" pSortableColumn="stock">{{ 'productsPage.table.stock' | translate }}</th>
       </tr>
     </ng-template>
-    @if(productService.isLoadingState()) {
+    @if(productService.isLoading()) {
     <ng-template #body>
       <tr>
         <td><p-skeleton /></td>
@@ -109,7 +106,7 @@
     </ng-template>
     } @else {
     <ng-template #body let-product let-expanded="expanded">
-      <tr class="pi-container-product" (dblclick)="productService.redirectToProductSearch(product.id)">
+      <tr class="pi-container-product" (dblclick)="productService.redirectToProductsPage(product.id)">
         <td>{{ product.title }}</td>
         <td style="height: 81px;">
           <img class="shadow-lg" [src]="product.images[0]" [alt]="product.title" width="50" />

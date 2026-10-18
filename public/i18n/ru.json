@@ -289,8 +289,8 @@
       "stock": "Количество"
     },
     "sortOrder": {
-      "ascending": "По возрастанию",
-      "descending": "По убыванию"
+      "asc": "По возрастанию",
+      "desc": "По убыванию"
     },
     "table": {
       "pageReport": "Показано с {first} по {last} из {totalRecords}",

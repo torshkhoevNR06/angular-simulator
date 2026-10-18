@@ -17,16 +17,16 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 })
 export class CartComponent implements OnInit {
 
-  readonly cartService = inject(CartService);
-  private readonly messageService = inject(MessageService);
-  private readonly loaderService = inject(LoaderService);
-  private readonly translateService = inject(TranslateService);
+  private translateService: TranslateService = inject(TranslateService);
+  private messageService: MessageService = inject(MessageService);
+  private loaderService: LoaderService = inject(LoaderService);
+  cartService = inject(CartService);
 
   ngOnInit(): void {
     this.cartService.loadCart();
   }
 
-  private generalCartUpdateSub(id: number, messageInfo: string, messageError: string, currentQuantity?: number): void {
+  private updateProductQuantity(id: number, messageInfo: string, messageError: string, currentQuantity?: number): void {
     this.loaderService.showLoader();
     this.cartService.saveCartItem({ id, quantity: currentQuantity ?? 0 })
       .pipe(
@@ -44,15 +44,15 @@ export class CartComponent implements OnInit {
   }
   
   increaseQuantity(id: number, currentQuantity: number): void {
-    this.generalCartUpdateSub(id, 'cartPage.messages.increased', 'cartPage.messages.increaseError', currentQuantity + 1);
+    this.updateProductQuantity(id, 'cartPage.messages.increased', 'cartPage.messages.increaseError', currentQuantity + 1);
   }
 
   decreaseQuantity(id: number, currentQuantity: number): void {
-    this.generalCartUpdateSub(id, 'cartPage.messages.decreased', 'cartPage.messages.decreaseError', currentQuantity - 1);
+    this.updateProductQuantity(id, 'cartPage.messages.decreased', 'cartPage.messages.decreaseError', currentQuantity - 1);
   }
 
   removeProduct(id: number): void {
-    this.generalCartUpdateSub(id, 'cartPage.messages.removed', 'cartPage.messages.removeError');
+    this.updateProductQuantity(id, 'cartPage.messages.removed', 'cartPage.messages.removeError');
   }
 
   checkout(): void {

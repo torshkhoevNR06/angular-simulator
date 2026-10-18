@@ -36,7 +36,7 @@ export class HeaderComponent {
   languageService: LanguageService = inject(LanguageService);
   cartService: CartService = inject(CartService);
   
-  router = inject(Router);
+  router: Router = inject(Router);
 
   productsRouteActive: Signal<boolean> = isActive('/products', this.router);
 

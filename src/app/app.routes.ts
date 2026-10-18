@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { postResolver } from '../features/posts/resolver/post.resolver';
 import { adminGuard } from '../core/guard/admin.guard';
 import { authGuard } from '../core/guard/auth.guard';
-import { MessageService } from 'primeng/api';
 import { productResolver } from '../features/products/resolver/product.resolver';
 
 export const routes: Routes = [
@@ -53,7 +52,6 @@ export const routes: Routes = [
       {
         path: 'products',
         canActivate: [adminGuard],
-        providers: [MessageService],
         loadComponent: () => import('../features/products/products.component').then((c) => c.ProductsComponent)
       },
       {

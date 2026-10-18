@@ -14,16 +14,16 @@ import { IAuthUser } from '../../auth/interface/IAuthUser';
 })
 export class CartService {
 
-  private readonly cartApiService: CartApiService = inject(CartApiService);
-  private readonly authService: AuthService = inject(AuthService);
+  private cartApiService: CartApiService = inject(CartApiService);
+  private authService: AuthService = inject(AuthService);
 
-  readonly cart: WritableSignal<ICart | null> = signal<ICart | null>(null);
+  cart: WritableSignal<ICart | null> = signal<ICart | null>(null);
 
-  readonly itemsCount: Signal<number> = computed(
+  itemsCount: Signal<number> = computed(
     () => this.cart()?.totalQuantity ?? 0
   );
 
-  readonly subtotal: Signal<number> = computed(
+  subtotal: Signal<number> = computed(
     () => {
       if (!this.cart()) {
         return 0;
@@ -35,12 +35,12 @@ export class CartService {
     }
   );
 
-  readonly tax: Signal<number> = computed(() => {
-    const TAX_RATE = 0.2;
+  tax: Signal<number> = computed(() => {
+    const TAX_RATE: number = 0.2;
     return this.subtotal() * TAX_RATE;
   });
 
-  readonly total: Signal<number> = computed(() => {
+  total: Signal<number> = computed(() => {
     return this.subtotal() + this.tax();
   });
 

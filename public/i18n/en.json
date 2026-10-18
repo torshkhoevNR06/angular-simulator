@@ -289,8 +289,8 @@
       "stock": "Stock"
     },
     "sortOrder": {
-      "ascending": "Ascending",
-      "descending": "Descending"
+      "asc": "Ascending",
+      "desc": "Descending"
     },
     "table": {
       "pageReport": "Showing {first} to {last} of {totalRecords}",

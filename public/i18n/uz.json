@@ -288,8 +288,8 @@
       "stock": "Ombordagi soni"
     },
     "sortOrder": {
-      "ascending": "O'sish tartibida",
-      "descending": "Kamayish tartibida"
+      "asc": "O'sish tartibida",
+      "desc": "Kamayish tartibida"
     },
     "table": {
       "pageReport": "{totalRecords} tadan {first}–{last} ko'rsatilmoqda",

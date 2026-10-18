@@ -23,7 +23,7 @@ export class ProductApiService extends BaseApiService {
       ['order', params?.sortOrder]
     ]);
 
-    if (params?.category && params?.category !== null) {      
+    if (params?.category) {
       return this.http.get<IProductResponse>(this.getUrl(`${ urlCategory }/${ params.category }?` + queryProductParams));
     } else if (params?.search) {
       return this.http.get<IProductResponse>(this.getUrl(`${ urlSearch }?q=${ params.search }&` + queryProductParams));

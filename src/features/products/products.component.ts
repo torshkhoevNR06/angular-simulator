@@ -7,6 +7,7 @@ import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from '../../core/ui/message/service/message.service';
+import { MessageService as MessageServicePrimeNG } from 'primeng/api';
 import { CurrencyPipe } from '@angular/common';
 import { ProductService } from './service/product.service';
 import { tap } from 'rxjs';
@@ -14,7 +15,6 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { UpperCasePipe } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
-import { IProduct } from './interface/IProduct';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -33,7 +33,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   selector: 'app-products',
   imports: [UpperCasePipe, SkeletonModule, InputIconModule, ToggleSwitchModule, IconFieldModule, PaginatorModule, ButtonModule, RatingModule, FloatLabelModule, InputTextModule, TableModule, TagModule, ToastModule, RippleModule, FormsModule, CurrencyPipe, SelectModule, AutoCompleteModule, TranslatePipe],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  styleUrl: './products.component.scss',
+  providers: [MessageServicePrimeNG]
 })
 export class ProductsComponent implements OnInit {
   
@@ -44,17 +45,17 @@ export class ProductsComponent implements OnInit {
 
   readonly zeros: number[] = new Array(30).fill(0);
   
-  readonly sortByCategories: ISortField[] = [
-    { name: 'productsPage.sort.title', sortBy: SortBy.TITLE },
-    { name: 'productsPage.sort.price', sortBy: SortBy.PRICE },
-    { name: 'productsPage.sort.rating', sortBy: SortBy.RATING },
-    { name: 'productsPage.sort.stock', sortBy: SortBy.STOCK }
-  ];
+  readonly sortByCategories: ISortField[] = Object.values(SortBy).map(
+    (key: SortBy) => ({ 
+      name: `productsPage.sort.${ key }`, sortBy: key 
+    })
+  );
 
-  readonly sortByOrders: ISortField[] = [
-    { name: 'productsPage.sortOrder.ascending', sortOrder: SortOrder.ASC },
-    { name: 'productsPage.sortOrder.descending', sortOrder: SortOrder.DESC }
-  ];
+  readonly sortByOrders: ISortField[] = Object.values(SortOrder).map(
+    (key: SortOrder) => ({
+      name: `productsPage.sortOrder.${ key }`, sortOrder: key
+    })
+  );
 
   protected categories: string[] = [];
   protected sortByOptions: string[] = [];
@@ -111,7 +112,7 @@ export class ProductsComponent implements OnInit {
   onPageChange(event: TablePageEvent): void {
     this.productService.getProductsPage(event.first!, event.rows!)
       .pipe(
-      tap(() => this.messageService.showInfo(this.translateService.instant('productsPage.messages.pageChanged')))
+        tap(() => this.messageService.showInfo(this.translateService.instant('productsPage.messages.pageChanged')))
       ).subscribe();
   }
 
