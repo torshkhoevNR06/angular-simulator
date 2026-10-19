@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, type Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { isActive, Router, RouterModule } from '@angular/router';
 import { AsyncPipe, DATE_PIPE_DEFAULT_OPTIONS, DatePipe, DatePipeConfig } from '@angular/common';
 import { LocalStorageService } from '../../../shared/service/local-storage.service';
 import { ThemeService } from '../../../shared/service/theme.service';
@@ -19,6 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Language } from '../../../shared/ui/language/language.component';
 import { MessageService } from '../message/service/message.service';
 import { LanguageService } from '../../../shared/ui/language/service/language.service';
+import { CartService } from '../../../features/products/service/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,11 @@ export class HeaderComponent {
   themeService: ThemeService = inject(ThemeService);
   authService: AuthService = inject(AuthService);
   languageService: LanguageService = inject(LanguageService);
+  cartService: CartService = inject(CartService);
+  
+  router: Router = inject(Router);
+
+  productsRouteActive: Signal<boolean> = isActive('/products', this.router);
 
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   theme$: Observable<Theme> = this.themeService.theme$;
@@ -52,7 +58,8 @@ export class HeaderComponent {
   pages: INavigation[] = [
     { key: 'header.pages.home', path: '' },
     { key: 'header.pages.users', path: 'users' },
-    { key: 'header.pages.posts', path: 'posts' }
+    { key: 'header.pages.posts', path: 'posts' },
+    { key: 'header.pages.products', path: 'products' }
   ];
 
   constructor() {

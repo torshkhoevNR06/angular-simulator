@@ -1,0 +1,105 @@
+<main class="cart">
+  <div class="cart__content">
+    <h1 class="cart__title">{{ 'cartPage.title' | translate }}</h1>
+
+    <a class="cart__back-link" routerLink="/products">
+      <i class="pi pi-arrow-left" aria-hidden="true"></i>
+      <span>{{ 'cartPage.backToShopping' | translate }}</span>
+    </a>
+
+    @if (cartService.cart()) {
+      <div class="cart__layout">
+        <section class="cart__items" [attr.aria-label]="'cartPage.itemsAriaLabel' | translate">
+          @for (product of cartService.cart()!.products; track product.id) {
+            @if (product.quantity) {
+              <article class="cart-item">
+                <div class="cart-item__image" aria-hidden="true">
+                  <img [src]="product.thumbnail" [alt]="product.title">
+                </div>
+  
+                <div class="cart-item__details">
+                  <span class="cart-item__category"></span>
+                  <h2 class="cart-item__title">{{ product.title }}</h2>
+                  <span class="cart-item__unit-price">{{ product.price | currency: 'USD':'symbol':'1.2-2' }}</span>
+                </div>
+  
+                <div class="cart-item__quantity" [attr.aria-label]="'cartPage.quantityAriaLabel' | translate">
+                  <button class="cart-item__quantity-button" type="button" [attr.aria-label]="'cartPage.decreaseQuantity' | translate">
+                    <i 
+                      class="pi pi-minus" 
+                      aria-hidden="true" 
+                      (click)="decreaseQuantity(product.id, product.quantity)"
+                    ></i>
+                  </button>
+                  <span class="cart-item__quantity-value">{{ product.quantity }}</span>
+                  <button 
+                    class="cart-item__quantity-button" 
+                    type="button" 
+                    [attr.aria-label]="'cartPage.increaseQuantity' | translate"
+                    (click)="increaseQuantity(product.id, product.quantity)"
+                  >
+                    <i class="pi pi-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+  
+                <strong class="cart-item__subtotal">{{ product.total | currency: 'USD':'symbol':'1.2-2' }}</strong>
+  
+                <button 
+                  class="cart-item__remove" 
+                  type="button" 
+                  [attr.aria-label]="'cartPage.removeProduct' | translate"
+                  (click)="removeProduct(product.id)"
+                >
+                  <i class="pi pi-trash" aria-hidden="true"></i>
+                </button>
+              </article>
+            }
+          }
+        </section>
+
+        <aside class="cart-summary" aria-labelledby="cart-summary-title">
+          <h2 class="cart-summary__title" id="cart-summary-title">{{ 'cartPage.summaryTitle' | translate }}</h2>
+
+          <dl class="cart-summary__rows">
+            <div class="cart-summary__row">
+              <dt>{{ 'cartPage.items' | translate }}</dt>
+              <dd>{{ cartService.itemsCount() }}</dd>
+            </div>
+            <div class="cart-summary__row">
+              <dt>{{ 'cartPage.subtotal' | translate }}</dt>
+              <dd>{{ cartService.subtotal() | currency: 'USD':'symbol':'1.2-2' }}</dd>
+            </div>
+            <div class="cart-summary__row">
+              <dt>{{ 'cartPage.tax' | translate }}</dt>
+              <dd>{{ cartService.tax() | currency: 'USD':'symbol':'1.2-2' }}</dd>
+            </div>
+          </dl>
+
+          <div class="cart-summary__total">
+            <span>{{ 'cartPage.total' | translate }}</span>
+            <strong>{{ cartService.total() | currency: 'USD':'symbol':'1.2-2' }}</strong>
+          </div>
+
+          <div class="cart-summary__actions">
+            <button class="cart-summary__checkout" type="button" (click)="checkout()">
+              <i class="pi pi-credit-card" aria-hidden="true"></i>
+              <span>{{ 'cartPage.checkout' | translate }}</span>
+            </button>
+            <button class="cart-summary__clear" type="button" (click)="clearCart()">
+              <i class="pi pi-trash" aria-hidden="true"></i>
+              <span>{{ 'cartPage.clearCart' | translate }}</span>
+            </button>
+          </div>
+        </aside>
+      </div>
+    } @else {
+      <p-card styleClass="cart__empty-panel">
+        <div class="cart__empty-state">
+          <i class="pi pi-shopping-cart cart__empty-icon" aria-hidden="true"></i>
+          <h2 class="cart__empty-title">{{ 'cartPage.empty.title' | translate }}</h2>
+          <p class="cart__empty-description">{{ 'cartPage.empty.description' | translate }}</p>
+        </div>
+      </p-card>
+    }
+  </div>
+</main>

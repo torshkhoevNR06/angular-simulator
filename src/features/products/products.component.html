@@ -1,0 +1,147 @@
+<div class="card">
+  <p-toast />
+  <p-table
+    class="table-cl"
+    #dt2
+    dataKey="id"
+    [value]="productService.productsResponse().products"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    selectionMode="multiple"
+    [paginator]="true"
+    (onPage)="onPageChange($event)"
+    [lazy]="true"
+    [first]="productService.skip()" 
+    [rows]="productService.limit()"
+    [totalRecords]="productService.total()" 
+    [showJumpToPageDropdown]="false"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="true"
+    [currentPageReportTemplate]="'productsPage.table.pageReport' | translate"
+    [rowsPerPageOptions]="[10, 20, 30]" 
+  >
+    <ng-template #caption>
+      <div class="flex">
+        <p-iconfield iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input 
+            pInputText 
+            type="text" 
+            (input)="onSearchInput($event.target.value)" 
+            [value]="productService.search() ?? ''"
+            [placeholder]="'productsPage.filters.searchPlaceholder' | translate" 
+          />
+          <p-autocomplete
+            [(ngModel)]="productService.category"
+            [suggestions]="sortByOptions"
+            (completeMethod)="filterCategories($event)" 
+            [virtualScrollItemSize]="34" 
+            [virtualScroll]="true" 
+            [dropdown]="true" 
+            class="category-filter"
+            [placeholder]="'productsPage.filters.categoryPlaceholder' | translate" 
+          />
+          <p-select 
+            [options]="sortByCategories" 
+            [(ngModel)]="productService.sortBy"            
+            optionLabel="name"
+            optionValue="sortBy" 
+            [placeholder]="'productsPage.filters.sortByPlaceholder' | translate" 
+            class="w-full md:w-56" 
+          >
+            <ng-template #item let-option>
+              {{ option.name | translate }}
+            </ng-template>
+            <ng-template #selectedItem let-option>
+              {{ option.name | translate }}
+            </ng-template>
+          </p-select>
+          <p-select 
+            [options]="sortByOrders" 
+            [(ngModel)]="productService.sortOrder"
+            [disabled]="!productService.sortBy()" 
+            optionLabel="name"
+            optionValue="sortOrder" 
+            [placeholder]="'productsPage.filters.sortOrderPlaceholder' | translate"
+            class="w-full md:w-56" 
+          >
+            <ng-template #item let-option>
+              {{ option.name | translate }}
+            </ng-template>
+            <ng-template #selectedItem let-option>
+              {{ option.name | translate }}
+            </ng-template>
+          </p-select>
+          <p-button
+            [label]="'productsPage.filters.reset' | translate"
+            icon="pi pi-refresh"
+            severity="secondary"
+            [disabled]="isDisabledResetButton()"
+            (onClick)="productService.resetProductParams()"
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+    <ng-template #header>
+      <tr>
+        <th style="width: 30rem;">{{ 'productsPage.table.name' | translate }}</th>
+        <th>{{ 'productsPage.table.image' | translate }}</th>
+        <th pSortableColumn="price">{{ 'productsPage.table.price' | translate }}</th>
+        <th pSortableColumn="category">{{ 'productsPage.table.category' | translate }}</th>
+        <th style="width: 0rem;">{{ 'productsPage.table.reviews' | translate }}</th>
+        <th style="text-align: right;" pSortableColumn="stock">{{ 'productsPage.table.stock' | translate }}</th>
+      </tr>
+    </ng-template>
+    @if(productService.isLoading()) {
+    <ng-template #body>
+      <tr>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+      </tr>
+    </ng-template>
+    } @else {
+    <ng-template #body let-product let-expanded="expanded">
+      <tr class="pi-container-product" (dblclick)="productService.redirectToProductsPage(product.id)">
+        <td>{{ product.title }}</td>
+        <td style="height: 81px;">
+          <img class="shadow-lg" [src]="product.images[0]" [alt]="product.title" width="50" />
+        </td>
+        <td>{{ product.price | currency: 'USD' }}</td>
+        <td>{{ product.category }}</td>
+        <td>
+          <p-rating [ngModel]="product.rating" [readonly]="true" cancel="false" />
+        </td>
+        <td style="text-align: right;">
+          <p-tag [value]="product.availabilityStatus | uppercase"/>
+        </td>
+      </tr>
+    </ng-template>
+    }
+    <ng-template #emptymessage>
+      @for (zero of zeros; track $index) {
+      <tr>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+        <td><p-skeleton /></td>
+      </tr>
+      }
+    </ng-template>
+    <ng-template #expandedrow let-product>
+      <tr>
+        <td colspan="7">
+          <div class="p-4">
+            <h5>{{ 'productsPage.table.ordersFor' | translate: { title: product.title } }}</h5>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

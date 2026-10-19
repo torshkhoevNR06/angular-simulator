@@ -1,0 +1,166 @@
+@use '../../../../assets/mixins' as mix;
+
+.product-detail__wrapper {
+  @include mix.flex(center, center, nowrap);
+
+  flex-direction: column;
+  min-height: calc(100vh - 200px);
+  padding: 16px 32px;
+  margin-bottom: 160px;
+}
+
+.product-detail__description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--secondary-text-color);
+  margin-bottom: 16px;
+}
+
+.product-detail__price-row {
+  @include mix.flex(start, center, nowrap);
+
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.product-detail__price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-text-color);
+}
+
+.product-detail__discount {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.product-detail__rating-row {
+  @include mix.flex(start, center, nowrap);
+
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.product-detail__stock {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+}
+
+.product-detail__tags {
+  @include mix.flex(start, center, wrap);
+
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.product-detail__info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--bg-container);
+  margin-bottom: 20px;
+}
+
+.product-detail__info-item {
+  @include mix.flex(start, start, nowrap);
+
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-detail__info-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--secondary-text-color);
+}
+
+.product-detail__info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+}
+
+.product-detail__details {
+  @include mix.flex(start, start, nowrap);
+
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--bg-container);
+  margin-bottom: 20px;
+}
+
+.product-detail__detail-item {
+  @include mix.flex(start, center, nowrap);
+
+  gap: 12px;
+}
+
+.product-detail__detail-label {
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+}
+
+.product-detail__detail-value {
+  font-size: 14px;
+  color: var(--primary-text-color);
+}
+
+.product-detail__reviews {
+  margin-bottom: 8px;
+}
+
+.product-detail__section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--primary-text-color);
+}
+
+.product-detail__review {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--bg-container);
+  margin-bottom: 8px;
+}
+
+.product-detail__review-header {
+  @include mix.flex(start, center, nowrap);
+
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.product-detail__review-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-text-color);
+}
+
+.product-detail__review-date {
+  font-size: 12px;
+  color: var(--secondary-text-color);
+}
+
+.product-detail__review-comment {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--secondary-text-color);
+  margin-top: 8px;
+}
+
+.product-detail__footer {
+  @include mix.flex(start, center, nowrap);
+
+  gap: 12px;
+}

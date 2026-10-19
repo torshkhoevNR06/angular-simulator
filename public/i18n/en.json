@@ -18,7 +18,8 @@
     "pages": {
       "home": "Home",
       "users": "Users",
-      "posts": "Posts"
+      "posts": "Posts",
+      "products": "Goods"
     },
     "themes": {
       "nora": "Nora",
@@ -271,6 +272,88 @@
       "cancel": "Cancel",
       "save": "Save",
       "header": "Post list"
+    }
+  },
+  "productsPage": {
+    "filters": {
+      "searchPlaceholder": "Search products",
+      "categoryPlaceholder": "Category",
+      "sortByPlaceholder": "Sort by",
+      "sortOrderPlaceholder": "Sort direction",
+      "reset": "Reset filters"
+    },
+    "sort": {
+      "title": "Name",
+      "price": "Price",
+      "rating": "Rating",
+      "stock": "Stock"
+    },
+    "sortOrder": {
+      "asc": "Ascending",
+      "desc": "Descending"
+    },
+    "table": {
+      "pageReport": "Showing {first} to {last} of {totalRecords}",
+      "name": "Name",
+      "image": "Image",
+      "price": "Price",
+      "category": "Category",
+      "reviews": "Reviews",
+      "stock": "Stock",
+      "ordersFor": "Orders for {{ title }}"
+    },
+    "messages": {
+      "loaded": "Products loaded",
+      "filterError": "Unable to filter products: {{ error }}",
+      "pageChanged": "Page changed"
+    }
+  },
+  "productDetail": {
+    "imageAlt": "Product image",
+    "inStock": "in stock",
+    "weight": "Weight",
+    "dimensions": "Dimensions",
+    "minimumOrder": "Minimum order",
+    "pieces": "pcs",
+    "warranty": "Warranty",
+    "shipping": "Shipping",
+    "returnPolicy": "Return policy",
+    "barcode": "Barcode",
+    "reviews": "Reviews",
+    "addToCart": "Add to cart",
+    "backToProducts": "Back to products",
+    "messages": {
+      "addedToCart": "Product added to cart",
+      "addToCartError": "Unable to add product to cart: {{ error }}"
+    }
+  },
+  "cartPage": {
+    "title": "Shopping cart",
+    "backToShopping": "Continue shopping",
+    "itemsAriaLabel": "Items in cart",
+    "quantityAriaLabel": "Product quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "removeProduct": "Remove product from cart",
+    "summaryTitle": "Order summary",
+    "items": "Items",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Checkout",
+    "clearCart": "Clear cart",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Add products to your cart."
+    },
+    "messages": {
+      "increased": "Product quantity increased",
+      "increaseError": "Unable to increase product quantity: {{ error }}",
+      "decreased": "Product quantity decreased",
+      "decreaseError": "Unable to decrease product quantity: {{ error }}",
+      "removed": "Product removed",
+      "removeError": "Unable to remove product: {{ error }}",
+      "orderPlaced": "Order placed"
     }
   },
   "footer": {

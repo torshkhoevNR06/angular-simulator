@@ -19,6 +19,10 @@ export class AuthService {
 
   private authUserSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
 
+  getCurrentUser(): IAuthUser | null {
+    return this.authUserSubject.value;
+  }
+
   getToken(): IToken | null {
     return this.localStorageService.getItem('token');
   }

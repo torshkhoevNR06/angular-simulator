@@ -18,7 +18,8 @@
     "pages": {
       "home": "Главная",
       "users": "Пользователи",
-      "posts": "Посты"
+      "posts": "Посты",
+      "products": "Товары"
     },
     "themes": {
       "nora": "Нора",
@@ -271,6 +272,88 @@
       "cancel": "Отмена",
       "save": "Сохранить",
       "header": "Список постов"
+    }
+  },
+  "productsPage": {
+    "filters": {
+      "searchPlaceholder": "Поиск товаров",
+      "categoryPlaceholder": "Категория",
+      "sortByPlaceholder": "Сортировать по",
+      "sortOrderPlaceholder": "Направление сортировки",
+      "reset": "Сбросить фильтры"
+    },
+    "sort": {
+      "title": "Название",
+      "price": "Цена",
+      "rating": "Рейтинг",
+      "stock": "Количество"
+    },
+    "sortOrder": {
+      "asc": "По возрастанию",
+      "desc": "По убыванию"
+    },
+    "table": {
+      "pageReport": "Показано с {first} по {last} из {totalRecords}",
+      "name": "Название",
+      "image": "Изображение",
+      "price": "Цена",
+      "category": "Категория",
+      "reviews": "Отзывы",
+      "stock": "Количество",
+      "ordersFor": "Заказы для {{ title }}"
+    },
+    "messages": {
+      "loaded": "Товары загружены",
+      "filterError": "Не удалось отфильтровать товары: {{ error }}",
+      "pageChanged": "Страница изменена"
+    }
+  },
+  "productDetail": {
+    "imageAlt": "Изображение товара",
+    "inStock": "в наличии",
+    "weight": "Вес",
+    "dimensions": "Размеры",
+    "minimumOrder": "Минимальный заказ",
+    "pieces": "шт.",
+    "warranty": "Гарантия",
+    "shipping": "Доставка",
+    "returnPolicy": "Политика возврата",
+    "barcode": "Штрихкод",
+    "reviews": "Отзывы",
+    "addToCart": "Добавить в корзину",
+    "backToProducts": "Вернуться к товарам",
+    "messages": {
+      "addedToCart": "Товар добавлен в корзину",
+      "addToCartError": "Не удалось добавить товар в корзину: {{ error }}"
+    }
+  },
+  "cartPage": {
+    "title": "Корзина",
+    "backToShopping": "Вернуться к покупкам",
+    "itemsAriaLabel": "Товары в корзине",
+    "quantityAriaLabel": "Количество товара",
+    "decreaseQuantity": "Уменьшить количество",
+    "increaseQuantity": "Увеличить количество",
+    "removeProduct": "Удалить товар из корзины",
+    "summaryTitle": "Итог заказа",
+    "items": "Товары",
+    "subtotal": "Подытог",
+    "tax": "Налог",
+    "total": "Итого",
+    "checkout": "Оформить заказ",
+    "clearCart": "Очистить корзину",
+    "empty": {
+      "title": "Корзина пуста",
+      "description": "Добавьте товары в корзину."
+    },
+    "messages": {
+      "increased": "Количество товара увеличено",
+      "increaseError": "Не удалось увеличить количество товара: {{ error }}",
+      "decreased": "Количество товара уменьшено",
+      "decreaseError": "Не удалось уменьшить количество товара: {{ error }}",
+      "removed": "Товар удалён",
+      "removeError": "Не удалось удалить товар: {{ error }}",
+      "orderPlaced": "Заказ оформлен"
     }
   },
   "footer": {

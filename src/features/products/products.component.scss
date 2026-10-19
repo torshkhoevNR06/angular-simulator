@@ -1,0 +1,42 @@
+:host::ng-deep {
+  display: flex;
+  justify-content: center;
+
+  .pi-search {
+    padding-right: 10px !important;
+  }
+
+  .p-iconfield {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  .pi-container-product {
+    cursor: pointer;
+  }
+
+  .items-end {
+    margin-bottom: 0px !important;
+  }
+  
+  .p-iconfield .p-inputtext:not(:first-child), .p-iconfield .p-inputwrapper:not(:first-child) .p-inputtext {
+    width: 220px;
+    padding-inline-start: calc((var(--p-form-field-padding-x) * 2) + var(--p-icon-size)); 
+  }
+
+  .p-iconfield p-autocomplete.category-filter .p-autocomplete-input.p-inputtext {
+    padding-inline-start: 13px;
+  }
+
+  .card {
+    min-width: 1500px;
+    margin-top: 2.5vh;
+    margin-bottom: 10em;
+  }
+
+  .p-datatable-header {
+    margin-bottom: 10px;
+    border-radius: 12px;
+  }
+
+}

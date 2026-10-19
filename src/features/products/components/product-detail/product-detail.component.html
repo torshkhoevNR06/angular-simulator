@@ -1,0 +1,91 @@
+<div class="product-detail__wrapper">
+  <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+    <ng-template #header>
+      <img [alt]="'productDetail.imageAlt' | translate" class="w-full" [src]="productService.product()!.images[0]" />
+    </ng-template>
+    <ng-template #title>{{ productService.product()!.title }}</ng-template>
+    <ng-template #subtitle>{{ productService.product()!.brand }} · {{ productService.product()!.category }}</ng-template>
+    <p class="product-detail__description">{{ productService.product()!.description }}</p>
+    <div class="product-detail__price-row">
+      <span class="product-detail__price">{{ productService.product()!.price | currency: 'USD' }}</span>
+      <span class="product-detail__discount">-{{ productService.product()!.discountPercentage }}%</span>
+    </div>
+    <div class="product-detail__rating-row">
+      <p-rating [(ngModel)]="productService.product()!.rating" [readonly]="true" cancel="false" />
+      <span class="product-detail__stock">{{ productService.product()!.stock }} {{ 'productDetail.inStock' | translate }}</span>
+    </div>
+    <div class="product-detail__tags">
+      @for (tag of productService.product()!.tags; track tag) {
+        <p-tag [value]="tag" />
+      }
+    </div>
+    <div class="product-detail__info-grid">
+      <div class="product-detail__info-item">
+        <span class="product-detail__info-label">SKU</span>
+        <span class="product-detail__info-value">{{ productService.product()!.sku }}</span>
+      </div>
+      <div class="product-detail__info-item">
+        <span class="product-detail__info-label">{{ 'productDetail.weight' | translate }}</span>
+        <span class="product-detail__info-value">{{ productService.product()!.weight }} g</span>
+      </div>
+      <div class="product-detail__info-item">
+        <span class="product-detail__info-label">{{ 'productDetail.dimensions' | translate }}</span>
+        <span class="product-detail__info-value">{{ productService.product()!.dimensions.width }} × {{ productService.product()!.dimensions.height }} × {{ productService.product()!.dimensions.depth }} mm</span>
+      </div>
+      <div class="product-detail__info-item">
+        <span class="product-detail__info-label">{{ 'productDetail.minimumOrder' | translate }}</span>
+        <span class="product-detail__info-value">{{ productService.product()!.minimumOrderQuantity }} {{ 'productDetail.pieces' | translate }}</span>
+      </div>
+    </div>
+    <div class="product-detail__details">
+      <div class="product-detail__detail-item">
+        <span class="product-detail__detail-label">{{ 'productDetail.warranty' | translate }}</span>
+        <span class="product-detail__detail-value">{{ productService.product()!.warrantyInformation }}</span>
+      </div>
+      <div class="product-detail__detail-item">
+        <span class="product-detail__detail-label">{{ 'productDetail.shipping' | translate }}</span>
+        <span class="product-detail__detail-value">{{ productService.product()!.shippingInformation }}</span>
+      </div>
+      <div class="product-detail__detail-item">
+        <span class="product-detail__detail-label">{{ 'productDetail.returnPolicy' | translate }}</span>
+        <span class="product-detail__detail-value">{{ productService.product()!.returnPolicy }}</span>
+      </div>
+      <div class="product-detail__detail-item">
+        <span class="product-detail__detail-label">{{ 'productDetail.barcode' | translate }}</span>
+        <span class="product-detail__detail-value">{{ productService.product()!.meta.barcode }}</span>
+      </div>
+    </div>
+    @if (productService.product()!.reviews.length > 0) {
+      <div class="product-detail__reviews">
+        <h4 class="product-detail__section-title">{{ 'productDetail.reviews' | translate }}</h4>
+        @for (review of productService.product()!.reviews; track $index) {
+          <div class="product-detail__review">
+            <div class="product-detail__review-header">
+              <span class="product-detail__review-name">{{ review.reviewerName }}</span>
+              <span class="product-detail__review-date">{{ review.date | date: 'mediumDate' }}</span>
+            </div>
+            <p-rating [ngModel]="review.rating" [readonly]="true" cancel="false" />
+            <p class="product-detail__review-comment">{{ review.comment }}</p>
+          </div>
+        }
+      </div>
+    }
+    <ng-template #footer>
+      <div class="product-detail__footer">
+        <p-button
+          [label]="'productDetail.addToCart' | translate"
+          class="product-detail__add-button"
+          severity="success"
+          [outlined]="false"
+          (onClick)="createCart()"
+        />
+        <p-button
+          [label]="'productDetail.backToProducts' | translate"
+          severity="secondary"
+          [outlined]="true"
+          [routerLink]="['/products']"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+</div>
