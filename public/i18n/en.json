@@ -19,7 +19,13 @@
       "home": "Home",
       "users": "Users",
       "posts": "Posts",
-      "products": "Goods"
+      "products": "Goods",
+      "recipes": "Recipes"
+    },
+    "navigation": {
+      "label": "Main navigation",
+      "open": "Menu",
+      "close": "Close menu"
     },
     "themes": {
       "nora": "Nora",
@@ -33,6 +39,20 @@
     "logoAlt": "Rumtibet companies logo",
     "consultationMessage": "Thank you for your request! We will contact you.",
     "logout": "Logout"
+  },
+  "shared": {
+    "emptyState": "No data to display"
+  },
+  "recipesPage": {
+    "title": "Recipes",
+    "reload": "Reload recipes",
+    "fields": {
+      "name": "Name",
+      "cuisine": "Cuisine",
+      "preparationTime": "Preparation time",
+      "rating": "Rating"
+    },
+    "minutes": "min"
   },
   "main": {
     "heading": "Enjoy a mountain walk with a team of like-minded people",

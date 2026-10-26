@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.empty-state {
+  display: flex;
+  min-height: 240px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px 20px;
+  color: var(--secondary-text-color);
+  text-align: center;
+}
+
+.empty-state__icon {
+  color: var(--additional-color);
+  font-size: clamp(4rem, 10vw, 6rem);
+}
+
+.empty-state__message {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}

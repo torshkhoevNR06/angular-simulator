@@ -1,4 +1,4 @@
-import { Component, inject, type Signal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { isActive, Router, RouterModule } from '@angular/router';
 import { AsyncPipe, DATE_PIPE_DEFAULT_OPTIONS, DatePipe, DatePipeConfig } from '@angular/common';
@@ -50,7 +50,6 @@ export class HeaderComponent {
   companyName: string = 'Румтибет';
   dateTime!: Date;
   counter: number = 0;
-
   faMoon: IconDefinition = faMoon;
   faSun: IconDefinition = faSun;
   faRightFromBracket: IconDefinition = faRightFromBracket;
@@ -59,7 +58,8 @@ export class HeaderComponent {
     { key: 'header.pages.home', path: '' },
     { key: 'header.pages.users', path: 'users' },
     { key: 'header.pages.posts', path: 'posts' },
-    { key: 'header.pages.products', path: 'products' }
+    { key: 'header.pages.products', path: 'products' },
+    { key: 'header.pages.recipes', path: 'recipes' }
   ];
 
   constructor() {

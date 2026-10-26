@@ -18,6 +18,10 @@ import { errorInterceptor } from '../core/interceptor/error.interceptor';
 import { loggingInterceptor } from '../core/interceptor/logging.interceptor';
 import { authInterceptor } from '../core/interceptor/auth.interceptor';
 import { APP_CONFIG } from '../core/token/app-config.token';
+import { provideStore } from '@ngrx/store';
+import { recipesReducer } from '../features/recipes/state/recipes.reducers';
+import { provideEffects } from '@ngrx/effects';
+import { RecipesEffectsService } from '../features/recipes/state/recipes.effects';
 
 const getSavedTheme = (appConfigValue: IAppConfig): PresetVariants => {
   let savedTheme: Theme = (localStorage.getItem('theme') as Theme) ?? Theme.AURA;
@@ -80,6 +84,10 @@ export const appConfig: ApplicationConfig = {
         preset: getSavedTheme(appConfigValue),
         options: { darkModeSelector: '.p-dark' }
       }
-    })
+    }),
+    provideStore({
+      recipes: recipesReducer
+    }),
+    provideEffects([RecipesEffectsService])
   ]
 };

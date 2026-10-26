@@ -6,19 +6,7 @@
           <img src="/images/logo-rumtibet.svg" [alt]="'header.logoAlt' | translate">
           <span class="company-name">{{ APP_CONFIG.companyName | translate }}</span>
         </div>
-        <nav class="header__nav">
-          @for (page of pages; track page.key) {
-            <a 
-              [routerLink]="page.path" 
-              [routerLinkActive]="'active'" 
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="link" 
-            >
-              {{ page.key | translate }}
-            </a>
-          } @empty {
-            <span>{{ 'header.navStub' | translate }}</span>
-          }
+        <div class="header__controls">
           @if (APP_CONFIG.enableTheming) {
             <p-toggleswitch 
               [ngModel]="isDarkMode$ | async" 
@@ -53,11 +41,44 @@
               />
             </div>
           }
-          <a class="header__logout" (click)="authService.logout()" [attr.aria-label]="'header.logout' | translate">
+        </div>
+        <app-language mode="normal" />
+        <div class="header__navigation">
+          <a 
+            class="header__logout" 
+            (click)="authService.logout()" 
+            [attr.aria-label]="'header.logout' | translate"
+          >
             <fa-icon [icon]="faRightFromBracket" />
           </a>
-        </nav>
-        <app-language mode="normal" />
+          <details class="header__menu">
+            <summary class="header__menu-toggle" aria-controls="header-navigation-links">
+              <i class="pi pi-bars header__menu-icon--open" aria-hidden="true"></i>
+              <i class="pi pi-times header__menu-icon--close" aria-hidden="true"></i>
+              <span class="header__menu-label--open">{{ 'header.navigation.open' | translate }}</span>
+              <span class="header__menu-label--close">{{ 'header.navigation.close' | translate }}</span>
+            </summary>
+            <nav
+              class="header__nav"
+              [attr.aria-label]="'header.navigation.label' | translate"
+            >
+              <div id="header-navigation-links" class="header__nav-links">
+                @for (page of pages; track page.key) {
+                  <a
+                    [routerLink]="page.path"
+                    [routerLinkActive]="'active'"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="link"
+                  >
+                    {{ page.key | translate }}
+                  </a>
+                } @empty {
+                  <span>{{ 'header.navStub' | translate }}</span>
+                }
+              </div>
+            </nav>
+          </details>
+        </div>
       </div>
       <div class="header__btn">
         <button   
