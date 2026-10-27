@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-empty-state',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class EmptyStateComponent {
 
-  message = 'Рецепты подгружаются...';
-  icon = 'pi pi-inbox';
+  @Input({ required: true }) message!: string;
+  icon: string = 'pi pi-inbox';
 
 }

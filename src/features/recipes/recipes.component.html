@@ -12,7 +12,7 @@
   </header>
 
   @if (isLoading$ | async) {
-    <app-empty-state />
+    <app-empty-state message="Рецепты подгружаются..." />
   } @else {
     <section class="recipes-page__grid" [attr.aria-label]="'recipesPage.title' | translate">
       @for (recipe of recipes$ | async; track recipe.id) {
