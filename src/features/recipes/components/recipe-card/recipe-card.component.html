@@ -1,0 +1,24 @@
+<p-card styleClass="recipe-card">
+  <article class="recipe-card__content" [attr.aria-labelledby]="'recipe-title-' + recipe.id">
+    <h2 class="recipe-card__title" [id]="'recipe-title-' + recipe.id">
+      <span class="visually-hidden">{{ 'recipesPage.fields.name' | translate }}: </span>{{ recipe.name }}
+    </h2>
+    <dl class="recipe-card__details">
+      <div class="recipe-card__field">
+        <dt>{{ 'recipesPage.fields.cuisine' | translate }}</dt>
+        <dd>{{ recipe.cuisine }}</dd>
+      </div>
+      <div class="recipe-card__field">
+        <dt>{{ 'recipesPage.fields.preparationTime' | translate }}</dt>
+        <dd>{{ recipe.prepTimeMinutes }} {{ 'recipesPage.minutes' | translate }}</dd>
+      </div>
+      <div class="recipe-card__field">
+        <dt>{{ 'recipesPage.fields.rating' | translate }}</dt>
+        <dd class="recipe-card__rating">
+          <p-rating [ngModel]="recipe.rating" [readonly]="true" [stars]="5" />
+          <span>{{ recipe.rating }}</span>
+        </dd>
+      </div>
+    </dl>
+  </article>
+</p-card>

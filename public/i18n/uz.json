@@ -18,7 +18,14 @@
     "pages": {
       "home": "Bosh sahifa",
       "users": "Foydalanuvchilar",
-      "posts": "Maqolalar"
+      "posts": "Maqolalar",
+      "products": "Mahsulotlar",
+      "recipes": "Retseptlar"
+    },
+    "navigation": {
+      "label": "Asosiy navigatsiya",
+      "open": "Menyu",
+      "close": "Menyuni yopish"
     },
     "themes": {
       "nora": "Nora",
@@ -32,6 +39,20 @@
     "logoAlt": "Rumtibet kompaniyalari logotipi",
     "consultationMessage": "Ariza uchun tashakkur! Siz bilan bog'lanamiz.",
     "logout": "Chiqish"
+  },
+  "shared": {
+    "emptyState": "Ko'rsatish uchun ma'lumot yo'q"
+  },
+  "recipesPage": {
+    "title": "Retseptlar",
+    "reload": "Retseptlarni yangilash",
+    "fields": {
+      "name": "Nomi",
+      "cuisine": "Oshxona",
+      "preparationTime": "Tayyorlash vaqti",
+      "rating": "Reyting"
+    },
+    "minutes": "daq."
   },
   "main": {
     "heading": "O'zingizga yaqin odamlar bilan tog' yurishidan zavqlaning",

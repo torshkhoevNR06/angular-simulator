@@ -1,0 +1,23 @@
+<main class="recipes-page" aria-labelledby="recipes-title">
+  <header class="recipes-page__header">
+    <h1 id="recipes-title" class="recipes-page__title title">{{ 'recipesPage.title' | translate }}</h1>
+    <p-button
+      [label]="'recipesPage.reload' | translate"
+      icon="pi pi-refresh"
+      severity="secondary"
+      [outlined]="true"
+      styleClass="recipes-page__reload-button"
+      (onClick)="onLoadRecipes()"
+    />
+  </header>
+
+  @if (isLoading$ | async) {
+    <app-empty-state message="Рецепты подгружаются..." />
+  } @else {
+    <section class="recipes-page__grid" [attr.aria-label]="'recipesPage.title' | translate">
+      @for (recipe of recipes$ | async; track recipe.id) {
+        <app-recipe-card [recipe]="recipe" />
+      }
+    </section>
+  }
+</main>
