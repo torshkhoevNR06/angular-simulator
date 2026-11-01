@@ -1,4 +1,4 @@
-import type { IRecipe } from './IRecipe';
+import { IRecipe } from './IRecipe';
 
 export interface IRecipesState {
   recipes: IRecipe[];

@@ -59,7 +59,8 @@ export class HeaderComponent {
     { key: 'header.pages.users', path: 'users' },
     { key: 'header.pages.posts', path: 'posts' },
     { key: 'header.pages.products', path: 'products' },
-    { key: 'header.pages.recipes', path: 'recipes' }
+    { key: 'header.pages.recipes', path: 'recipes' },
+    { key: 'header.pages.quotes', path: 'quotes' }
   ];
 
   constructor() {

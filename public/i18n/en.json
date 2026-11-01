@@ -20,7 +20,8 @@
       "users": "Users",
       "posts": "Posts",
       "products": "Goods",
-      "recipes": "Recipes"
+      "recipes": "Recipes",
+      "quotes": "Quotes"
     },
     "navigation": {
       "label": "Main navigation",
