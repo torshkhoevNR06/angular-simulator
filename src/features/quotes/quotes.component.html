@@ -1,0 +1,115 @@
+<main class="quotes-page">
+  <header class="quotes-page__header">
+    <h1 class="quotes-page__title">Цитаты</h1>
+    <p class="quotes-page__intro">Мысли, к которым хочется возвращаться.</p>
+  </header>
+  <section class="quotes-stats" aria-label="Статистика цитат">
+    <div class="quotes-stats__item">
+      <i class="pi pi-star-fill" aria-hidden="true"></i>
+      <span>В избранном</span>
+      <strong>{{ quotesStore.favoritesCount() }}</strong>
+    </div>
+    <span class="quotes-stats__divider" aria-hidden="true"></span>
+    <div class="quotes-stats__item">
+      <i class="pi pi-users" aria-hidden="true"></i>
+      <span>Авторов</span>
+      <strong>{{ quotesStore.authorsCount() }}</strong>
+    </div>
+  </section>
+  <section class="random-quote" aria-labelledby="random-quote-title">
+    <div class="random-quote__header">
+      <h2 class="random-quote__title" id="random-quote-title">Random Quote</h2>
+      <button 
+        class="random-quote__button" 
+        type="button" 
+        (click)="quotesStore.selectRandomQuote()" 
+      >
+        Random quote
+      </button>
+    </div>
+      @if (quotesStore.randomQuote()) {
+        <div class="random-quote__content">
+          <blockquote class="random-quote__text">{{ quotesStore.randomQuote()!.quote }}</blockquote>
+          <p class="random-quote__author">— {{ quotesStore.randomQuote()!.author }}</p>
+        </div>
+      } @else {
+        <div class="quotes-list__empty">
+            <app-empty-state message="Click the button to get a random quote" />
+        </div>
+      }
+  </section>
+  <div class="quotes-list-header">
+    <h2 class="quotes-list-header__title">Все цитаты</h2>
+    <div class="quotes-filter" aria-label="Фильтр цитат">
+      <button 
+        [class]="quotesStore.activeList() === QuoteListType.ALL
+          ? 'quotes-filter__button quotes-filter__button--active'
+          : 'quotes-filter__button'"
+        type="button" 
+        (click)="quotesStore.changeListOfQuotes(QuoteListType.ALL)"
+      >
+        Все
+      </button>
+      <button 
+        [class]="quotesStore.activeList() === QuoteListType.FAVORITE
+          ? 'quotes-filter__button quotes-filter__button--active'
+          : 'quotes-filter__button'" 
+        type="button" 
+        (click)="quotesStore.changeListOfQuotes(QuoteListType.FAVORITE)"
+      >
+        Избранное
+      </button>
+    </div>
+  </div>
+  <section class="quotes-list" aria-label="Список цитат">
+    @if (quotesStore.loading()) {
+      <div class="quotes-list__empty">
+        <app-empty-state message="Loading quotes..." />
+      </div>
+    } @else if (quotesStore.error()) {
+      <div class="quotes-list__empty quotes-list__empty--error">
+        <app-empty-state message="Failed to load quotes" />
+        <button 
+          class="quotes-list__retry" 
+          type="button" 
+          (click)="quotesStore.loadQuotes()"
+        >
+          Retry
+        </button>
+      </div>
+    } @else {
+      @for (quote of quotesStore.filteredQuotes(); track quote.id) {
+        <article class="quote-card">
+          <i class="pi pi-quote-right quote-card__mark" aria-hidden="true"></i>
+          <blockquote class="quote-card__text">{{ quote.quote }}</blockquote>
+          <div class="quote-card__footer">
+            <p class="quote-card__author">{{ quote.author }}</p>
+            @if (quotesStore.addFavorites(quote.id)) {
+              <button 
+                class="quote-card__favorite quote-card__favorite--saved" 
+                type="button" 
+                (click)="quotesStore.deleteQuote(quote)"
+              >
+                <i class="pi pi-star-fill" aria-hidden="true"></i>
+                Удалить из избранного
+              </button>
+            } @else {
+              <button 
+                class="quote-card__favorite quote-card__favorite--saved" 
+                type="button" 
+                (click)="quotesStore.addQuote(quote)"
+              >
+                <i class="pi pi-star" aria-hidden="true"></i>
+                Добавить в избранное
+              </button>
+            }
+          </div>
+        </article>
+      } @empty {
+        <div class="quotes-list__empty">
+          <app-empty-state message="It’s empty for now; add quotes to your favorites..." />
+        </div>
+      }
+    }
+  </section>
+</main>
