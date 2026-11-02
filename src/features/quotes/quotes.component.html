@@ -42,20 +42,20 @@
     <h2 class="quotes-list-header__title">Все цитаты</h2>
     <div class="quotes-filter" aria-label="Фильтр цитат">
       <button 
-        [class]="quotesStore.activeList() === activeListQuote.ALL
+        [class]="quotesStore.activeList() === QuoteListType.ALL
           ? 'quotes-filter__button quotes-filter__button--active'
           : 'quotes-filter__button'"
         type="button" 
-        (click)="quotesStore.changeListOfQuotes(activeListQuote.ALL)"
+        (click)="quotesStore.changeListOfQuotes(QuoteListType.ALL)"
       >
         Все
       </button>
       <button 
-        [class]="quotesStore.activeList() === activeListQuote.FAVORITE
+        [class]="quotesStore.activeList() === QuoteListType.FAVORITE
           ? 'quotes-filter__button quotes-filter__button--active'
           : 'quotes-filter__button'" 
         type="button" 
-        (click)="quotesStore.changeListOfQuotes(activeListQuote.FAVORITE)"
+        (click)="quotesStore.changeListOfQuotes(QuoteListType.FAVORITE)"
       >
         Избранное
       </button>

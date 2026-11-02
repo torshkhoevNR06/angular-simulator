@@ -7,10 +7,10 @@ import { IQuotes } from '../interface/IQuotes';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { IQuote } from '../interface/IQuote';
-import { ActiveListQuote } from '../enum/ActiveListQuote';
+import { QuoteListType } from '../enum/QuoteListType';
 
 const initialQuotesState: IQuotesState = {
-  activeList: ActiveListQuote.ALL,
+  activeList: QuoteListType.ALL,
   randomQuote: null,
   quotes: [],
   favorites: [],
@@ -27,7 +27,7 @@ export const QuotesStore = signalStore(
     favoritesCount: computed(() => store.favorites().length),
     authorsCount: computed(() => store.quotes().length),
     filteredQuotes: computed(() => {
-      return store.activeList() === ActiveListQuote.FAVORITE
+      return store.activeList() === QuoteListType.FAVORITE
         ? store.favorites() 
         : store.quotes();
     })
@@ -66,7 +66,6 @@ export const QuotesStore = signalStore(
   ),
 
   withMethods((store) => ({
-
     addQuote(currentQuotes: IQuote): void {
       patchState(store, {
         favorites: [...store.favorites(), currentQuotes]
@@ -74,7 +73,7 @@ export const QuotesStore = signalStore(
     },
 
     deleteQuote(currentQuote: IQuote): void {
-      const filteredQuotes: IQuote[] = store.favorites().filter(quote => {
+      const filteredQuotes: IQuote[] = store.favorites().filter((quote: IQuote) => {
         return quote.id !== currentQuote.id;
       });
       patchState(store, { 
@@ -83,18 +82,12 @@ export const QuotesStore = signalStore(
     },
 
     addFavorites(quoteId: number): boolean {
-      let isFavorite: boolean = false;
-
-      store.favorites().some((favorite: IQuote) => {
-        return favorite.id === quoteId
-          ? isFavorite = true 
-          : isFavorite;
+      return store.favorites().some((favorite: IQuote) => {
+        return favorite.id === quoteId;
       });
-
-      return isFavorite;
     },
 
-    changeListOfQuotes(activeList: ActiveListQuote) {
+    changeListOfQuotes(activeList: QuoteListType): void {
       patchState(store, {
         activeList: activeList
       });

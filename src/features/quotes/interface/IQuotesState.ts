@@ -1,8 +1,8 @@
-import type { ActiveListQuote } from '../enum/ActiveListQuote';
+import type { QuoteListType} from '../enum/QuoteListType';
 import { IQuote } from './IQuote';
 
 export interface IQuotesState {
-  activeList: ActiveListQuote;
+  activeList: QuoteListType;
   randomQuote: IQuote | null;
   quotes: IQuote[];
   favorites: IQuote[];

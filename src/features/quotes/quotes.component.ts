@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { QuotesStore } from './store/quote.store';
 import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state.component';
-import { ActiveListQuote } from './enum/ActiveListQuote';
-
+import { QuoteListType } from './enum/QuoteListType';
 @Component({
   selector: 'app-quotes',
   imports: [EmptyStateComponent],
@@ -11,7 +10,7 @@ import { ActiveListQuote } from './enum/ActiveListQuote';
 })
 export class QuotesComponent {
 
-  quotesStore = inject(QuotesStore);
-  activeListQuote: typeof ActiveListQuote = ActiveListQuote;
+  quotesStore: InstanceType<typeof QuotesStore> = inject(QuotesStore);
+  QuoteListType: typeof QuoteListType = QuoteListType;
 
 }
